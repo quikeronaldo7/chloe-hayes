@@ -11,7 +11,7 @@ export function ProductCard({ product, priority = false, compact = false }: { pr
       <Link href={`/guides/${product.slug}`} className="block rounded-[var(--radius-card)] bg-paper-deep/70 p-[9%] pb-[7%] transition-colors group-hover:bg-sand/70">
         <Cover product={product} priority={priority} />
       </Link>
-      <div className="mt-4 flex flex-1 flex-col">
+      <div className="mt-4 flex flex-col">
         <p className="t-eyebrow text-terracotta">{col.name}</p>
         <h3 className={`mt-1.5 font-serif leading-snug ${compact ? "text-lg" : "text-[1.3rem]"}`}>
           <Link href={`/guides/${product.slug}`} className="after:absolute after:inset-0 hover:underline hover:decoration-1 hover:underline-offset-4">
@@ -26,7 +26,8 @@ export function ProductCard({ product, priority = false, compact = false }: { pr
             </li>
           ))}
         </ul>
-        <div className="mt-auto pt-4">
+        <div className="mt-4 flex items-center justify-between gap-3 border-t border-line/70 pt-3">
+          <span className="t-eyebrow text-terracotta">Guide price</span>
           <PriceTag id={product.id} />
         </div>
       </div>
