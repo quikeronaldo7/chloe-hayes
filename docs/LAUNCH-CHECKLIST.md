@@ -55,9 +55,8 @@ Status as of **18 October 2026**. Five separate categories, never merged. "Built
 
 | Blocker | Exact error | Workaround / next step |
 |---|---|---|
-| Create GitHub repo `quikeronaldo7/chloe-hayes` | `403 Resource not accessible by integration` | Owner creates the (private, empty) repo and grants the Claude GitHub App access; then push this project's `main` |
-| Push the code anywhere | Pushing Chloe's code to the session's designated branch in **Kate's** repo was blocked by the permission system | Code is committed locally; needs the repo above (or explicit approval to use an isolated branch) |
-| Vercel (inspect project, set env vars, deploy preview) | `api.vercel.com` → proxy `403 CONNECT tunnel failed`; no Vercel tool | Connect the repo to project `chloe-hayes` (prj_TchL8Kz6g9QuhKQ8sTdgUwy8PfTY), set env vars from `.env.example`, keep Vercel Authentication on |
+| ~~GitHub repo~~ | Resolved 18 Oct: owner created `quikeronaldo7/chloe-hayes`; code pushed to `main` (+ `preview`) | – |
+| Vercel (inspect project, set env vars, deploy preview) | `api.vercel.com` → proxy `403 CONNECT tunnel failed`; no Vercel tool | Owner connects the repo in the Vercel dashboard: exact steps in [DEPLOY.md](DEPLOY.md) |
 | Six PDFs > 10 MB | Drive connector: "File too large for download, over limit of 10 MB" (Being Single at 9.5 MB crashed the connector) | Download from Drive manually or via rclone, then follow docs/DELIVERY.md |
 | Stripe webhook endpoint for Chloe | Needs the deployed preview URL; the signing secret must go into Vercel | Create in **test mode**: `https://<preview>/api/webhooks/stripe`, events `checkout.session.completed`, `checkout.session.async_payment_succeeded` |
 

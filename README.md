@@ -6,7 +6,7 @@ The storefront for Chloe Hayes's seven Austin guides: **chloeinaustin.com** (QR 
 
 Built on the engineering of the Kate Anderson shop (server-priced Stripe Checkout, webhook fulfilment, private library, signed downloads, Resend email), adapted into an **independent project** with its own catalogue, design, Stripe products and metadata, storage bucket, email identity and tests. Kate's repository, site, Stripe objects, webhooks and bucket are untouched.
 
-**Read next:** [`docs/LAUNCH-CHECKLIST.md`](docs/LAUNCH-CHECKLIST.md) (what's built, what's waiting on whom) · [`docs/CATALOGUE.md`](docs/CATALOGUE.md) (every product fact and its source) · [`docs/IMAGERY.md`](docs/IMAGERY.md) (image sources and rights) · [`docs/DELIVERY.md`](docs/DELIVERY.md) (locking and uploading the PDFs) · [`docs/QA.md`](docs/QA.md) (test results) · [`docs/screenshots/`](docs/screenshots/)
+**Read next:** [`docs/LAUNCH-CHECKLIST.md`](docs/LAUNCH-CHECKLIST.md) (what's built, what's waiting on whom) · [`docs/CATALOGUE.md`](docs/CATALOGUE.md) (every product fact and its source) · [`docs/IMAGERY.md`](docs/IMAGERY.md) (image sources and rights) · [`docs/DELIVERY.md`](docs/DELIVERY.md) (locking and uploading the PDFs) · [`docs/QA.md`](docs/QA.md) (test results) · [`docs/DEPLOY.md`](docs/DEPLOY.md) (Vercel preview) · [`docs/screenshots/`](docs/screenshots/)
 
 ```bash
 npm install
