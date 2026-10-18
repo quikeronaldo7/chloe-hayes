@@ -16,11 +16,11 @@ export const siteConfig = {
    * Socials, shown in the footer (owner request, 18 Oct 2026).
    * Instagram: @chloe.eats.atx, the handle printed in the Date Ideas, Exclusive and New to
    * Austin guides. Set NEXT_PUBLIC_INSTAGRAM_HANDLE to change it, or to "" to hide it.
-   * Facebook: no URL exists in the project, guides or Drive, so none is invented. It appears
-   * once NEXT_PUBLIC_FACEBOOK_URL is set.
+   * Facebook: the owner's verified page (added by the owner, 18 Oct 2026). NEXT_PUBLIC_FACEBOOK_URL
+   * overrides it; "" hides it.
    */
   instagramHandle: (process.env.NEXT_PUBLIC_INSTAGRAM_HANDLE ?? "chloe.eats.atx").trim().replace(/^@/, ""),
-  facebookUrl: process.env.NEXT_PUBLIC_FACEBOOK_URL?.trim() || null,
+  facebookUrl: (process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "https://www.facebook.com/profile.php?id=61593967931557").trim() || null,
   /**
    * Customer support address. None is configured: chloeinaustin.com can send through
    * Resend but receiving is disabled, so no inbound mailbox is claimed anywhere.

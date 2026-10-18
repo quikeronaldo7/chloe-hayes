@@ -43,7 +43,7 @@ Status as of **18 October 2026**. Five separate categories, never merged. "Built
 2. **Bundles**: Complete Austin Collection approved ($99). First Month, Date Night and Weekend Explorer remain hidden proposals until named and priced.
 3. **Website copy** for all pages (written from the PDFs on 18 Oct; marked *needs review*).
 4. **Image rights** (docs/IMAGERY.md): AI-generated brand imagery of Chloe in identifiable places (BBQ hall, South Congress/Austin Motel sign), the Greetings-from-Austin mural on the New to Austin cover, restaurant photos inside Dinner Spots, generated event scenes in Date Ideas.
-5. **Socials**: the footer links Instagram `@chloe.eats.atx` (printed in three guides; the Brand Bible lists the live handle as unlocked, so confirm). **Facebook has no URL anywhere**: set `NEXT_PUBLIC_FACEBOOK_URL` to show it.
+5. **Socials**: the footer links Facebook (owner-verified page) and Instagram `@chloe.eats.atx` (printed in three guides; the Brand Bible lists the live handle as unlocked, so confirm the handle).
 6. **AI-persona disclosure**: whether/how the site discloses that Chloe and some imagery are AI-generated (the Dinner Spots PDF already notes "approved AI-assisted refinements").
 7. **Legal**: seller entity and address, refund policy, licence terms, update policy, privacy details, governing law, tax position (Stripe Tax?). Pages currently say "not published yet".
 8. **Support inbox**: a monitored address (set `NEXT_PUBLIC_SUPPORT_EMAIL`), or enable Resend receiving.

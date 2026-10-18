@@ -9,12 +9,11 @@
 - **Being Single:** the approved poolside skyline portrait, in the same layout, cropped to face and shoulders.
 
 **Logo**
-- Back to the simple cactus mark and "Chloe *in* Austin" wordmark in the header, footer and favicon.
-- The Western Badge files, the hat-and-cactus mark and the apple-touch icon are all removed.
+- Back to the simple cactus mark and "Chloe *in* Austin" wordmark in the header, footer and favicon (your cactus icon from 851eb87).
+- The Western Badge artwork and the apple-touch icon are removed.
 
 **Footer**
-- Instagram `@chloe.eats.atx` is linked under the tagline.
-- Facebook appears once `NEXT_PUBLIC_FACEBOOK_URL` is set. No URL exists in the project, guides or Drive, so none was invented.
+- Instagram (`@chloe.eats.atx`) and Facebook (your verified page, from your commit 5866eb3) are linked under the tagline. Your footer layout is kept as you wrote it.
 - The Legal column is gone. Terms, Refunds and Privacy are small links beside the copyright line.
 
 **Prices** (approved, recorded in `products.ts` and `readiness.ts`)
