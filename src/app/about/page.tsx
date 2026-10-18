@@ -6,65 +6,74 @@ import { Cover } from "@/components/cover";
 import { JsonLd } from "@/components/json-ld";
 import { absoluteUrl } from "@/lib/config";
 
+/** Owner-approved: Chloe in the yellow dress outside the Austin Motel (same photo as the New to Austin cover). */
+const ABOUT_PHOTO = { src: "/images/chloe/chloe-austin-motel-yellow-dress.jpg", alt: "Chloe in a yellow sundress under the Austin Motel sign on South Congress" };
+
 export const metadata: Metadata = {
   title: "About Chloe",
-  description: "Chloe Hayes is 27, Canadian and new to Austin: a culinary storyteller learning the city through food, people and the stories behind them.",
+  description: "Meet Chloe Hayes, your Austin insider with excellent taste: dinner reservations, first dates, hidden gems and weekend escapes, with the details that make them work.",
   alternates: { canonical: "/about" },
-  openGraph: { images: [{ url: "/images/chloe/chloe-portrait-warm.jpg", alt: "Chloe Hayes" }] },
+  openGraph: { images: [{ url: ABOUT_PHOTO.src, alt: ABOUT_PHOTO.alt }] },
 };
 
 /**
- * Only established canon from the Brand Bible v1.1: 27, Canadian, Austin home base
- * ("new to ATX"), culinary storyteller, travels because of food, and her personality.
- * Hometown, previous city, move date/reason, education, jobs and relationship status
- * are deliberately UNLOCKED and must not be written here.
+ * About copy: owner-approved text (18 Oct 2026), used verbatim. Anything beyond it
+ * (hometown, previous city, education, jobs, relationship status) stays UNLOCKED per
+ * the Brand Bible v1.1 and must not be added here.
  */
 export default function AboutPage() {
   return (
     <>
-      <section className="wrap grid items-center gap-10 pb-16 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pt-14">
+      <section className="wrap grid gap-10 pb-16 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start lg:gap-16 lg:pt-14">
         <div>
           <p className="t-eyebrow text-terracotta">About Chloe</p>
           <h1 className="t-display mt-4 text-balance">
-            Food first. <span className="accent-italic">Everything else follows.</span>
+            Your Austin insider, <span className="accent-italic">with excellent taste.</span>
           </h1>
-          <p className="t-lede mt-6 max-w-xl text-ink-soft text-pretty">
-            I&rsquo;m Chloe Hayes: 27, Canadian, and new to Austin. I&rsquo;m a culinary storyteller, which is a fancy way of saying I learn a place
-            through what people cook, who&rsquo;s cooking it, and why everyone keeps coming back.
+          <p className="t-lede mt-6 font-serif text-ink">
+            Hi, I&rsquo;m Chloe! <span role="img" aria-label="Canadian flag">🇨🇦</span>
+          </p>
+          <div className="mt-4 max-w-xl space-y-4 text-[1.08rem] text-ink-soft text-pretty">
+            <p>I came to Austin for a new adventure, and somewhere along the way, finding the city&rsquo;s best spots became my favorite obsession.</p>
+            <p>
+              I&rsquo;m the friend who knows where to make dinner reservations, which new places are worth the hype, where to go on a first date, and
+              which little hidden gems deserve a spot on your weekend calendar.
+            </p>
+            <p>
+              I&rsquo;m equally happy at a neighborhood taco joint or a beautiful tasting menu. Give me good food, great company, and a place with a
+              little personality, and I&rsquo;m in.
+            </p>
+            <p>
+              I&rsquo;ve made it my mission to discover the Austin experiences actually worth your time. The romantic spots, the fun nights out, the
+              secret corners, the beautiful escapes, and those special places you&rsquo;ll want to tell your friends about.
+            </p>
+            <p>
+              And because a great recommendation is only useful when you can actually experience it, my guides go beyond pretty pictures. I bring you
+              the details: what to order, what to book, when to go, and how to make the most of it.
+            </p>
+            <p className="text-ink">
+              <strong className="font-semibold">Consider me your Austin girl with the inside scoop.</strong> You bring the company. I&rsquo;ll bring the
+              plans. <span role="img" aria-label="cowboy hat face">🤠</span>
+            </p>
+          </div>
+          <p className="mt-6 max-w-xl font-serif text-xl italic text-forest" style={{ fontVariationSettings: '"SOFT" 100, "WONK" 1' }}>
+            And if you&rsquo;ve discovered somewhere amazing that I haven&rsquo;t, you know I&rsquo;m going to want to hear about it.
           </p>
         </div>
-        <div className="relative mx-auto w-full max-w-md">
+        <div className="relative order-first mx-auto w-full max-w-sm sm:max-w-md lg:sticky lg:top-28 lg:order-none">
           <div className="relative aspect-[4/5] overflow-hidden rounded-[2rem]">
-            <Image src="/images/chloe/chloe-portrait-warm.jpg" alt="Chloe smiling on a patio in warm evening light" fill priority sizes="(min-width: 1024px) 28rem, 90vw" className="object-cover" style={{ objectPosition: "50% 25%" }} />
+            <Image src={ABOUT_PHOTO.src} alt={ABOUT_PHOTO.alt} fill priority sizes="(min-width: 1024px) 28rem, 90vw" className="object-cover" style={{ objectPosition: "50% 40%" }} />
           </div>
-          <span className="sticker absolute -left-4 bottom-10 h-24 w-24 bg-sun text-[0.68rem] text-forest-deep shadow-lg">
-            New
-            <br />
-            to ATX
-          </span>
         </div>
       </section>
 
       <section className="grain bg-forest text-paper">
-        <div className="wrap section-tight grid gap-12 lg:grid-cols-2 lg:gap-20">
-          <div className="space-y-5 text-[1.08rem] text-paper/85">
-            <h2 className="t-h2 text-paper">
-              Why a <span className="italic text-sun">new</span> girl in town?
-            </h2>
-            <p>
-              Because I don&rsquo;t have to pretend I&rsquo;ve known Austin forever. I get to do what you&rsquo;d do: ask the second question, read
-              the fine print on the reservation page, and work out which places are actually worth it.
-            </p>
-            <p>
-              I&rsquo;ll walk into a bakery for one thing and leave knowing the story behind it. (I said I was getting one. It was four.) That
-              curiosity is the whole engine behind these guides.
-            </p>
-          </div>
+        <div className="wrap section-tight">
           <div className="space-y-5 text-[1.08rem] text-paper/85">
             <h2 className="t-h2 text-paper">
               How the guides <span className="italic text-sun">get made</span>
             </h2>
-            <ul className="space-y-4">
+            <ul className="grid gap-x-12 gap-y-4 md:grid-cols-2">
               {[
                 ["Researched, not guessed.", "Every listing is checked against its official source, and each guide prints when it was checked."],
                 ["Dated and linked.", "Prices, hours and booking windows change. The guides say so, and link straight to where you can confirm."],
@@ -79,25 +88,6 @@ export default function AboutPage() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-tight">
-        <div className="wrap grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="relative aspect-[16/9] overflow-hidden rounded-[1.5rem]">
-            <Image src="/images/chloe/chloe-south-congress.jpg" alt="Chloe walking along South Congress at golden hour" fill sizes="(min-width: 1024px) 50vw, 100vw" className="object-cover" />
-          </div>
-          <div>
-            <p className="t-eyebrow text-terracotta">What I&rsquo;m not</p>
-            <ul className="mt-4 space-y-3 text-[1.05rem]">
-              <li>Not a restaurant scorecard. Not everything is a 10/10.</li>
-              <li>Not a luxury-only foodie. A great taco and a tasting menu can both be the night.</li>
-              <li>Not a fake local. I&rsquo;m learning, and I&rsquo;d love your help.</li>
-            </ul>
-            <p className="mt-8 font-serif text-2xl italic text-forest" style={{ fontVariationSettings: '"SOFT" 100, "WONK" 1' }}>
-              Tell me what I&rsquo;m missing in Austin.
-            </p>
           </div>
         </div>
       </section>
@@ -131,7 +121,7 @@ export default function AboutPage() {
           "@context": "https://schema.org",
           "@type": "ProfilePage",
           url: absoluteUrl("/about"),
-          mainEntity: { "@type": "Person", name: "Chloe Hayes", jobTitle: "Culinary storyteller", homeLocation: { "@type": "Place", name: "Austin, Texas" }, image: absoluteUrl("/images/chloe/chloe-portrait-warm.jpg") },
+          mainEntity: { "@type": "Person", name: "Chloe Hayes", jobTitle: "Culinary storyteller", homeLocation: { "@type": "Place", name: "Austin, Texas" }, image: absoluteUrl(ABOUT_PHOTO.src) },
         }}
       />
     </>

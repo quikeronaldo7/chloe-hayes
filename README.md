@@ -22,8 +22,8 @@ npm run check                   # lint + typecheck + 180 tests + delivery + SigV
 | Area | What exists |
 |---|---|
 | **Pages** | Home, Shop All, 4 collection pages, 7 guide pages (one template), About, Help (with "Resend my downloads"), legal placeholders (clearly not in force), checkout success / cancelled, private library, download-unavailable, 404, error, Journal shell |
-| **Catalogue** | `src/catalogue/`: 7 guides with facts from the FINAL PDFs, 4 collections, 4 bundle proposals (hidden until approved; approved ones appear as **Save with Bundles** with their saving), readiness, delivery manifest |
-| **Prices** | Owner-approved 18 Oct 2026: New to Austin $39, Exclusive $24, Hill Country $15, the other four $19; Complete Austin Collection $99. Preview test mode charges the same figures in Stripe **test** mode (unpriced proposals fall back to $1, labelled) |
+| **Catalogue** | `src/catalogue/`: 7 guides with facts from the FINAL PDFs, 4 collections, 4 approved bundles shown as **Curated Guide Bundles** (saving shown only where real), readiness, delivery manifest |
+| **Prices** | Owner-approved 18 Oct 2026: New to Austin $39, Exclusive $24, Hill Country $15, the other four $19; bundles $58 / $38 / $34 and Complete Austin Collection $99. Preview test mode charges the same figures in Stripe **test** mode (unpriced proposals fall back to $1, labelled) |
 | **Bag & checkout** | Add to bag, Buy now, multi-item bag, bundles absorb their guides, covered/duplicate items refused, server re-prices everything, promo codes at Stripe, Chloe-branded hosted checkout on the shared QR DIGITAL account |
 | **Fulfilment** | Webhook re-reads the session, emails a Chloe-branded library link via Resend (idempotent), records it on the session; refunds revoke library and downloads on every visit |
 | **Delivery** | Private R2 bucket `chloe-hayes-products`; files locked by SHA-256 and re-verified before a 5-minute signed URL; never in `/public`; pending files are never substituted |
@@ -85,7 +85,7 @@ Guide page / bag ──POST /api/checkout {items}──▶ reconcile + price on 
 | `CHLOE_TEST_COMMERCE` | – | `true` | never |
 | Prices | approved | approved (Stripe test mode) | approved |
 | `STOREFRONT_MODE` | – | – | unset = browsing-only |
-| Save with Bundles | approved only | approved only | approved only |
+| Curated Guide Bundles | approved only | approved only | approved only |
 | Storage | `private-files/` | R2 read-only token | R2 read-only token |
 | robots | – | disallow all + noindex | allow (after launch) |
 

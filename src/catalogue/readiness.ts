@@ -33,15 +33,15 @@ export interface Readiness {
   notes: string[];
 }
 
+/** The owner's pricing approval in the 18 Oct 2026 corrections brief. */
+const PRICES_APPROVED: Approval = { by: "Owner", on: "2026-10-18", basis: "Storefront corrections briefs: approved guide prices and all four bundle prices." };
+
 /**
  * The seven customer PDFs are FINAL per the 18 Oct 2026 master brief ("These
  * products already exist… use the actual final PDF files"). Website copy was
  * written on 18 Oct 2026 from those PDFs and needs owner review; prices were
  * approved on 18 Oct 2026; imagery has open rights questions (docs/IMAGERY.md).
  */
-/** The owner's pricing approval in the 18 Oct 2026 corrections brief. */
-const PRICES_APPROVED: Approval = { by: "Owner", on: "2026-10-18", basis: "Storefront corrections brief: approved price list (guides + Complete Austin Collection)." };
-
 const finalPdf = (notes: string[] = []): Readiness => ({
   kind: "product",
   content: "final",
@@ -50,13 +50,6 @@ const finalPdf = (notes: string[] = []): Readiness => ({
   salesCopy: "needs-review",
   imagery: "pending",
   notes,
-});
-
-const proposal = (notes: string[] = []): Readiness => ({
-  kind: "bundle",
-  salesCopy: "needs-review",
-  imagery: "final",
-  notes: ["Bundle proposal: contents, name and price need owner approval.", ...notes],
 });
 
 export const readiness: Record<string, Readiness> = {
@@ -72,9 +65,9 @@ export const readiness: Record<string, Readiness> = {
   "cia-natural-gems": finalPdf(["Edition/date isn't printed in the PDF. Swim status changes; plan periodic re-checks."]),
   "cia-hill-country": finalPdf(),
   "cia-exclusive": finalPdf(["Some venue images are third-party (e.g. a Google Maps credit on Pershing House): confirm rights."]),
-  "cia-bundle-first-month": proposal(),
-  "cia-bundle-date-night": proposal(),
-  "cia-bundle-weekend-explorer": proposal(),
+  "cia-bundle-first-month": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "needs-review", imagery: "final", notes: [] },
+  "cia-bundle-date-night": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "needs-review", imagery: "final", notes: [] },
+  "cia-bundle-weekend-explorer": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "needs-review", imagery: "final", notes: [] },
   "cia-bundle-complete": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "needs-review", imagery: "final", notes: [] },
 };
 

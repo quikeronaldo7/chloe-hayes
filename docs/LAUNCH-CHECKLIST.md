@@ -11,7 +11,7 @@ Status as of **18 October 2026**. Five separate categories, never merged. "Built
 | Catalogue of all 7 guides with facts from the FINAL PDFs | `npm run test:chloe` checks titles and page counts against the PDFs |
 | Collections + "Find your Austin" (≤ 3 clicks to any guide) | Every door links straight to a guide or collection |
 | Recommendations (Dinner ↔ Dates, Gems ↔ Hill Country, New to Austin → Being Single, …) with reasons | Tested |
-| Bundle system: "Save with Bundles" shows approved bundles only (price, combined price, saving); proposals stay hidden; bundles absorb guides they contain | Tested (bag rules, saving maths on a QA fixture, unapproved bundles never offered) |
+| Bundles: all four approved and shown as "Curated Guide Bundles" (First Month $58, Date Night $38, Weekend Explorer $34: same as separately, no saving claimed; Complete Collection $99, saves $55); bundles absorb guides they contain | Tested (prices, saving maths, bag subtotals, unapproved bundles never offered) |
 | Bag: add, remove, persist (localStorage, cross-tab), buy now, multi-item, empty state, mobile bottom sheet | Browser flow test |
 | Server-side pricing; browser prices ignored; Kate ids / unknown ids / tampered lists rejected | Checkout API tests |
 | Approved prices (18 Oct): 7 guides + Complete Austin Collection ($99, saves $55 on $154); same figures on every page, bag and checkout; test mode charges them in Stripe test only | Tests |
@@ -40,12 +40,12 @@ Status as of **18 October 2026**. Five separate categories, never merged. "Built
 ## 3. Awaiting owner approval
 
 1. ~~Prices~~: approved 18 Oct 2026 and recorded (`products.ts`, `readiness.ts`).
-2. **Bundles**: Complete Austin Collection approved ($99). First Month, Date Night and Weekend Explorer remain hidden proposals until named and priced.
+2. ~~Bundles~~: all four approved 18 Oct 2026 and recorded.
 3. **Website copy** for all pages (written from the PDFs on 18 Oct; marked *needs review*).
 4. **Image rights** (docs/IMAGERY.md): AI-generated brand imagery of Chloe in identifiable places (BBQ hall, South Congress/Austin Motel sign), the Greetings-from-Austin mural on the New to Austin cover, restaurant photos inside Dinner Spots, generated event scenes in Date Ideas.
 5. **Socials**: the footer links Facebook (owner-verified page) and Instagram `@chloe.eats.atx` (printed in three guides; the Brand Bible lists the live handle as unlocked, so confirm the handle).
 6. **AI-persona disclosure**: whether/how the site discloses that Chloe and some imagery are AI-generated (the Dinner Spots PDF already notes "approved AI-assisted refinements").
-7. **Legal**: seller entity and address, refund policy, licence terms, update policy, privacy details, governing law, tax position (Stripe Tax?). Pages currently say "not published yet".
+7. **Legal**: seller entity and address, refund terms, licence wording, update policy, data retention, governing law, tax position (Stripe Tax?). The Help page (Terms of Sale, Privacy, Refund & Digital Product Policy; `src/lib/policies.ts`) states what already applies and says the full policy isn't published yet. `/legal/terms|refunds|privacy` stay live for payment providers.
 8. **Support inbox**: a monitored address (set `NEXT_PUBLIC_SUPPORT_EMAIL`), or enable Resend receiving.
 9. **Which Exclusive Experiences PDF is master**: two FINAL files with different sizes exist (10,513,766 vs 10,361,297 bytes).
 10. **New to Austin open items** from its production summary (Zilker rent figure, mural cover, image provenance) and the in-PDF recommendation links (storefront URLs can now be supplied: `/guides/<slug>`).

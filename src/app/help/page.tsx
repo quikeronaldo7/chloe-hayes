@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { FaqList } from "@/components/faq";
+import { PolicyBody } from "@/components/policy";
 import { ResendForm } from "@/components/resend-form";
 import { HowItWorks, SectionHead } from "@/components/sections";
 import { siteConfig } from "@/lib/config";
 import { storeFaqs } from "@/lib/faqs";
+import { policies } from "@/lib/policies";
 
 export const metadata: Metadata = {
   title: "Help & downloads",
@@ -71,16 +72,39 @@ export default function HelpPage() {
                 <>A direct support inbox is being set up. Until then, the resend form above is the fastest way back to your guides.</>
               )}
             </p>
+            <p className="mt-4 max-w-sm t-small text-ink-soft">
+              Looking for the fine print? See the <a href="#terms-of-sale" className="link-arrow">Terms of Sale</a>,{" "}
+              <a href="#refunds" className="link-arrow">Refund &amp; Digital Product Policy</a> and <a href="#privacy" className="link-arrow">Privacy</a> below.
+            </p>
           </div>
           <FaqList items={storeFaqs} schema />
         </div>
       </section>
 
-      <section className="section-tight pb-24">
-        <div className="wrap flex flex-wrap gap-x-8 gap-y-3 border-t border-line pt-8 t-small">
-          <Link href="/legal/terms" className="link-arrow">Terms of sale</Link>
-          <Link href="/legal/refunds" className="link-arrow">Refunds</Link>
-          <Link href="/legal/privacy" className="link-arrow">Privacy</Link>
+      <section id="policies" className="section-tight scroll-mt-24 pb-24">
+        <div className="wrap grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+          <div>
+            <SectionHead eyebrow="Policies" title="The" accent="fine print" />
+            <nav aria-label="Policies" className="mt-6 flex flex-col gap-2 t-small">
+              {policies.map((p) => (
+                <a key={p.anchor} href={`#${p.anchor}`} className="link-arrow">
+                  {p.title} <span aria-hidden>↓</span>
+                </a>
+              ))}
+            </nav>
+          </div>
+          <div className="space-y-12">
+            {policies.map((p) => (
+              <section key={p.anchor} id={p.anchor} aria-labelledby={`${p.anchor}-title`} className="scroll-mt-28">
+                <h3 id={`${p.anchor}-title`} className="t-h3">
+                  {p.title}
+                </h3>
+                <div className="mt-3">
+                  <PolicyBody policy={p} />
+                </div>
+              </section>
+            ))}
+          </div>
         </div>
       </section>
     </>

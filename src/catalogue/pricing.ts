@@ -82,7 +82,7 @@ export interface BundleOffer {
 }
 
 /**
- * "Save with Bundles": the bundles customers may see. Only owner-approved bundles whose
+ * "Curated Guide Bundles": the bundles customers may see. Only owner-approved bundles whose
  * price, and every guide inside, is approved; savings come from approved prices only.
  * On 18 Oct 2026 no bundle is approved, so this is empty and the sections don't render.
  */

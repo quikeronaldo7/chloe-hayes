@@ -44,6 +44,12 @@ const APPROVED_PRICES: Record<string, number> = {
   "cia-hill-country": 1500,
   "cia-exclusive": 2400,
 };
+const APPROVED_BUNDLES: Record<string, number> = {
+  "cia-bundle-first-month": 5800,
+  "cia-bundle-date-night": 3800,
+  "cia-bundle-weekend-explorer": 3400,
+  "cia-bundle-complete": 9900,
+};
 
 async function main() {
   // -------------------------------------------------------------------------
@@ -89,7 +95,7 @@ async function main() {
   check("required recommendations: Gems → Hill Country", getProduct("cia-natural-gems")!.related[0].id === "cia-hill-country");
   check("required recommendations: Hill Country → Gems", getProduct("cia-hill-country")!.related[0].id === "cia-natural-gems");
   check("required recommendations: New to Austin → Being Single", getProduct("cia-new-to-austin")!.related[0].id === "cia-being-single");
-  check("four bundles: Complete Collection approved at $99, the rest unpriced proposals", bundles.length === 4 && bundles.every((b) => (b.id === "cia-bundle-complete" ? b.status === "approved" && b.price.amount === 9900 : b.status === "proposal" && b.price.amount === null)));
+  check("four approved bundles at the owner's prices", bundles.length === 4 && bundles.every((b) => b.status === "approved" && b.price.status === "approved" && b.price.amount === APPROVED_BUNDLES[b.id]));
   check("bundle contents valid", bundles.every((b) => b.includes.every((id) => getProduct(id))));
   check("Complete Austin Collection has all seven", bundles.find((b) => b.slug === "complete-austin-collection")!.includes.length === 7);
   check("no paid PDFs in /public", !hasPdf("public"));
@@ -117,7 +123,7 @@ async function main() {
   // -------------------------------------------------------------------------
   section("Price books (no invented prices)");
   const approved = approvedPriceBook();
-  check("approved book = the 7 approved guides + Complete Collection", Object.keys(approved.prices).length === 8 && Object.entries(APPROVED_PRICES).every(([id, n]) => approved.prices[id] === n) && approved.prices["cia-bundle-complete"] === 9900);
+  check("approved book = the 7 guides + 4 bundles at approved prices", Object.keys(approved.prices).length === 11 && Object.entries({ ...APPROVED_PRICES, ...APPROVED_BUNDLES }).every(([id, n]) => approved.prices[id] === n));
   const test = testPriceBook();
   check("test book carries approved guide prices (same figures as the shop)", products.every((p) => test.prices[p.id] === approved.prices[p.id]));
   check("test book: approved bundle at its price, proposals = exact sum (no invented discount)", bundles.every((b) => test.prices[b.id] === (approved.prices[b.id] ?? b.includes.reduce((n, id) => n + test.prices[id], 0))));
@@ -129,19 +135,25 @@ async function main() {
   check("Production always uses the approved book", activePriceBook(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "production" })).mode === "approved");
   check("Preview with flag uses the test book", activePriceBook(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "preview" })).mode === "test");
   {
-    const offers = bundleOffers();
-    check("Save with Bundles = Complete Collection only", offers.length === 1 && offers[0].bundle.id === "cia-bundle-complete");
-    check("Complete Collection: $99 vs $154 separately, saves $55", offers[0]?.price === 9900 && offers[0].separately === 15400 && offers[0].saving === 5500, JSON.stringify(offers[0] ?? null));
+    const offers = Object.fromEntries(bundleOffers().map((o) => [o.bundle.id, o]));
+    check("Curated Guide Bundles shows all four", Object.keys(offers).length === 4);
+    const same = (id: string, cents: number) => offers[id]?.price === cents && offers[id].separately === cents && offers[id].saving === 0;
+    check("First Month $58 = $39 + $19, no saving claimed", same("cia-bundle-first-month", 5800), JSON.stringify(offers["cia-bundle-first-month"] ?? null));
+    check("Date Night $38 = $19 + $19, no saving claimed", same("cia-bundle-date-night", 3800));
+    check("Weekend Explorer $34 = $19 + $15, no saving claimed", same("cia-bundle-weekend-explorer", 3400));
+    const c = offers["cia-bundle-complete"];
+    check("Complete Collection: $99 vs $154 separately, saves $55", c?.price === 9900 && c.separately === 15400 && c.saving === 5500, JSON.stringify(c ?? null));
+    check("bag: First Month bundle subtotal $58", summarise(["cia-bundle-first-month"], approved).subtotal === 5800);
+    check("bag: three convenience bundles together $130", summarise(["cia-bundle-first-month", "cia-bundle-date-night", "cia-bundle-weekend-explorer"], approved).subtotal === 13000);
   }
   {
     // Fixture book (QA only, never shown): checks the saving maths and that proposals stay hidden.
     const fx = { mode: "approved" as const, prices: { "cia-new-to-austin": 3900, "cia-being-single": 1900, "cia-bundle-first-month": 4900 } };
-    check("unapproved bundle never offered, even with a price", bundleOffers(["cia-bundle-first-month"], fx).length === 0);
     const orig = bundles.find((b) => b.id === "cia-bundle-first-month")!;
-    const was = orig.status;
+    (orig as { status: string }).status = "proposal";
+    check("unapproved bundle never offered, even with a price", bundleOffers(["cia-bundle-first-month"], fx).length === 0);
     (orig as { status: string }).status = "approved";
     const [o] = bundleOffers(["cia-bundle-first-month"], fx);
-    (orig as { status: string }).status = was;
     check("saving = guides separately − bundle price", o?.separately === 5800 && o.price === 4900 && o.saving === 900, JSON.stringify(o ?? null));
     check("bundle with an unpriced guide is not offered", bundleOffers(["cia-bundle-date-night"], fx).length === 0);
   }
@@ -149,8 +161,8 @@ async function main() {
 
   // -------------------------------------------------------------------------
   section("Bag rules");
-  let r = addToCart([], "cia-bundle-date-night", approved);
-  check("approved book: an unapproved bundle can't be added", r.note.kind === "unavailable" && r.ids.length === 0);
+  let r = addToCart([], "cia-not-a-guide", approved);
+  check("approved book: an unknown item can't be added", r.note.kind !== "added" && r.ids.length === 0);
   check("approved book: an approved guide can be added", addToCart([], "cia-dinner-spots", approved).note.kind === "added");
   r = addToCart([], "cia-dinner-spots", test);
   check("add a guide", r.note.kind === "added" && r.ids.join() === "cia-dinner-spots");

@@ -35,12 +35,11 @@ export const collections: Collection[] = [
   },
 ];
 
-const PROPOSAL = { amount: null, status: "pending", source: "Bundle proposal from the 18 Oct 2026 brief. Contents, name and price need owner approval." } as const;
-
 /**
- * Bundles. Only "approved" ones (with an approved price) appear to customers, in
- * Save with Bundles. As of 18 Oct 2026 that is the Complete Austin Collection; the
- * other three are still proposals: hidden, unpriced, never sold.
+ * Bundles, all four owner-approved on 18 Oct 2026. Only approved bundles with an
+ * approved price appear to customers (Curated Guide Bundles). First Month, Date Night
+ * and Weekend Explorer cost exactly their guides' total (convenience, no saving);
+ * the Complete Austin Collection is $99 against $154 separately.
  */
 export const bundles: Bundle[] = [
   {
@@ -50,8 +49,8 @@ export const bundles: Bundle[] = [
     subtitle: "New to Austin + Guide to Being Single",
     includes: ["cia-new-to-austin", "cia-being-single"],
     why: "Settle in, then get out there: the move, the neighborhoods and your first 90 days, plus where to meet people IRL.",
-    status: "proposal",
-    price: PROPOSAL,
+    status: "approved",
+    price: { amount: 5800, status: "approved", source: "Owner-approved bundle price, 18 Oct 2026 (equals the guides bought separately)." },
   },
   {
     id: "cia-bundle-date-night",
@@ -60,8 +59,8 @@ export const bundles: Bundle[] = [
     subtitle: "12 Best Date Ideas + 10 Best Dinner Spots",
     includes: ["cia-date-ideas", "cia-dinner-spots"],
     why: "Twelve dates with a plan, and ten dinners worth dressing up for.",
-    status: "proposal",
-    price: PROPOSAL,
+    status: "approved",
+    price: { amount: 3800, status: "approved", source: "Owner-approved bundle price, 18 Oct 2026 (equals the guides bought separately)." },
   },
   {
     id: "cia-bundle-weekend-explorer",
@@ -70,8 +69,8 @@ export const bundles: Bundle[] = [
     subtitle: "5 Natural Gems + Hill Country Escapes",
     includes: ["cia-natural-gems", "cia-hill-country"],
     why: "Swimming holes and Hill Country days that share Wimberley and Dripping Springs.",
-    status: "proposal",
-    price: PROPOSAL,
+    status: "approved",
+    price: { amount: 3400, status: "approved", source: "Owner-approved bundle price, 18 Oct 2026 (equals the guides bought separately)." },
   },
   {
     id: "cia-bundle-complete",

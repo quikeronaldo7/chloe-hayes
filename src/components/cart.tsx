@@ -6,6 +6,7 @@ import { getSellable, isBundle } from "@/catalogue";
 import { addToCart, describeNote, reconcile, removeFromCart, summarise, type CartNote } from "@/catalogue/cart";
 import type { PriceBook } from "@/catalogue/pricing";
 import { track } from "@/lib/analytics";
+import { PolicyLinks } from "./policy";
 import { formatMoney } from "@/lib/money";
 import { CoverThumb } from "./cover";
 
@@ -348,6 +349,7 @@ function CartDrawer() {
                   Clear bag
                 </button>
               </div>
+              <PolicyLinks />
             </div>
           </>
         )}

@@ -31,7 +31,7 @@ export const storeFaqs: Faq[] = [
   },
   {
     q: "Can I get a refund?",
-    a: "The refund policy will be published before the shop opens, on the Refunds page and at checkout.",
+    a: "Refunded orders lose access to their library and downloads. The full Refund & Digital Product Policy will be published before the shop opens, in the policies section of the Help page.",
   },
   {
     q: "Does buying a guide get me reservations or access anywhere?",

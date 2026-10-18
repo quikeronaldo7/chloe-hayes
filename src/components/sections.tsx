@@ -40,9 +40,10 @@ export function HowItWorks({ dark = false }: { dark?: boolean }) {
 }
 
 /**
- * "Save with Bundles": approved bundles only (see bundleOffers). Each card lists what's
- * inside, the bundle price, the guides' combined price and the saving, all from approved
- * prices. Callers render nothing when there are no offers.
+ * "Curated Guide Bundles": approved bundles only (see bundleOffers). Each card lists
+ * what's inside and the bundle price. A saving (with the guides' combined price) is shown
+ * only when the bundle really costs less; otherwise it says it's the same price.
+ * Callers render nothing when there are no offers.
  */
 export function BundleGrid({ offers }: { offers: BundleOffer[] }) {
   return (
@@ -69,16 +70,21 @@ export function BundleGrid({ offers }: { offers: BundleOffer[] }) {
                 <li key={g.id}>· {g.title}</li>
               ))}
             </ul>
-            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-line pt-4">
-              <p className="flex items-baseline gap-2">
-                <span className="font-serif text-2xl tabular-nums">{formatMoney(price)}</span>
-                {saving > 0 ? (
-                  <span className="t-small text-muted">
-                    <span className="sr-only">instead of </span>
-                    <s className="tabular-nums">{formatMoney(separately)}</s> separately
-                  </span>
-                ) : null}
-              </p>
+            <div className="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-t border-line pt-4">
+              <div>
+                <p className="t-eyebrow text-terracotta">Bundle price</p>
+                <p className="mt-1 flex items-baseline gap-2">
+                  <span className="font-serif text-2xl tabular-nums">{formatMoney(price)}</span>
+                  {saving > 0 ? (
+                    <span className="t-small text-muted">
+                      <span className="sr-only">instead of </span>
+                      <s className="tabular-nums">{formatMoney(separately)}</s> separately
+                    </span>
+                  ) : (
+                    <span className="t-small text-muted">Same as buying separately, in one checkout</span>
+                  )}
+                </p>
+              </div>
               <AddButton id={b.id} label="Add bundle to bag" />
             </div>
           </li>
@@ -88,14 +94,14 @@ export function BundleGrid({ offers }: { offers: BundleOffer[] }) {
   );
 }
 
-/** The "Save with Bundles" section, or nothing when no bundle is approved. */
+/** The "Curated Guide Bundles" section, or nothing when no bundle is approved. */
 export function SaveWithBundles({ ids, headingId = "bundles-title", className = "section-tight bg-paper-deep/60" }: { ids?: readonly string[]; headingId?: string; className?: string }) {
   const offers = bundleOffers(ids);
   if (!offers.length) return null;
   return (
     <section className={className} aria-labelledby={headingId}>
       <div className="wrap">
-        <SectionHead id={headingId} eyebrow="Bundles" title="Save with" accent="Bundles" lede="Guides that work better together, in one bag and one download library." />
+        <SectionHead id={headingId} eyebrow="Bundles" title="Curated" accent="Guide Bundles" lede="Guides that work better together, in one bag and one download library." />
         <div className="mt-10">
           <BundleGrid offers={offers} />
         </div>

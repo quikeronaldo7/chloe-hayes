@@ -108,6 +108,9 @@ export async function POST(req: Request) {
       ...(process.env.STRIPE_AUTOMATIC_TAX === "true" ? { automatic_tax: { enabled: true } } : {}),
       ...(process.env.STRIPE_REQUIRE_TERMS === "true" ? { consent_collection: { terms_of_service: "required" as const } } : {}),
       custom_text: {
+        ...(process.env.STRIPE_REQUIRE_TERMS === "true"
+          ? { terms_of_service_acceptance: { message: `I agree to the [Terms of Sale](${origin}/help#terms-of-sale) and the [Refund & Digital Product Policy](${origin}/help#refunds).` } }
+          : {}),
         submit: {
           message:
             book.mode === "test"

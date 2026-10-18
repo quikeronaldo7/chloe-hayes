@@ -7,6 +7,7 @@ import { approvedPriceBook, priceOf } from "@/catalogue/pricing";
 import { useCart } from "@/components/cart";
 import { track } from "@/lib/analytics";
 import { formatMoney } from "@/lib/money";
+import { PolicyLinks } from "./policy";
 
 /** Price line that is honest about the deployment: approved, test, or coming soon. */
 export function PriceTag({ id, className = "" }: { id: string; className?: string }) {
@@ -93,6 +94,7 @@ export function BuyBox({ id }: { id: string }) {
       {book.mode === "test" ? (
         <p className="t-small text-muted">Preview test mode: pay with Stripe test card 4242 4242 4242 4242. No real money moves.</p>
       ) : null}
+      <PolicyLinks className="mt-2" />
 
       <div
         aria-hidden={!showBar}

@@ -1,5 +1,31 @@
 # Changelog
 
+## 18 Oct 2026 (final): Storefront corrections (`preview` branch)
+
+**Bundles**
+- First Month in Austin ($58), Austin Date Night ($38) and Weekend Explorer ($34) are now approved, alongside the Complete Austin Collection ($99).
+- All four show under **Curated Guide Bundles** on the homepage, Shop and the guide pages they include.
+- Each card lists the included guides, a labelled "Bundle price" and either "Same as buying separately, in one checkout" or, for the Collection only, "$154 separately" with a "Save $55" chip.
+- Bag subtotals and checkout amounts come from the same price list. In the browser, adding the bundles one after another gave $58, then $96, then $130; adding the Collection replaced them at $99.
+
+**About**
+- The owner-approved copy ("Your Austin insider, with excellent taste.") is used verbatim, with the yellow-dress Austin Motel photo. It's the same photo as the New to Austin cover, unaltered.
+- The "What I'm not" and "Why a new girl in town?" blocks are removed. "How the guides get made" and the New to Austin call-to-action are kept.
+- On mobile the photo comes first.
+
+**Product cards and footer icons**
+- The owner's commits 7b44856 (labelled "Guide price" directly under the details) and f509df0 (icon-only Instagram and Facebook links) are kept and verified at desktop and mobile widths.
+
+**Legal**
+- The footer has no legal links now, only the copyright line.
+- The Help page has a "Policies" section with Terms of Sale, Privacy, and the Refund & Digital Product Policy (`/help#terms-of-sale`, `#privacy`, `#refunds`), linked from the FAQs. Each states what already applies and that the full policy isn't published yet.
+- "Before you buy" policy links sit next to Buy now and in the bag. When `STRIPE_REQUIRE_TERMS=true`, Stripe's terms checkbox links to the same sections.
+- `/legal/terms`, `/legal/refunds` and `/legal/privacy` still work (noindex) for payment providers.
+
+**QA**
+- 190 tests pass, along with lint, typecheck and the production build.
+- axe: 0 violations on 15 pages × 2 widths. All internal links work.
+
 ## 18 Oct 2026 (later): Owner corrections (`preview` branch)
 
 **Covers**
