@@ -8,6 +8,9 @@ import type { Product } from "./types";
  * interactive features and caveats). Where a PDF doesn't state something, the
  * site doesn't either. Source files and checks: docs/CATALOGUE.md.
  *
+ * Stripe: each guide has its own TEST-mode Product in the shared QR DIGITAL account
+ * (metadata storefront=chloe-in-austin). Live Products are created at launch.
+ *
  * Prices: none approved yet (18 Oct 2026). Every price is `pending`, which means
  * "Price coming soon" on the site and no real checkout. Never type a number in
  * here without a recorded owner approval in readiness.ts.
@@ -28,6 +31,7 @@ export const products: Product[] = [
     subtitle: "The friend you call when you're choosing a neighborhood, planning week one, or looking for your people.",
     collection: "start-here",
     price: PENDING,
+    stripe: { testProductId: "prod_VSjpsLrbCLnmCz" },
     cover: {
       kind: "typeset",
       tone: "forest",
@@ -129,6 +133,7 @@ export const products: Product[] = [
     subtitle: "The ten dinners I'd plan a whole night around, and exactly how to get the table.",
     collection: "eat-and-drink",
     price: PENDING,
+    stripe: { testProductId: "prod_VSjpiXtGJpFKPI" },
     cover: { kind: "typeset", tone: "terracotta", count: "10", countLabel: "dinners", lines: ["Chloe's 10 Best", "Dinner Spots", "in Austin"] },
     hero: { src: "/images/chloe/chloe-bbq-table.jpg", alt: "Chloe at a table loaded with barbecue, mid-bite", focus: "50% 40%" },
     lede: "Not the ten most expensive restaurants in Austin. The ten dinners worth planning a night around, judged on food, service, atmosphere, Austin significance and how memorable the whole evening feels.",
@@ -199,6 +204,7 @@ export const products: Product[] = [
     subtitle: "Where to actually meet people IRL, and whether you can walk in alone.",
     collection: "date-and-connect",
     price: PENDING,
+    stripe: { testProductId: "prod_VSjp6hIedheOr8" },
     cover: {
       kind: "typeset",
       tone: "sage",
@@ -271,6 +277,7 @@ export const products: Product[] = [
     subtitle: "Lake days, rooftops, games, galleries and brunch, each with a plan.",
     collection: "date-and-connect",
     price: PENDING,
+    stripe: { testProductId: "prod_VSjqLgJ3VftHWg" },
     cover: { kind: "approved", image: { src: "/images/covers/12-best-date-ideas.jpg", alt: "Cover of Chloe's 12 Best Date Ideas in Austin: Chloe at a picnic on Zilker's lawn with the skyline behind" } },
     hero: { src: "/images/covers/12-best-date-ideas.jpg", alt: "Chloe at a picnic on Zilker's lawn with the Austin skyline behind", focus: "70% 45%" },
     lede: "Twelve Austin dates with a plan attached: where it is, how to book, what to know before you go and one small move that makes it yours. Plus a bonus date, a gallery of seasonal events and a planner.",
@@ -332,6 +339,7 @@ export const products: Product[] = [
     subtitle: "Swimming holes, waterfalls and Hill Country escapes worth the drive.",
     collection: "explore-and-escape",
     price: PENDING,
+    stripe: { testProductId: "prod_VSjqC5iDU1X4ln" },
     cover: { kind: "typeset", tone: "sage", count: "5", countLabel: "gems", lines: ["Chloe's 5", "Natural Gems", "around Austin"] },
     lede: "One of the best things about Austin is how quickly you can trade the city for cypress trees, turquoise water and Hill Country views. This mini-guide rounds up five natural escapes that are genuinely worth the drive, and what to check before you leave.",
     summary:
@@ -388,6 +396,7 @@ export const products: Product[] = [
     subtitle: "Where to stay, sip, float, wander and eat, all within about an hour of the city.",
     collection: "explore-and-escape",
     price: PENDING,
+    stripe: { testProductId: "prod_VSjnlLNyhC9zGx" },
     cover: {
       kind: "pdf",
       image: { src: "/images/covers/hill-country-escapes.jpg", alt: "Cover of Chloe's Perfect Hill Country Escapes: Chloe by a yurt and hot tub in the Hill Country" },
@@ -458,6 +467,7 @@ export const products: Product[] = [
     subtitle: "Private clubs, hidden doors and hard-to-get reservations, and how access actually works.",
     collection: "explore-and-escape",
     price: PENDING,
+    stripe: { testProductId: "prod_VSjq33WGpB5oG1" },
     cover: {
       kind: "typeset",
       tone: "night",

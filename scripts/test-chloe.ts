@@ -220,6 +220,36 @@ async function main() {
   check("no support inbox claimed when none configured", !siteConfig.supportEmail ? !/reply to this email/i.test(pe.html) : true);
   process.env = prev;
 
+  // -------------------------------------------------------------------------
+  section("Checkout API (POST /api/checkout)");
+  const { POST } = await import("../src/app/api/checkout/route");
+  const call = async (body: unknown, extra: Record<string, string | undefined> = {}) => {
+    const saved = { ...process.env };
+    Object.assign(process.env, { STRIPE_SECRET_KEY: "", CHLOE_TEST_COMMERCE: "", VERCEL_ENV: "preview", ALLOW_DEMO_CHECKOUT: "", ...extra });
+    try {
+      const res = await POST(new Request("http://x/api/checkout", { method: "POST", body: typeof body === "string" ? body : JSON.stringify(body) }));
+      return { status: res.status, json: (await res.json()) as { error?: string; url?: string } };
+    } finally {
+      process.env = saved;
+    }
+  };
+  let res = await call({ items: ["cia-hill-country"] });
+  check("no approved price → 409, nothing sold", res.status === 409 && /can be bought yet|isn't available/.test(res.json.error ?? ""), `${res.status} ${res.json.error}`);
+  res = await call("not json");
+  check("malformed body → 400", res.status === 400);
+  res = await call({ items: [] });
+  check("empty bag → 400", res.status === 400);
+  res = await call({ items: ["ka-london-guide"] });
+  check("Kate's product id → 404", res.status === 404);
+  res = await call({ items: ["cia-hill-country"], prices: { "cia-hill-country": 1 } });
+  check("browser-sent prices ignored (still refused)", res.status === 409);
+  res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "production" });
+  check("Production never sells at test prices (browsing-only too)", res.status === 403 || res.status === 409, String(res.status));
+  res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "sk_live_x", CHLOE_TEST_COMMERCE: "true" });
+  check("live key never unlocks test prices", res.status === 409, String(res.status));
+  res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", NEXT_PUBLIC_SITE_URL: "" , VERCEL_ENV: "preview", VERCEL_URL: "" });
+  check("test mode without a safe HTTPS origin → refused before Stripe", res.status === 503, String(res.status));
+
   console.log(`\n${failed ? "✗" : "✓"} ${passed} passed, ${failed} failed`);
   process.exit(failed ? 1 : 0);
 }

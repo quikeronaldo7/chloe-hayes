@@ -102,6 +102,8 @@ export async function POST(req: Request) {
       metadata,
       payment_intent_data: { metadata, description: `Chloe in Austin: ${ids.map((id) => getSellable(id)!.title).join(", ")}`.slice(0, 1000) },
       allow_promotion_codes: true,
+      // Both stores share the QR DIGITAL account; Chloe's checkout carries her own name and colours.
+      branding_settings: { display_name: "Chloe in Austin", button_color: "#b9573a", background_color: "#f7f1e6", border_style: "rounded" },
       billing_address_collection: "auto",
       ...(process.env.STRIPE_AUTOMATIC_TAX === "true" ? { automatic_tax: { enabled: true } } : {}),
       ...(process.env.STRIPE_REQUIRE_TERMS === "true" ? { consent_collection: { terms_of_service: "required" as const } } : {}),

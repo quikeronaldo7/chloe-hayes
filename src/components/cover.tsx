@@ -9,7 +9,7 @@ const tones = {
   sage: { bg: "bg-sage", text: "text-forest-deep", kicker: "text-terracotta-deep", sticker: "bg-forest text-paper", foot: "text-forest/70" },
 } as const;
 
-const fade = { forest: "#24453a", terracotta: "#b9573a", cream: "#fffbf4", night: "#1d1a1c", sage: "#dbe3d0" } as const;
+const fade = { forest: "#24453a", terracotta: "#9d472d", cream: "#fffbf4", night: "#1d1a1c", sage: "#dbe3d0" } as const;
 
 /**
  * A guide cover. "pdf" and "approved" covers are the real artwork; "typeset" covers are

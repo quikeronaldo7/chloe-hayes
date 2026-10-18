@@ -63,9 +63,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-dvh flex-col">
         <CartProvider book={book} shopOpen={storefrontOpen()}>
           {isPreview ? (
-            <p className="bg-ink px-4 py-1.5 text-center text-[0.72rem] font-medium tracking-wide text-paper/85">
+            <aside aria-label="Preview notice" className="bg-ink px-4 py-1.5 text-center text-[0.72rem] font-medium tracking-wide text-paper/85">
               Private preview · not public · {book.mode === "test" ? "Stripe TEST mode, $1 test prices" : "prices not yet approved, nothing is for sale"}
-            </p>
+            </aside>
           ) : null}
           <SiteHeader />
           <main id="main" className="flex-1">
