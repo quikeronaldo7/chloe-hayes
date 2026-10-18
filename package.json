@@ -1,0 +1,37 @@
+{
+  "name": "chloe-in-austin",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "next typegen && tsc --noEmit",
+    "test:chloe": "NODE_OPTIONS=--conditions=react-server tsx scripts/test-chloe.ts",
+    "verify:delivery": "NODE_OPTIONS=--conditions=react-server tsx scripts/verify-delivery.ts",
+    "verify:presign": "NODE_OPTIONS=--conditions=react-server tsx scripts/verify-presign.ts",
+    "verify:storage": "NODE_OPTIONS=--conditions=react-server tsx scripts/verify-delivery.ts --strict --settings .env.storage.local",
+    "storage:plan": "NODE_OPTIONS=--conditions=react-server tsx scripts/storage-plan.ts",
+    "storage:hash": "NODE_OPTIONS=--conditions=react-server tsx scripts/storage-hash.ts",
+    "check": "npm run lint && npm run typecheck && npm run test:chloe && npm run verify:delivery -- --allow-missing-local && npm run verify:presign"
+  },
+  "dependencies": {
+    "next": "16.3.8",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "server-only": "^0.0.1",
+    "stripe": "^23.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.8",
+    "tailwindcss": "^4",
+    "tsx": "^4.23.15",
+    "typescript": "^5"
+  }
+}

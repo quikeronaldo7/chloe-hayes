@@ -1,0 +1,67 @@
+import { bundles, getBundle, getProduct, getSellable, isBundle, products } from "./index";
+
+/**
+ * PRICE BOOKS
+ *
+ * A price book is the list of things that can be bought on this deployment, and
+ * what each costs in minor units. The browser receives the active book from the
+ * server as a prop and never decides it; the checkout API re-derives it.
+ *
+ *  "approved"  Real prices. Only guides and bundles whose price the owner has
+ *              approved (status "approved", amount set). On 18 Oct 2026 this book
+ *              is EMPTY: nothing has an approved price, so nothing can be bought.
+ *
+ *  "test"      QA prices for Stripe *test mode* only. Every guide costs TEST_UNIT;
+ *              a bundle costs exactly the sum of its guides (no invented discount).
+ *              The server hands this book out only when all of these hold:
+ *                - STRIPE_SECRET_KEY is a test key (sk_test_…), or `next dev` demo checkout
+ *                - not Vercel Production
+ *                - CHLOE_TEST_COMMERCE=true
+ *              (see src/lib/server/pricing.ts). Test prices are always labelled
+ *              "Test price" on screen and can never reach a live Stripe session.
+ */
+
+export type PriceBookMode = "approved" | "test";
+
+export interface PriceBook {
+  mode: PriceBookMode;
+  prices: Record<string, number>;
+}
+
+/** $1.00: obviously not a real price, and above Stripe's minimum charge. */
+export const TEST_UNIT = 100;
+
+export function approvedPriceBook(): PriceBook {
+  const prices: Record<string, number> = {};
+  for (const p of products) if (p.price.status === "approved" && p.price.amount !== null) prices[p.id] = p.price.amount;
+  for (const b of bundles) {
+    // A bundle is sellable only once it is approved AND every guide inside is.
+    if (b.status === "approved" && b.price.status === "approved" && b.price.amount !== null && b.includes.every((id) => id in prices)) {
+      prices[b.id] = b.price.amount;
+    }
+  }
+  return { mode: "approved", prices };
+}
+
+export function testPriceBook(): PriceBook {
+  const prices: Record<string, number> = {};
+  for (const p of products) prices[p.id] = TEST_UNIT;
+  for (const b of bundles) prices[b.id] = b.includes.length * TEST_UNIT;
+  return { mode: "test", prices };
+}
+
+export const priceOf = (book: PriceBook, id: string): number | null => (id in book.prices ? book.prices[id] : null);
+
+/** What the guides inside a bundle cost bought one by one in this book. */
+export function bundleValue(book: PriceBook, id: string): number | undefined {
+  const b = getBundle(id);
+  if (!b) return undefined;
+  const parts = b.includes.map((x) => priceOf(book, x));
+  return parts.some((n) => n === null) ? undefined : parts.reduce<number>((s, n) => s + (n ?? 0), 0);
+}
+
+export function isSellableIn(book: PriceBook, id: string): boolean {
+  const s = getSellable(id);
+  if (!s || priceOf(book, id) === null) return false;
+  return isBundle(s) ? s.includes.every((x) => getProduct(x)) : true;
+}

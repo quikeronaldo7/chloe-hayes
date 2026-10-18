@@ -1,0 +1,356 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   CHLOE IN AUSTIN: design tokens
+   Taken from the guides themselves: warm paper, forest green, terracotta,
+   Fraunces for voice and DM Sans for information. Warm, sunny, a bit playful.
+   ========================================================================== */
+
+@theme {
+  --color-paper: #f7f1e6;
+  --color-paper-deep: #efe4d1;
+  --color-card: #fffbf4;
+  --color-ink: #2a2420;
+  --color-ink-soft: #4f463e;
+  --color-muted: #6f6357;
+  --color-line: #e6d9c4;
+  --color-line-strong: #d3c1a4;
+
+  --color-forest: #24453a;
+  --color-forest-deep: #182f27;
+  --color-terracotta: #b9573a;
+  --color-terracotta-deep: #94412a;
+  --color-blush: #f4dccb;
+  --color-sage: #dbe3d0;
+  --color-sand: #ecdcbf;
+  --color-plum: #6e2340;
+  --color-gold: #c99a3e;
+  --color-sky: #d3e3e2;
+  --color-night: #1d1a1c;
+  --color-sun: #f2b25c;
+
+  --font-serif: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-dm-sans), "Helvetica Neue", Arial, sans-serif;
+
+  --radius-card: 1.25rem;
+  --ease-pop: cubic-bezier(0.34, 1.4, 0.64, 1);
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --breakpoint-xs: 26rem;
+}
+
+:root {
+  color-scheme: light;
+  --gutter: 1rem;
+  --header-h: 4rem;
+}
+@media (min-width: 40rem) {
+  :root { --gutter: 1.5rem; }
+}
+@media (min-width: 64rem) {
+  :root { --gutter: 2.5rem; --header-h: 4.75rem; }
+}
+
+html {
+  background: var(--color-paper);
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--header-h) + 1rem);
+}
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+::selection { background: var(--color-blush); color: var(--color-ink); }
+
+:focus-visible {
+  outline: 2.5px solid var(--color-terracotta);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+@utility wrap {
+  width: 100%;
+  max-width: 86rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility wrap-narrow {
+  width: 100%;
+  max-width: 46rem;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+@utility section {
+  padding-block: clamp(4rem, 8vw, 7.5rem);
+}
+@utility section-tight {
+  padding-block: clamp(2.75rem, 5vw, 4.5rem);
+}
+
+/* ==========================================================================
+   Type. Fraunces carries the personality (soft, wonky italics); DM Sans informs.
+   ========================================================================== */
+
+@utility t-display {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 7vw, 6.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  font-variation-settings: "SOFT" 100, "WONK" 0;
+}
+@utility t-h1 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(2.15rem, 4.6vw, 4rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  font-variation-settings: "SOFT" 100;
+}
+@utility t-h2 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.8rem, 3.3vw, 2.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  font-variation-settings: "SOFT" 100;
+}
+@utility t-h3 {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  font-size: clamp(1.25rem, 1.7vw, 1.55rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-variation-settings: "SOFT" 100;
+}
+@utility t-lede {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.6vw, 1.4rem);
+  line-height: 1.5;
+  font-variation-settings: "SOFT" 100;
+}
+@utility t-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+@utility t-small {
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+/* The italic accent used in headlines, as in the guides ("Hill Country *Escapes*"). */
+.accent-italic {
+  font-style: italic;
+  font-variation-settings: "SOFT" 100, "WONK" 1;
+  color: var(--color-terracotta);
+}
+
+/* ==========================================================================
+   Buttons and links
+   ========================================================================== */
+
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.6rem;
+  border-radius: 999px;
+  background: var(--color-terracotta);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  transition: background-color 0.25s, transform 0.35s var(--ease-pop), box-shadow 0.25s;
+  box-shadow: 0 1px 0 rgba(42, 36, 32, 0.08);
+  &:hover { background: var(--color-terracotta-deep); transform: translateY(-1px); }
+  &:active { transform: translateY(0); }
+  &:disabled { opacity: 0.6; cursor: progress; transform: none; }
+}
+@utility btn-forest {
+  background: var(--color-forest);
+  &:hover { background: var(--color-forest-deep); }
+}
+@utility btn-outline {
+  background: transparent;
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+  &:hover { background: var(--color-ink); color: var(--color-paper); }
+}
+@utility btn-light {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  &:hover { background: #fff; }
+}
+@utility link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  text-underline-offset: 0.3em;
+  text-decoration-thickness: 1.5px;
+  transition: text-decoration-color 0.25s, gap 0.3s var(--ease-soft);
+  &:hover { text-decoration-color: currentColor; gap: 0.6rem; }
+}
+@utility link-quiet {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 0.3em;
+  transition: text-decoration-color 0.2s;
+  &:hover { text-decoration-color: currentColor; }
+}
+
+/* ==========================================================================
+   Surfaces
+   ========================================================================== */
+
+@utility card {
+  background: var(--color-card);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+}
+@utility chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.2;
+  background: var(--color-paper-deep);
+  color: var(--color-ink-soft);
+}
+/* A "sticker": the playful badge used on covers and hero moments. */
+@utility sticker {
+  display: inline-grid;
+  place-items: center;
+  text-align: center;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transform: rotate(-8deg);
+}
+
+/* Paper grain, very faint, so flat colour panels feel printed. */
+.grain { position: relative; isolation: isolate; }
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.07;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   Covers: a printed booklet with a soft page edge
+   ========================================================================== */
+
+.cover {
+  position: relative;
+  aspect-ratio: 612 / 792;
+  border-radius: 6px 10px 10px 6px;
+  overflow: hidden;
+  box-shadow:
+    0 1px 1px rgba(42, 36, 32, 0.08),
+    0 18px 36px -18px rgba(42, 36, 32, 0.45),
+    inset 3px 0 0 rgba(255, 255, 255, 0.12);
+  transition: transform 0.5s var(--ease-soft), box-shadow 0.5s var(--ease-soft);
+  container-type: inline-size;
+}
+.cover::after {
+  /* spine shading */
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 6%;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.16), transparent);
+  pointer-events: none;
+}
+.group:hover .cover,
+.group:focus-visible .cover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 0 1px 1px rgba(42, 36, 32, 0.08), 0 30px 48px -22px rgba(42, 36, 32, 0.5);
+}
+
+/* Typeset cover internals, sized in container units so it scales with the card. */
+.tc { position: absolute; inset: 0; display: flex; flex-direction: column; padding: 7cqi 7.5cqi; }
+.tc-kicker { font-family: var(--font-sans); font-weight: 700; font-size: 3.1cqi; letter-spacing: 0.16em; text-transform: uppercase; }
+.tc-title { font-family: var(--font-serif); font-weight: 500; font-variation-settings: "SOFT" 100; line-height: 0.95; letter-spacing: -0.02em; }
+.tc-title .sm { display: block; font-size: 7.5cqi; font-style: italic; font-variation-settings: "SOFT" 100, "WONK" 1; }
+.tc-title .lg { display: block; font-size: 14.5cqi; }
+.tc-count { width: 21cqi; height: 21cqi; font-size: 2.5cqi; }
+.tc-count b { display: block; font-family: var(--font-serif); font-size: 8cqi; letter-spacing: -0.02em; line-height: 0.9; }
+.tc-foot { font-family: var(--font-sans); font-size: 2.6cqi; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; }
+
+/* ==========================================================================
+   Motion
+   ========================================================================== */
+
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.8s var(--ease-soft), transform 0.8s var(--ease-soft);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.js [data-reveal][data-in] { opacity: 1; transform: none; }
+
+.zoom img { transition: transform 1.1s var(--ease-soft); }
+.group:hover .zoom img { transform: scale(1.04); }
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-8deg); }
+  50% { transform: rotate(-3deg); }
+}
+.group:hover .wiggle { animation: wiggle 0.6s var(--ease-soft); }
+
+@keyframes marquee {
+  to { transform: translateX(-50%); }
+}
+.marquee { animation: marquee 38s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  .js [data-reveal] { opacity: 1; transform: none; }
+}
+
+/* ==========================================================================
+   Misc
+   ========================================================================== */
+
+.rail { scrollbar-width: none; scroll-snap-type: x mandatory; scroll-padding-inline: var(--gutter); }
+.rail::-webkit-scrollbar { display: none; }
+.rail > * { scroll-snap-align: start; }
+
+.text-balance { text-wrap: balance; }
+.text-pretty { text-wrap: pretty; }
+
+details > summary { list-style: none; cursor: pointer; }
+details > summary::-webkit-details-marker { display: none; }
+details[open] .faq-icon { transform: rotate(45deg); }
+
+.prose-chloe p + p { margin-top: 1rem; }
+.prose-chloe h2 { font-family: var(--font-serif); font-size: 1.6rem; line-height: 1.2; margin: 2.5rem 0 0.75rem; }
+.prose-chloe h3 { font-weight: 700; margin: 1.75rem 0 0.5rem; }
+.prose-chloe ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.75rem; }
+.prose-chloe li + li { margin-top: 0.35rem; }
+.prose-chloe a { color: var(--color-terracotta-deep); text-decoration: underline; text-underline-offset: 0.2em; }
