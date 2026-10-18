@@ -6,10 +6,11 @@
 - Typeset covers with a photo now give it the bottom half (was 46%), with a much shorter fade (16% instead of 40%). Chloe's face was being washed out by the fade.
 - Each cover photo is focused on her face (`focus` in `products.ts`). Checked at 1440 and 390 px: all seven product images show her face, and nothing is stretched (`object-cover` only).
 - New to Austin: now uses the approved Franklin image, `APPROVED — Franklin Chloe Hero` (Drive › Revision Round 2).
-- Being Single: now uses the portrait from Drive › Revision Round 2 › 01 — Brand Assets. It's no longer the same South Congress photo as New to Austin.
+- Being Single: uses the warm patio portrait, the owner's own choice pushed to `preview` (e73bd02). The crop is re-focused for the new inset, and it's no longer the same photo as New to Austin.
 
 **Positioning**
-- Homepage collection lede, Meet Chloe heading and copy, and the topic marquee now cover food, experiences, dating, lifestyle and local finds. Food stays the signature.
+- The owner's own copy edits (966fc0e: headline line break, collection lede, Meet Chloe) are kept as written.
+- Added: a broader Meet Chloe second paragraph (dates, Hill Country weekends, hard-to-get-into rooms) and a wider topic marquee. Food stays the signature.
 
 **Prices**
 - One source of truth: approved prices from `products.ts` drive the homepage CTA, cards, product pages, bundles and bag. The test price book now carries approved prices over, so a test checkout matches the shop.
@@ -27,7 +28,7 @@
 - See docs/IMAGERY.md.
 
 **QA**
-- `npm run check`: 186 tests pass, along with lint and typecheck. The production build passes.
+- `npm run check`: 183 tests pass, along with lint and typecheck. The production build passes.
 - axe WCAG 2 A/AA plus best practice: 0 violations on 15 pages × 2 widths.
 - No horizontal overflow, no broken images, all 18 internal links return 200.
 - Checkout still refuses unpriced items (409).

@@ -212,10 +212,10 @@ export const products: Product[] = [
       count: "IRL",
       countLabel: "meet people",
       lines: ["Chloe's Guide to", "Being Single", "in Austin"],
-      // Brand portrait from Drive "01 — Brand Assets" (Revision Round 2, 18 Oct 2026), cropped to head and shoulders.
-      photo: { src: "/images/chloe/chloe-rooftop-portrait.jpg", alt: "Chloe smiling on a rooftop with the Austin skyline behind", focus: "50% 24%" },
+      // Owner's choice (18 Oct 2026): the warm portrait, distinct from New to Austin. Focus keeps her face clear of the fade.
+      photo: { src: "/images/chloe/chloe-portrait-warm.jpg", alt: "Chloe smiling on a patio in warm evening light", focus: "50% 14%" },
     },
-    hero: { src: "/images/chloe/chloe-rooftop-portrait.jpg", alt: "Chloe smiling on a rooftop with the Austin skyline behind", focus: "50% 24%" },
+    hero: { src: "/images/chloe/chloe-portrait-warm.jpg", alt: "Chloe smiling on a patio in warm evening light", focus: "50% 30%" },
     lede: "This isn't a list of bars where singles supposedly hang out. It's the clubs, classes, nights and communities in Austin that are actually running, with what to expect, who each one suits and whether you can show up on your own.",
     summary:
       "Singles nights, run clubs, two-step, dinners with strangers and the communities worth joining, each with who it suits and whether you can go solo.",

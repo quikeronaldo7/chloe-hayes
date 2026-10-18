@@ -10,9 +10,8 @@ Every image on the site, where it came from, and what still needs a decision. No
 | `previews/new-to-austin-pages-*.jpg` | `page-overview.png` (New to Austin folder), cropped | Sample-page strips | Thumbnails too small to read; **page 1 (mural cover) excluded** |
 | `chloe/chloe-zilker-picnic.jpg` | `Zilker Picnic.png` (Date Ideas › 03 Selected Images; same photo as `img/picnic.jpg` and the approved Date Ideas cover) | Homepage flagship hero (owner-approved, 18 Oct 2026) | Approved by owner for the homepage. Brand Bible lists "Zilker Picnic" as a strongly consistent asset. Shows a wine glass at a public park, where alcohol needs a permit (as the Date Ideas guide notes) |
 | `chloe/chloe-bbq-table.jpg` | `Slide 1 - Chloe Hero FINAL.png` (Franklin carousel); pixel-identical to `APPROVED — Franklin Chloe Hero — Website Hero Reference.png` (Revision Round 2 › 03 — Hero References) | **New to Austin cover photo** (since 18 Oct refinement), Dinner Spots Open Graph | Marked APPROVED in Drive. AI-generated brand image in a barbecue hall. **Venue not named on the site** |
-| `chloe/chloe-rooftop-portrait.jpg` | `REFERENCE — Previous Chloe Cactus Logo.jpg` (Revision Round 2 › 01 — Brand Assets; same file as `Chloe Logo.jpg`) | **Being Single cover photo** + Open Graph, cropped to head and shoulders | The "portrait/logo image" named in the 18 Oct refinement brief. Swimwear portrait: the crop keeps it to face and shoulders |
 | `food/bbq-tray.jpg` | `Slide 4 - Full Tray FINAL.png` | (available, currently unused) | Same set |
-| `chloe/chloe-portrait-warm.jpg` | `10_ChloesPicks_WarmPortrait.png` (Being Single archive) | Meet Chloe, About, Being Single hero | Brand portrait |
+| `chloe/chloe-portrait-warm.jpg` | `10_ChloesPicks_WarmPortrait.png` (Being Single archive) | Meet Chloe, About, **Being Single cover photo** (owner's choice, 18 Oct) and hero | Brand portrait |
 | `chloe/chloe-south-congress.jpg` | `01_Cover_SouthCongress_GoldenHour.png` (Being Single archive) | About page (no longer on any cover) | Brand image; shows the **Austin Motel sign** (Brand Bible: verified anchor, but don't imply residence) |
 | `chloe/chloe-private-doorway.jpg` | `COVER-H-Chloe-Nighttime-Private-Doorway-APPROVED.png` | Exclusive typeset cover, hero | Marked APPROVED in Drive. Generic doorway, no venue claimed |
 
@@ -40,7 +39,7 @@ So these use a **typeset cover** in the guides' own design system (Fraunces titl
 ## Not used, and why
 
 - Restaurant/venue photos from the Dinner Spots, Exclusive and Date Ideas folders: many are third-party (Instagram/Google Maps screenshots), `REVIEW-NOT-APPROVED`, `RIGHTS-PENDING` or `SELECTED-GENERATED` scenes of real events.
-- `Chloe Logo.jpg`: despite the name, a portrait, not a logo (now used as the Being Single cover photo, see above).
+- `Chloe Logo.jpg` / `REFERENCE — Previous Chloe Cactus Logo.jpg`: despite the names, a swimwear portrait, not a logo.
 - Face and turnaround sheets: identity references, not for publication.
 
 ## Decisions needed
