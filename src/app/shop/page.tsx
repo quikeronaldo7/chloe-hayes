@@ -3,10 +3,9 @@ import Link from "next/link";
 import { collections, productsIn } from "@/catalogue";
 import { JsonLd } from "@/components/json-ld";
 import { ProductCard } from "@/components/product-card";
-import { BundleGrid, SectionHead } from "@/components/sections";
+import { SaveWithBundles, SectionHead } from "@/components/sections";
 import { ShopNav } from "@/components/shop-nav";
 import { absoluteUrl } from "@/lib/config";
-import { showProposals } from "@/lib/server/pricing";
 
 export const metadata: Metadata = {
   title: "Shop all guides",
@@ -48,16 +47,7 @@ export default function ShopPage() {
         </section>
       ))}
 
-      {showProposals() ? (
-        <section className="section-tight" aria-labelledby="shop-bundles">
-          <div className="wrap">
-            <SectionHead id="shop-bundles" eyebrow="Bundles · internal preview" title="Bundle" accent="proposals" lede="Preview only: not on sale and not priced until the owner approves them." />
-            <div className="mt-8">
-              <BundleGrid />
-            </div>
-          </div>
-        </section>
-      ) : null}
+      <SaveWithBundles headingId="shop-bundles" className="section-tight" />
 
       <JsonLd
         data={{

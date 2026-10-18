@@ -11,7 +11,7 @@ The Claude session couldn't do these steps: its network policy blocks `api.verce
 1. **Settings → Deployment Protection → Vercel Authentication**: confirm it is set to **All Deployments** (not "Standard Protection", which leaves production custom domains public). Keep it on.
 2. Optional, extra safety: **Settings → Git → Production Branch** → set it to `production` (a branch that doesn't exist yet). Then `main` and `preview` only ever create **Preview** deployments until you deliberately create `production`.
 
-Even if Production were reached, the code is safe: Production is browsing-only, has no approved prices, hides bundle proposals and refuses checkout.
+Even if Production were reached, the code is safe: Production is browsing-only, has no approved prices, shows no unapproved bundle and refuses checkout.
 
 ## 1. Connect the repository
 

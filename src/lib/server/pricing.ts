@@ -34,8 +34,3 @@ export function activePriceBook(env: Env = process.env): PriceBook {
   if (env === process.env && demoCheckoutEnabled()) return testPriceBook();
   return approvedPriceBook();
 }
-
-/** Bundle proposals are visible on previews and locally, never in Production. */
-export function showProposals(env: Env = process.env): boolean {
-  return env.VERCEL_ENV !== "production";
-}

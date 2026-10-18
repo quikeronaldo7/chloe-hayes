@@ -38,9 +38,10 @@ export const products: Product[] = [
       count: "12",
       countLabel: "chapters",
       lines: ["New to", "Austin"],
-      photo: { src: "/images/chloe/chloe-south-congress.jpg", alt: "Chloe walking along South Congress at golden hour", focus: "38% 50%" },
+      // "APPROVED — Franklin Chloe Hero" (Drive, Revision Round 2, 18 Oct 2026). Focus keeps her face in the upper third.
+      photo: { src: "/images/chloe/chloe-bbq-table.jpg", alt: "Chloe at a table loaded with barbecue, mid-bite", focus: "45% 17%" },
     },
-    hero: { src: "/images/chloe/chloe-south-congress.jpg", alt: "Chloe walking along South Congress at golden hour", focus: "38% 50%" },
+    hero: { src: "/images/chloe/chloe-bbq-table.jpg", alt: "Chloe at a table loaded with barbecue, mid-bite", focus: "45% 17%" },
     lede: "Moving somewhere new gives you a lot to look forward to, and about a thousand questions. This is the guide for all of them: where to live, what it really costs, whether you need a car, and how to actually meet people once the boxes are unpacked.",
     summary:
       "Twelve chapters on living in Austin: neighborhoods and real costs, settling in, making friends, eating well and your first 90 days, with worksheets you can fill in on screen.",
@@ -211,9 +212,10 @@ export const products: Product[] = [
       count: "IRL",
       countLabel: "meet people",
       lines: ["Chloe's Guide to", "Being Single", "in Austin"],
-      photo: { src: "/images/chloe/chloe-south-congress.jpg", alt: "Chloe on South Congress at golden hour", focus: "40% 50%" },
+      // Brand portrait from Drive "01 — Brand Assets" (Revision Round 2, 18 Oct 2026), cropped to head and shoulders.
+      photo: { src: "/images/chloe/chloe-rooftop-portrait.jpg", alt: "Chloe smiling on a rooftop with the Austin skyline behind", focus: "50% 24%" },
     },
-    hero: { src: "/images/chloe/chloe-portrait-warm.jpg", alt: "Chloe smiling on a patio in warm evening light", focus: "50% 30%" },
+    hero: { src: "/images/chloe/chloe-rooftop-portrait.jpg", alt: "Chloe smiling on a rooftop with the Austin skyline behind", focus: "50% 24%" },
     lede: "This isn't a list of bars where singles supposedly hang out. It's the clubs, classes, nights and communities in Austin that are actually running, with what to expect, who each one suits and whether you can show up on your own.",
     summary:
       "Singles nights, run clubs, two-step, dinners with strangers and the communities worth joining, each with who it suits and whether you can go solo.",
@@ -474,7 +476,7 @@ export const products: Product[] = [
       count: "10",
       countLabel: "experiences",
       lines: ["Chloe's 10 Most", "Exclusive", "Experiences"],
-      photo: { src: "/images/chloe/chloe-private-doorway.jpg", alt: "Chloe stepping through a dark doorway into a candlelit room at night", focus: "35% 30%" },
+      photo: { src: "/images/chloe/chloe-private-doorway.jpg", alt: "Chloe stepping through a dark doorway into a candlelit room at night", focus: "47% 0%" },
     },
     hero: { src: "/images/chloe/chloe-private-doorway.jpg", alt: "Chloe stepping through a dark doorway into a candlelit room at night", focus: "35% 30%" },
     lede: "Austin has places you can walk into, and places you need to know how to approach: private members' clubs, counters with six or eight seats, bars with no sign on the door. This guide explains how access to each one actually works, and the exact next step to take.",

@@ -36,7 +36,7 @@ Start Here: New to Austin · Eat & Drink: Dinner Spots · Date & Connect: Being 
 | `cia-bundle-weekend-explorer` | Weekend Explorer | Natural Gems + Hill Country |
 | `cia-bundle-complete` | Complete Austin Collection | all seven |
 
-Shown only on non-Production deployments, labelled "Proposal · not on sale". In test mode a bundle costs exactly the sum of its guides' test prices (no invented discount).
+Not shown anywhere until approved. Customers see a bundle only in **Save with Bundles**, and only once the bundle (`status: "approved"`), its price and every guide inside have approved prices; the card shows the bundle price, the guides' combined price and the saving (`bundleOffers()` in `src/catalogue/pricing.ts`). In test mode an unapproved bundle costs exactly the sum of its guides' test prices (no invented discount).
 
 ## Stripe (QR DIGITAL, test mode)
 

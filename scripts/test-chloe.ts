@@ -10,7 +10,7 @@ import type Stripe from "stripe";
 import { bundles, collections, expandPurchase, getProduct, products } from "../src/catalogue";
 import { addToCart, reconcile, summarise } from "../src/catalogue/cart";
 import { delivery } from "../src/catalogue/delivery.server";
-import { approvedPriceBook, testPriceBook, TEST_UNIT } from "../src/catalogue/pricing";
+import { approvedPriceBook, bundleOffers, testPriceBook, TEST_UNIT } from "../src/catalogue/pricing";
 import { readiness } from "../src/catalogue/readiness";
 import { siteConfig } from "../src/lib/config";
 import { purchaseEmail, resendEmail } from "../src/lib/server/email";
@@ -18,7 +18,7 @@ import { fulfilOrder, type FulfilmentDeps } from "../src/lib/server/fulfilment";
 import { isLaunchReady } from "../src/lib/server/launch";
 import { buildLibrary, deliverablesFor } from "../src/lib/server/library";
 import { orderFromSession, productIdMetadata, productIdsFromSession, type Order } from "../src/lib/server/orders";
-import { activePriceBook, showProposals, testCommerceEnabled } from "../src/lib/server/pricing";
+import { activePriceBook, testCommerceEnabled } from "../src/lib/server/pricing";
 import { fetchPrivateFile } from "../src/lib/server/storage";
 import { placeholdersAllowedFor } from "../src/lib/server/test-fulfilment";
 import { createDownloadToken, createLibraryToken, readDownloadToken, readLibraryToken } from "../src/lib/server/tokens";
@@ -117,7 +117,19 @@ async function main() {
   check("…not without the flag", !testCommerceEnabled(env({ STRIPE_SECRET_KEY: "sk_test_x", VERCEL_ENV: "preview" })));
   check("Production always uses the approved book", activePriceBook(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "production" })).mode === "approved");
   check("Preview with flag uses the test book", activePriceBook(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "preview" })).mode === "test");
-  check("bundle proposals hidden in Production", !showProposals(env({ VERCEL_ENV: "production" })) && showProposals(env({ VERCEL_ENV: "preview" })));
+  check("Save with Bundles shows no unapproved bundle (none approved today)", bundleOffers().length === 0 && bundles.every((b) => b.status !== "approved"));
+  {
+    // Fixture book (QA only, never shown): checks the saving maths and that proposals stay hidden.
+    const fx = { mode: "approved" as const, prices: { "cia-new-to-austin": 3900, "cia-being-single": 1900, "cia-bundle-first-month": 4900 } };
+    check("unapproved bundle never offered, even with a price", bundleOffers(["cia-bundle-first-month"], fx).length === 0);
+    const orig = bundles.find((b) => b.id === "cia-bundle-first-month")!;
+    const was = orig.status;
+    (orig as { status: string }).status = "approved";
+    const [o] = bundleOffers(["cia-bundle-first-month"], fx);
+    (orig as { status: string }).status = was;
+    check("saving = guides separately − bundle price", o?.separately === 5800 && o.price === 4900 && o.saving === 900, JSON.stringify(o ?? null));
+    check("bundle with an unpriced guide is not offered", bundleOffers(["cia-bundle-date-night"], fx).length === 0);
+  }
   check("nothing is launch-ready (no approved prices)", ![...products, ...bundles].some(isLaunchReady));
 
   // -------------------------------------------------------------------------

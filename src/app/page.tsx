@@ -3,12 +3,11 @@ import Link from "next/link";
 import { getProduct, products, shopOrder, resolveProducts } from "@/catalogue";
 import { approvedPriceBook, priceOf } from "@/catalogue/pricing";
 import { formatMoney } from "@/lib/money";
-import { Cactus, Cover } from "@/components/cover";
+import { Cover } from "@/components/cover";
 import { FaqList } from "@/components/faq";
 import { ProductCard } from "@/components/product-card";
-import { BundleGrid, HowItWorks, Pairing, SectionHead } from "@/components/sections";
+import { HowItWorks, Pairing, SaveWithBundles, SectionHead } from "@/components/sections";
 import { storeFaqs } from "@/lib/faqs";
-import { showProposals } from "@/lib/server/pricing";
 
 const must = (id: string) => getProduct(id)!;
 
@@ -20,14 +19,13 @@ const categories = [
   { title: "Find the Good Stuff", line: "Hidden gems, exclusive experiences, and memorable spots you might otherwise miss.", href: "/guides/10-most-exclusive-experiences", cta: "10 Most Exclusive Experiences", guides: ["cia-exclusive"], tone: "bg-night text-paper", sub: "text-paper/80" },
 ];
 
-const topics = ["Dinner reservations", "Swimming holes", "Two-step", "Hill Country", "Date nights", "Neighborhoods", "Hidden bars", "Run clubs", "Omakase drops", "River floats"];
+const topics = ["Dinner reservations", "Date nights", "Neighborhoods", "Swimming holes", "Run clubs", "Hidden bars", "Hill Country weekends", "Two-step", "Making friends", "Omakase drops", "River floats"];
 
 export default function Home() {
   const flagship = must("cia-new-to-austin");
   // The CTA shows a price only once it is approved in the catalogue (none is, as of 18 Oct 2026).
   const flagshipPrice = priceOf(approvedPriceBook(), flagship.id);
   const all = resolveProducts(shopOrder);
-  const proposals = showProposals();
 
   return (
     <>
@@ -36,9 +34,7 @@ export default function Home() {
         <div className="wrap grid items-center gap-10 pb-16 pt-8 sm:pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24 lg:pt-16">
           <div className="order-2 lg:order-1">
             <p className="inline-flex items-center gap-2 rounded-full bg-card px-3 py-1.5 text-[0.8rem] font-semibold text-forest ring-1 ring-line">
-              <svg aria-hidden viewBox="0 0 120 120" className="h-4 w-4 text-forest">
-                <Cactus />
-              </svg>
+              <Image src="/brand/chloe-mark.svg" alt="" width={20} height={20} className="h-5 w-5" unoptimized />
               The flagship guide · 2026–27 edition
             </p>
             <h1 id="flagship-title" className="t-display mt-6 text-balance">
@@ -180,7 +176,7 @@ export default function Home() {
       <section className="section" aria-labelledby="collection-title">
         <div className="wrap">
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHead id="collection-title" eyebrow="The collection" title="Seven guides," accent="one very good city" lede="Food first, and everything fun about Austin after that." />
+            <SectionHead id="collection-title" eyebrow="The collection" title="Seven guides," accent="one very good city" lede="Austin's food, experiences, dating life and local finds, researched and checked so your plans actually hold up." />
             <Link href="/shop" className="link-arrow">
               Shop all guides <span aria-hidden>→</span>
             </Link>
@@ -220,7 +216,7 @@ export default function Home() {
           <div>
             <p className="t-eyebrow text-terracotta">Meet Chloe</p>
             <h2 id="meet-title" className="t-h2 mt-3 text-balance">
-              Hi, I&rsquo;m Chloe. <span className="accent-italic">Food first, then everything fun.</span>
+              Hi, I&rsquo;m Chloe. <span className="accent-italic">Good food, great plans, your people.</span>
             </h2>
             <div className="mt-5 max-w-xl space-y-4 text-[1.06rem] text-ink-soft">
               <p>
@@ -228,8 +224,9 @@ export default function Home() {
                 plate, who made it, and why people will happily stand in line for it.
               </p>
               <p>
-                These guides are what happens when that curiosity gets organized. Dinners worth planning a night around, the clubs and classes that are
-                actually running, swimming holes worth the drive. Researched, checked, dated and linked to the official source, so your plans hold up.
+                These guides are what happens when that curiosity gets organized: dinners worth planning a night around, dates that beat dinner-and-a-movie,
+                the clubs and classes that are actually running, swimming holes worth the drive, Hill Country weekends and the rooms that are hard to get
+                into. Researched, checked, dated and linked to the official source, so your plans hold up.
               </p>
               <p className="font-serif text-xl italic text-forest" style={{ fontVariationSettings: '"SOFT" 100, "WONK" 1' }}>
                 Tell me what I&rsquo;m missing in Austin.
@@ -260,23 +257,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ---------------------------------------------------- BUNDLES (preview) */}
-      {proposals ? (
-        <section className="section-tight bg-paper-deep/60" aria-labelledby="bundles-title">
-          <div className="wrap">
-            <SectionHead
-              id="bundles-title"
-              eyebrow="Bundles · internal preview"
-              title="Bundle"
-              accent="proposals"
-              lede="Visible on the private preview only. Contents, names and prices need approval before any bundle goes on sale; none advertises a saving."
-            />
-            <div className="mt-10">
-              <BundleGrid />
-            </div>
-          </div>
-        </section>
-      ) : null}
+      {/* ---------------------------------------------------- SAVE WITH BUNDLES (approved only) */}
+      <SaveWithBundles />
 
       {/* ----------------------------------------------------------- HOW IT WORKS */}
       <section className="section grain bg-forest-deep text-paper" aria-labelledby="how-title">

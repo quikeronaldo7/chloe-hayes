@@ -1,5 +1,7 @@
 import Link from "next/link";
-import { bundles, getProduct, resolveProducts, type Bundle } from "@/catalogue";
+import { getProduct, resolveProducts } from "@/catalogue";
+import { bundleOffers, type BundleOffer } from "@/catalogue/pricing";
+import { formatMoney } from "@/lib/money";
 import { AddButton } from "./buy-box";
 import { Cover } from "./cover";
 
@@ -38,19 +40,20 @@ export function HowItWorks({ dark = false }: { dark?: boolean }) {
 }
 
 /**
- * Bundle proposals. Rendered only where the caller allows it (preview deployments):
- * clearly labelled, no price, no saving, no invented offer.
+ * "Save with Bundles": approved bundles only (see bundleOffers). Each card lists what's
+ * inside, the bundle price, the guides' combined price and the saving, all from approved
+ * prices. Callers render nothing when there are no offers.
  */
-export function BundleGrid({ items = bundles }: { items?: Bundle[] }) {
+export function BundleGrid({ offers }: { offers: BundleOffer[] }) {
   return (
     <ul className="grid gap-5 md:grid-cols-2">
-      {items.map((b) => {
+      {offers.map(({ bundle: b, price, separately, saving }) => {
         const guides = resolveProducts(b.includes);
         return (
           <li key={b.id} className="card relative flex flex-col overflow-hidden p-6 sm:p-7">
-            <span className="chip absolute right-5 top-5 bg-sun/40 text-ink">Proposal · not on sale</span>
+            {saving > 0 ? <span className="chip absolute right-5 top-5 bg-terracotta text-white">Save {formatMoney(saving)}</span> : null}
             <p className="t-eyebrow text-terracotta">{guides.length} guides</p>
-            <h3 className="t-h3 mt-2 pr-32">{b.title}</h3>
+            <h3 className="t-h3 mt-2 pr-28">{b.title}</h3>
             <p className="mt-2 t-small text-ink-soft">{b.why}</p>
             <div className="mt-6 flex items-end">
               {guides.slice(0, 7).map((g, i) => (
@@ -60,19 +63,44 @@ export function BundleGrid({ items = bundles }: { items?: Bundle[] }) {
                 </Link>
               ))}
             </div>
-            <ul className="mt-6 space-y-1 t-small">
+            <p className="mt-6 t-eyebrow text-muted">What&rsquo;s included</p>
+            <ul className="mt-2 space-y-1 t-small">
               {guides.map((g) => (
                 <li key={g.id}>· {g.title}</li>
               ))}
             </ul>
-            <div className="mt-5 flex flex-wrap items-center gap-3 border-t border-line pt-4">
-              <span className="t-small text-muted">Price, contents and name awaiting approval.</span>
-              <AddButton id={b.id} label="Add bundle (test)" />
+            <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-line pt-4">
+              <p className="flex items-baseline gap-2">
+                <span className="font-serif text-2xl tabular-nums">{formatMoney(price)}</span>
+                {saving > 0 ? (
+                  <span className="t-small text-muted">
+                    <span className="sr-only">instead of </span>
+                    <s className="tabular-nums">{formatMoney(separately)}</s> separately
+                  </span>
+                ) : null}
+              </p>
+              <AddButton id={b.id} label="Add bundle to bag" />
             </div>
           </li>
         );
       })}
     </ul>
+  );
+}
+
+/** The "Save with Bundles" section, or nothing when no bundle is approved. */
+export function SaveWithBundles({ ids, headingId = "bundles-title", className = "section-tight bg-paper-deep/60" }: { ids?: readonly string[]; headingId?: string; className?: string }) {
+  const offers = bundleOffers(ids);
+  if (!offers.length) return null;
+  return (
+    <section className={className} aria-labelledby={headingId}>
+      <div className="wrap">
+        <SectionHead id={headingId} eyebrow="Bundles" title="Save with" accent="Bundles" lede="Guides that work better together, in one bag and one download library." />
+        <div className="mt-10">
+          <BundleGrid offers={offers} />
+        </div>
+      </div>
+    </section>
   );
 }
 

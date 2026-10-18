@@ -1,18 +1,24 @@
-import { Cactus } from "./cover";
+import Image from "next/image";
 
-/** "Chloe in Austin" with a small cactus: the site's mark. */
-export function Wordmark({ light = false, size = "md" }: { light?: boolean; size?: "md" | "lg" }) {
-  const big = size === "lg";
+/**
+ * The logo system, from the approved Western Badge direction (Drive: "Chloe in Austin —
+ * Western Badge Logo Concept v2", Revision Round 2, 18 Oct 2026):
+ *  - Wordmark: compact mark (hat + cactus, /brand/chloe-mark.svg) + live "Chloe in Austin" type. Header.
+ *  - Badge: the full approved badge artwork. Footer and larger brand moments.
+ *  - Favicon / app icon: the compact mark alone (src/app/icon.svg, apple-icon.png).
+ */
+export function Wordmark({ light = false }: { light?: boolean }) {
   return (
     <span className={`inline-flex items-center gap-2 ${light ? "text-paper" : "text-ink"}`}>
-      <span className={`grid shrink-0 place-items-center rounded-full ${light ? "bg-paper text-forest" : "bg-forest text-paper"} ${big ? "h-12 w-12" : "h-9 w-9"}`}>
-        <svg aria-hidden viewBox="0 0 120 120" className={big ? "h-7 w-7" : "h-5 w-5"}>
-          <Cactus />
-        </svg>
-      </span>
-      <span className={`font-serif leading-none tracking-[-0.02em] ${big ? "text-[2.1rem]" : "text-[1.25rem] xs:text-[1.35rem] sm:text-[1.5rem]"}`} style={{ fontVariationSettings: '"SOFT" 100' }}>
+      <Image src="/brand/chloe-mark.svg" alt="" width={40} height={40} className="h-9 w-9 shrink-0 sm:h-10 sm:w-10" priority unoptimized />
+      <span className="font-serif text-[1.25rem] leading-none tracking-[-0.02em] xs:text-[1.35rem] sm:text-[1.5rem]" style={{ fontVariationSettings: '"SOFT" 100' }}>
         Chloe <span className={`italic ${light ? "text-sun" : "text-terracotta"}`} style={{ fontVariationSettings: '"SOFT" 100, "WONK" 1' }}>in</span> Austin
       </span>
     </span>
   );
+}
+
+/** The full badge. Decorative next to a text name, so pass `alt` only where it stands alone. */
+export function Badge({ className = "", alt = "Chloe in Austin" }: { className?: string; alt?: string }) {
+  return <Image src="/brand/chloe-in-austin-badge.png" alt={alt} width={800} height={799} sizes="(min-width: 640px) 13rem, 11rem" className={`h-auto ${className}`} />;
 }

@@ -1,4 +1,5 @@
 import { bundles, getBundle, getProduct, getSellable, isBundle, products } from "./index";
+import type { Bundle } from "./types";
 
 /**
  * PRICE BOOKS
@@ -11,8 +12,9 @@ import { bundles, getBundle, getProduct, getSellable, isBundle, products } from 
  *              approved (status "approved", amount set). On 18 Oct 2026 this book
  *              is EMPTY: nothing has an approved price, so nothing can be bought.
  *
- *  "test"      QA prices for Stripe *test mode* only. Every guide costs TEST_UNIT;
- *              a bundle costs exactly the sum of its guides (no invented discount).
+ *  "test"      QA prices for Stripe *test mode* only. Approved prices carry over;
+ *              every unpriced guide costs TEST_UNIT and an unapproved bundle costs
+ *              exactly the sum of its guides (no invented discount).
  *              The server hands this book out only when all of these hold:
  *                - STRIPE_SECRET_KEY is a test key (sk_test_…), or `next dev` demo checkout
  *                - not Vercel Production
@@ -44,9 +46,12 @@ export function approvedPriceBook(): PriceBook {
 }
 
 export function testPriceBook(): PriceBook {
+  // Approved prices carry over, so a test checkout shows the same figure as the shop;
+  // anything still unpriced costs TEST_UNIT (bundles: the sum of their guides).
+  const approved = approvedPriceBook().prices;
   const prices: Record<string, number> = {};
-  for (const p of products) prices[p.id] = TEST_UNIT;
-  for (const b of bundles) prices[b.id] = b.includes.length * TEST_UNIT;
+  for (const p of products) prices[p.id] = approved[p.id] ?? TEST_UNIT;
+  for (const b of bundles) prices[b.id] = approved[b.id] ?? b.includes.reduce((sum, id) => sum + prices[id], 0);
   return { mode: "test", prices };
 }
 
@@ -64,4 +69,29 @@ export function isSellableIn(book: PriceBook, id: string): boolean {
   const s = getSellable(id);
   if (!s || priceOf(book, id) === null) return false;
   return isBundle(s) ? s.includes.every((x) => getProduct(x)) : true;
+}
+
+export interface BundleOffer {
+  bundle: Bundle;
+  /** The approved bundle price. */
+  price: number;
+  /** The same guides bought one by one at their approved prices. */
+  separately: number;
+  /** separately − price; 0 when the bundle is not cheaper. */
+  saving: number;
+}
+
+/**
+ * "Save with Bundles": the bundles customers may see. Only owner-approved bundles whose
+ * price, and every guide inside, is approved; savings come from approved prices only.
+ * On 18 Oct 2026 no bundle is approved, so this is empty and the sections don't render.
+ */
+export function bundleOffers(ids: readonly string[] = bundles.map((b) => b.id), book: PriceBook = approvedPriceBook()): BundleOffer[] {
+  return ids.flatMap((id) => {
+    const bundle = getBundle(id);
+    const price = priceOf(book, id);
+    const separately = bundleValue(book, id);
+    if (!bundle || bundle.status !== "approved" || price === null || separately === undefined) return [];
+    return [{ bundle, price, separately, saving: Math.max(0, separately - price) }];
+  });
 }

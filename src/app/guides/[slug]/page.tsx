@@ -10,10 +10,9 @@ import { Cover } from "@/components/cover";
 import { FaqList } from "@/components/faq";
 import { JsonLd } from "@/components/json-ld";
 import { ProductCard } from "@/components/product-card";
-import { BundleGrid, SectionHead } from "@/components/sections";
+import { SaveWithBundles, SectionHead } from "@/components/sections";
 import { TrackOnMount } from "@/components/track";
 import { absoluteUrl, siteConfig } from "@/lib/config";
-import { showProposals } from "@/lib/server/pricing";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -47,7 +46,6 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
   const col = collectionOf(p);
   const a = accents[p.accent];
   const related = p.related.map((r) => ({ ...r, product: getProduct(r.id)! }));
-  const inBundles = showProposals() ? bundlesContaining(p.id) : [];
   const approvedPrice = priceOf(approvedPriceBook(), p.id);
 
   return (
@@ -219,16 +217,7 @@ export default async function GuidePage({ params }: PageProps<"/guides/[slug]">)
       </section>
 
       {/* ---------------------------------------------------------- BUNDLES */}
-      {inBundles.length ? (
-        <section className="section-tight bg-paper-deep/60" aria-labelledby="bundle-title">
-          <div className="wrap">
-            <SectionHead id="bundle-title" eyebrow="Bundles · internal preview" title="Also in" accent="these proposals" lede="Preview only: not on sale and not priced until approved." />
-            <div className="mt-8">
-              <BundleGrid items={inBundles} />
-            </div>
-          </div>
-        </section>
-      ) : null}
+      <SaveWithBundles ids={bundlesContaining(p.id).map((b) => b.id)} headingId="bundle-title" />
 
       {/* ---------------------------------------------------------- RELATED */}
       <section className="section-tight" aria-labelledby="related-title">

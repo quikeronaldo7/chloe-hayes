@@ -1,14 +1,16 @@
 import Link from "next/link";
 import { collections } from "@/catalogue";
 import { instagramUrl, siteConfig } from "@/lib/config";
-import { Wordmark } from "./wordmark";
+import { Badge } from "./wordmark";
 
 export function SiteFooter() {
   return (
     <footer className="grain mt-auto bg-forest text-paper">
       <div className="wrap grid gap-12 py-16 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
-          <Wordmark light size="lg" />
+          <Link href="/" className="inline-block rounded-full" aria-label="Chloe in Austin, home">
+            <Badge alt="" className="w-44 sm:w-52" />
+          </Link>
           <p className="mt-5 max-w-sm font-serif text-xl leading-snug text-paper/90" style={{ fontVariationSettings: '"SOFT" 100' }}>
             Good food. Great plans. <span className="italic text-sun">Your Austin, sorted.</span>
           </p>

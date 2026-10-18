@@ -22,7 +22,7 @@ npm run check                   # lint + typecheck + 180 tests + delivery + SigV
 | Area | What exists |
 |---|---|
 | **Pages** | Home, Shop All, 4 collection pages, 7 guide pages (one template), About, Help (with "Resend my downloads"), legal placeholders (clearly not in force), checkout success / cancelled, private library, download-unavailable, 404, error, Journal shell |
-| **Catalogue** | `src/catalogue/`: 7 guides with facts from the FINAL PDFs, 4 collections, 4 **bundle proposals** (preview-only, no price, no saving), readiness, delivery manifest |
+| **Catalogue** | `src/catalogue/`: 7 guides with facts from the FINAL PDFs, 4 collections, 4 bundle proposals (hidden until approved; approved ones appear as **Save with Bundles** with their saving), readiness, delivery manifest |
 | **Prices** | None approved. Every guide shows **Price coming soon**. An isolated **test price book** ($1/guide, Stripe test mode only, never Production) drives end-to-end QA |
 | **Bag & checkout** | Add to bag, Buy now, multi-item bag, bundles absorb their guides, covered/duplicate items refused, server re-prices everything, promo codes at Stripe, Chloe-branded hosted checkout on the shared QR DIGITAL account |
 | **Fulfilment** | Webhook re-reads the session, emails a Chloe-branded library link via Resend (idempotent), records it on the session; refunds revoke library and downloads on every visit |
@@ -85,7 +85,7 @@ Guide page / bag ──POST /api/checkout {items}──▶ reconcile + price on 
 | `CHLOE_TEST_COMMERCE` | – | `true` | never |
 | Prices | test (demo) | test ($1, labelled) | approved only (none today) |
 | `STOREFRONT_MODE` | – | – | unset = browsing-only |
-| Bundle proposals | shown | shown | hidden |
+| Save with Bundles | approved only | approved only | approved only |
 | Storage | `private-files/` | R2 read-only token | R2 read-only token |
 | robots | – | disallow all + noindex | allow (after launch) |
 

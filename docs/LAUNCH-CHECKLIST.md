@@ -11,7 +11,7 @@ Status as of **18 October 2026**. Five separate categories, never merged. "Built
 | Catalogue of all 7 guides with facts from the FINAL PDFs | `npm run test:chloe` checks titles and page counts against the PDFs |
 | Collections + "Find your Austin" (≤ 3 clicks to any guide) | Every door links straight to a guide or collection |
 | Recommendations (Dinner ↔ Dates, Gems ↔ Hill Country, New to Austin → Being Single, …) with reasons | Tested |
-| Bundle system: proposals visible on preview only, no price, no saving; bundles absorb guides they contain | Tested (bag rules, production hiding) |
+| Bundle system: "Save with Bundles" shows approved bundles only (price, combined price, saving); proposals stay hidden; bundles absorb guides they contain | Tested (bag rules, saving maths on a QA fixture, unapproved bundles never offered) |
 | Bag: add, remove, persist (localStorage, cross-tab), buy now, multi-item, empty state, mobile bottom sheet | Browser flow test |
 | Server-side pricing; browser prices ignored; Kate ids / unknown ids / tampered lists rejected | Checkout API tests |
 | Price books: no real price anywhere; test prices only with sk_test_ + not Production + flag | Tests |

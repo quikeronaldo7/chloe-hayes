@@ -31,9 +31,9 @@ export function Cover({ product, sizes = "(min-width: 1024px) 22vw, 45vw", prior
   return (
     <div className={`cover grain ${t.bg} ${t.text}`} role="img" aria-label={`Cover: ${product.title}`}>
       {c.photo ? (
-        <div className="absolute inset-x-0 bottom-0 h-[46%]">
+        <div className="absolute inset-x-0 bottom-0 h-1/2">
           <Image src={c.photo.src} alt="" fill sizes={sizes} className="object-cover" style={{ objectPosition: c.photo.focus }} />
-          <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${fade[c.tone ?? "cream"]}, transparent 40%)` }} />
+          <div className="absolute inset-0" style={{ background: `linear-gradient(to bottom, ${fade[c.tone ?? "cream"]}, transparent 16%)` }} />
         </div>
       ) : null}
       <div className="tc">
