@@ -36,7 +36,7 @@ export default function ShopPage() {
                 View {c.name} <span aria-hidden>→</span>
               </Link>
             </div>
-            <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 lg:grid-cols-4">
+            <ul className="card-grid mt-10 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 lg:grid-cols-4">
               {productsIn(c.slug).map((p, i) => (
                 <li key={p.id}>
                   <ProductCard product={p} priority={ci === 0 && i === 0} />

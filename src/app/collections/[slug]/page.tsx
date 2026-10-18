@@ -47,7 +47,7 @@ export default async function CollectionPage({ params }: PageProps<"/collections
       </section>
       <section className="section-tight" aria-labelledby="guides-title">
         <h2 id="guides-title" className="sr-only">Guides in {c.name}</h2>
-        <ul className="wrap grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
+        <ul className="card-grid wrap grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
           {items.map((p, i) => (
             <li key={p.id}>
               <ProductCard product={p} priority={i === 0} />
@@ -58,7 +58,7 @@ export default async function CollectionPage({ params }: PageProps<"/collections
       <section className="section-tight bg-paper-deep/50">
         <div className="wrap">
           <h2 className="t-eyebrow text-terracotta">Elsewhere in the collection</h2>
-          <ul className="mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
+          <ul className="card-grid mt-6 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-4">
             {more.map((p) => (
               <li key={p.id}>
                 <ProductCard product={p} compact />

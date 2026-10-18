@@ -354,3 +354,9 @@ details[open] .faq-icon { transform: rotate(45deg); }
 .prose-chloe ul { list-style: disc; padding-left: 1.25rem; margin-top: 0.75rem; }
 .prose-chloe li + li { margin-top: 0.35rem; }
 .prose-chloe a { color: var(--color-terracotta-deep); text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* Product grids: each card's five parts (cover, title, description, chips, price row)
+   share the grid row's subgrid tracks, so price rows line up directly under the details. */
+.card-grid > li { display: grid; grid-template-rows: subgrid; grid-row: span 5; row-gap: 0; }
+.card-grid > li > .product-card { display: grid; grid-template-rows: subgrid; grid-row: span 5; row-gap: 0; height: auto; }
+.card-grid > li > a:only-child { grid-row: 1 / -1; }

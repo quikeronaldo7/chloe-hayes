@@ -1,5 +1,39 @@
 # Changelog
 
+## 18 Oct 2026 (round 3): Owner visual review (`preview` branch)
+
+**New to Austin photo**
+- The cover uses the owner's definitive `golden_hour_stroll_at_austin_motel.png` in the existing green-title layout. It's cropped to the photo slot so the MOTEL sign, her face and the yellow dress all show; checked at 1440 and 390.
+- The About page shows the same photo uncropped, at its native 1448×1086 ratio, in a framed figure.
+- The exact attachment is kept as the master in `assets/masters/`, with optimized web copies in `public/images/chloe/`.
+
+**Product-card prices**
+- The price row reads "Digital guide · $19" with "View guide →", behind a hairline divider directly under the chips.
+- On the home, shop and collection grids, CSS subgrid lines up each card's parts across its row, so price rows align without floating to the bottom.
+- Checked at 1440, 768 and 390.
+
+**About**
+- The owner-approved copy is kept.
+- New: "Why ask Chloe: If you want to know where to go, I'm your girl" (five points about her eye for places, detail, curation and planning) and "So, where should you go?" (seven questions, each linking to the right guide).
+- No biography, achievements or first-hand visits are invented.
+
+**Bundles**
+- All four show with the guides included, the price bought separately, the bundle price and the saving: $58 / $38 / $34 at the same price as buying separately, and the Collection at $99 against $154, saving $55.
+- Prices come from the approved records in `collections.ts` and `readiness.ts`.
+- The bag still absorbs guides a bundle already covers and refuses duplicates (tested).
+
+**Removed**
+- The homepage "Guides that go together" section, which repeated the three bundles. Guide pages keep "Pairs well with".
+
+**Footer**
+- Icon-only Instagram and Facebook links with accessible names.
+- Small Terms / Refunds / Privacy links are back in the bottom row. The policy pages and the Help policies section are unchanged.
+
+**QA**
+- 190 tests pass, along with lint and the production build.
+- axe: 0 violations on 15 pages × 2 widths. All links and images load.
+- In the browser, bag totals came to $58, then $96, then $130, and adding the Collection replaced them at $99. Checkout still refuses real sales.
+
 ## 18 Oct 2026 (final): Storefront corrections (`preview` branch)
 
 **Bundles**

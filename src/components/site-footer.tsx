@@ -46,8 +46,13 @@ export function SiteFooter() {
         </FooterCol>
       </div>
       <div className="border-t border-paper/15">
-        <div className="wrap py-6 text-xs text-paper/65">
+        <div className="wrap flex flex-col gap-2 py-6 text-xs text-paper/65 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Chloe Hayes · Chloe in Austin. All rights reserved.</p>
+          <nav aria-label="Legal" className="-my-1 flex gap-4 [&>a]:py-1">
+            <Link href="/legal/terms" className="hover:text-paper">Terms</Link>
+            <Link href="/legal/refunds" className="hover:text-paper">Refunds</Link>
+            <Link href="/legal/privacy" className="hover:text-paper">Privacy</Link>
+          </nav>
         </div>
       </div>
     </footer>

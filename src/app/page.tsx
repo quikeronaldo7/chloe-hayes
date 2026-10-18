@@ -6,7 +6,7 @@ import { formatMoney } from "@/lib/money";
 import { Cactus, Cover } from "@/components/cover";
 import { FaqList } from "@/components/faq";
 import { ProductCard } from "@/components/product-card";
-import { HowItWorks, Pairing, SaveWithBundles, SectionHead } from "@/components/sections";
+import { HowItWorks, SaveWithBundles, SectionHead } from "@/components/sections";
 import { storeFaqs } from "@/lib/faqs";
 
 const must = (id: string) => getProduct(id)!;
@@ -183,7 +183,7 @@ export default function Home() {
               Shop all guides <span aria-hidden>→</span>
             </Link>
           </div>
-          <ul className="mt-12 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 lg:grid-cols-4">
+          <ul className="card-grid mt-12 grid grid-cols-2 gap-x-4 gap-y-12 sm:gap-x-6 lg:grid-cols-4">
             {all.map((p, i) => (
               <li key={p.id} data-reveal style={{ ["--reveal-delay" as string]: `${(i % 4) * 70}ms` }}>
                 <ProductCard product={p} />
@@ -237,24 +237,6 @@ export default function Home() {
               More about Chloe <span aria-hidden>→</span>
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* ------------------------------------------------------- COMPANION GUIDES */}
-      <section className="section" aria-labelledby="pairs-title">
-        <div className="wrap">
-          <SectionHead id="pairs-title" eyebrow="Better together" title="Guides that" accent="go together" lede="Not a must-buy-everything situation. Just the pairings that genuinely help each other." />
-          <ul className="mt-10 grid gap-4 md:grid-cols-3">
-            <li>
-              <Pairing from="cia-dinner-spots" to="cia-date-ideas" why="Dinner sorted, plus twelve ideas for before, after, or the nights you don't want a tasting menu." />
-            </li>
-            <li>
-              <Pairing from="cia-natural-gems" to="cia-hill-country" why="Both visit Wimberley and Dripping Springs: turn a swim stop into a whole day with lunch and a tasting." />
-            </li>
-            <li>
-              <Pairing from="cia-new-to-austin" to="cia-being-single" why="The move and the first 90 days, then the full, checked list of where to meet people IRL." />
-            </li>
-          </ul>
         </div>
       </section>
 

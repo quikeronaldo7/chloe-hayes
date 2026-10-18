@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getProduct, resolveProducts } from "@/catalogue";
+import { resolveProducts } from "@/catalogue";
 import { bundleOffers, type BundleOffer } from "@/catalogue/pricing";
 import { formatMoney } from "@/lib/money";
 import { AddButton } from "./buy-box";
@@ -70,22 +70,26 @@ export function BundleGrid({ offers }: { offers: BundleOffer[] }) {
                 <li key={g.id}>· {g.title}</li>
               ))}
             </ul>
-            <div className="mt-5 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 border-t border-line pt-4">
-              <div>
-                <p className="t-eyebrow text-terracotta">Bundle price</p>
-                <p className="mt-1 flex items-baseline gap-2">
-                  <span className="font-serif text-2xl tabular-nums">{formatMoney(price)}</span>
-                  {saving > 0 ? (
-                    <span className="t-small text-muted">
-                      <span className="sr-only">instead of </span>
-                      <s className="tabular-nums">{formatMoney(separately)}</s> separately
-                    </span>
-                  ) : (
-                    <span className="t-small text-muted">Same as buying separately, in one checkout</span>
-                  )}
-                </p>
+            <div className="mt-auto pt-5">
+              <dl className="grid grid-cols-3 gap-3 border-t border-line pt-4 text-center">
+                <div>
+                  <dt className="t-eyebrow text-muted">Guides separately</dt>
+                  <dd className="mt-1 font-serif text-lg tabular-nums text-ink-soft">{formatMoney(separately)}</dd>
+                </div>
+                <div>
+                  <dt className="t-eyebrow text-terracotta">Bundle price</dt>
+                  <dd className="mt-1 font-serif text-2xl tabular-nums">{formatMoney(price)}</dd>
+                </div>
+                <div>
+                  <dt className="t-eyebrow text-muted">You save</dt>
+                  <dd className={`mt-1 tabular-nums ${saving > 0 ? "font-serif text-lg text-terracotta-deep" : "pt-1 t-small text-muted"}`}>
+                    {saving > 0 ? formatMoney(saving) : "Same price, one checkout"}
+                  </dd>
+                </div>
+              </dl>
+              <div className="mt-4 flex justify-center">
+                <AddButton id={b.id} label="Add bundle to bag" />
               </div>
-              <AddButton id={b.id} label="Add bundle to bag" />
             </div>
           </li>
         );
@@ -107,28 +111,5 @@ export function SaveWithBundles({ ids, headingId = "bundles-title", className = 
         </div>
       </div>
     </section>
-  );
-}
-
-/** A companion pairing: two covers and the reason they belong together. */
-export function Pairing({ from, to, why }: { from: string; to: string; why: string }) {
-  const a = getProduct(from)!;
-  const b = getProduct(to)!;
-  return (
-    <div className="card flex h-full flex-col p-6">
-      <div className="flex items-center gap-3">
-        <Link href={`/guides/${a.slug}`} className="group w-20 shrink-0">
-          <Cover product={a} sizes="80px" />
-        </Link>
-        <span aria-hidden className="font-serif text-3xl text-terracotta">+</span>
-        <Link href={`/guides/${b.slug}`} className="group w-20 shrink-0">
-          <Cover product={b} sizes="80px" />
-        </Link>
-      </div>
-      <p className="mt-5 font-serif text-lg leading-snug">
-        {a.shortTitle} <span className="text-terracotta">&</span> {b.shortTitle}
-      </p>
-      <p className="mt-2 t-small text-ink-soft">{why}</p>
-    </div>
   );
 }

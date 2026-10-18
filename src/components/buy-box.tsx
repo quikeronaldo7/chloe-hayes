@@ -22,6 +22,19 @@ export function PriceTag({ id, className = "" }: { id: string; className?: strin
   );
 }
 
+/** The card's price line: "Digital guide · $19", or "Price coming soon". */
+export function CardPrice({ id }: { id: string }) {
+  const { book } = useCart();
+  const price = priceOf(book, id);
+  if (price === null) return <span className="chip bg-sand text-ink">Price coming soon</span>;
+  return (
+    <p className="flex items-baseline gap-1.5 text-ink">
+      <span className="t-small text-ink-soft">Digital guide ·</span>
+      <span className="font-serif text-xl tabular-nums">{formatMoney(price)}</span>
+    </p>
+  );
+}
+
 /**
  * The purchase moment: Buy now (straight to Stripe) or Add to bag, plus a sticky bar on
  * mobile once the buttons scroll away. When nothing can be bought on this deployment

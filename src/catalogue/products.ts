@@ -39,12 +39,12 @@ export const products: Product[] = [
       count: "12",
       countLabel: "chapters",
       lines: ["New to", "Austin"],
-      // Approved cover composition (title top, photo below) with the Austin Motel scene, Chloe in the
-      // yellow dress: Drive "SOCO.png" (owner direction, 18 Oct 2026).
-      // Cover crop of the same photo (sign, marquee, face and dress), sized to the cover's photo slot.
-      photo: { src: "/images/chloe/chloe-austin-motel-yellow-dress-cover.jpg", alt: "Chloe in a yellow sundress under the Austin Motel sign on South Congress", focus: "50% 50%" },
+      // Approved cover composition (title top, photo below) with the owner's definitive photo,
+      // "golden_hour_stroll_at_austin_motel.png" (master: assets/masters/). The cover copy is cropped
+      // to the photo slot: MOTEL sign, her face and the yellow dress.
+      photo: { src: "/images/chloe/chloe-golden-hour-austin-motel-cover.jpg", alt: "Chloe in a yellow sundress walking past the Austin Motel sign at golden hour", focus: "50% 50%" },
     },
-    hero: { src: "/images/chloe/chloe-austin-motel-yellow-dress.jpg", alt: "Chloe in a yellow sundress under the Austin Motel sign on South Congress", focus: "50% 40%" },
+    hero: { src: "/images/chloe/chloe-golden-hour-austin-motel.jpg", alt: "Chloe in a yellow sundress walking past the Austin Motel sign at golden hour", focus: "45% 40%" },
     lede: "Moving somewhere new gives you a lot to look forward to, and about a thousand questions. This is the guide for all of them: where to live, what it really costs, whether you need a car, and how to actually meet people once the boxes are unpacked.",
     summary:
       "Twelve chapters on living in Austin: neighborhoods and real costs, settling in, making friends, eating well and your first 90 days, with worksheets you can fill in on screen.",
