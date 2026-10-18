@@ -42,7 +42,7 @@ export default function Home() {
               The flagship guide · 2026–27 edition
             </p>
             <h1 id="flagship-title" className="t-display mt-6 text-balance">
-              New to Austin? <span className="accent-italic">I&rsquo;ve got you.</span> <span aria-hidden className="inline-block align-[0.08em] text-[0.62em]">💛</span>
+              New to Austin? <span className="block whitespace-nowrap text-[0.78em] leading-[1.06] sm:text-[0.84em]"><span className="accent-italic">I&rsquo;ve got you.</span> <span aria-hidden className="inline-block align-[0.08em] text-[0.62em]">💛</span></span>
             </h1>
             <p className="t-lede mt-6 max-w-xl text-ink-soft text-pretty">Moving somewhere new is exciting. Figuring everything out? A little overwhelming.</p>
             <p className="mt-4 max-w-xl text-[1.06rem] text-ink-soft text-pretty">
@@ -180,7 +180,7 @@ export default function Home() {
       <section className="section" aria-labelledby="collection-title">
         <div className="wrap">
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHead id="collection-title" eyebrow="The collection" title="Seven guides," accent="one very good city" lede="Food first, and everything fun about Austin after that." />
+            <SectionHead id="collection-title" eyebrow="The collection" title="Seven guides," accent="one very good city" lede="From great dinners and new friends to hidden gems, memorable dates, and weekend escapes." />
             <Link href="/shop" className="link-arrow">
               Shop all guides <span aria-hidden>→</span>
             </Link>
@@ -220,12 +220,11 @@ export default function Home() {
           <div>
             <p className="t-eyebrow text-terracotta">Meet Chloe</p>
             <h2 id="meet-title" className="t-h2 mt-3 text-balance">
-              Hi, I&rsquo;m Chloe. <span className="accent-italic">Food first, then everything fun.</span>
+              Hi, I&rsquo;m Chloe. <span className="accent-italic">Good food, great people, and everything in between.</span>
             </h2>
             <div className="mt-5 max-w-xl space-y-4 text-[1.06rem] text-ink-soft">
               <p>
-                I&rsquo;m 27, Canadian, and new to Austin, which means I&rsquo;m learning this city the best way I know: through what&rsquo;s on the
-                plate, who made it, and why people will happily stand in line for it.
+                I&rsquo;m 27, Canadian, and new to Austin. I love discovering a city through its people, neighborhoods, food, and all the little experiences that make it feel like home.
               </p>
               <p>
                 These guides are what happens when that curiosity gets organized. Dinners worth planning a night around, the clubs and classes that are
