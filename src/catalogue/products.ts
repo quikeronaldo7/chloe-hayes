@@ -211,7 +211,7 @@ export const products: Product[] = [
       count: "IRL",
       countLabel: "meet people",
       lines: ["Chloe's Guide to", "Being Single", "in Austin"],
-      photo: { src: "/images/chloe/chloe-south-congress.jpg", alt: "Chloe on South Congress at golden hour", focus: "40% 50%" },
+      photo: { src: "/images/chloe/chloe-portrait-warm.jpg", alt: "Chloe smiling on a patio in warm evening light", focus: "50% 30%" },
     },
     hero: { src: "/images/chloe/chloe-portrait-warm.jpg", alt: "Chloe smiling on a patio in warm evening light", focus: "50% 30%" },
     lede: "This isn't a list of bars where singles supposedly hang out. It's the clubs, classes, nights and communities in Austin that are actually running, with what to expect, who each one suits and whether you can show up on your own.",
