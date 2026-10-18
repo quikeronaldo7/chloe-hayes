@@ -45,6 +45,6 @@ In Stripe **test mode** (QR DIGITAL): Developers → Webhooks → Add endpoint `
 
 ## 5. Verify
 
-1. Open the preview: banner reads "Private preview · not public · Stripe TEST mode, $1 test prices".
+1. Open the preview: banner reads "Private preview · not public · Stripe TEST mode, no real charges".
 2. Buy Hill Country Escapes with card `4242 4242 4242 4242`: success page, then library, then the email from hello@chloeinaustin.com.
 3. Refund the payment in Stripe (test mode): the library link stops working.

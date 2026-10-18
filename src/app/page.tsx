@@ -3,7 +3,7 @@ import Link from "next/link";
 import { getProduct, products, shopOrder, resolveProducts } from "@/catalogue";
 import { approvedPriceBook, priceOf } from "@/catalogue/pricing";
 import { formatMoney } from "@/lib/money";
-import { Cover } from "@/components/cover";
+import { Cactus, Cover } from "@/components/cover";
 import { FaqList } from "@/components/faq";
 import { ProductCard } from "@/components/product-card";
 import { HowItWorks, Pairing, SaveWithBundles, SectionHead } from "@/components/sections";
@@ -34,7 +34,9 @@ export default function Home() {
         <div className="wrap grid items-center gap-10 pb-16 pt-8 sm:pt-12 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24 lg:pt-16">
           <div className="order-2 lg:order-1">
             <p className="inline-flex items-center gap-2 rounded-full bg-card px-3 py-1.5 text-[0.8rem] font-semibold text-forest ring-1 ring-line">
-              <Image src="/brand/chloe-mark.svg" alt="" width={20} height={20} className="h-5 w-5" unoptimized />
+              <svg aria-hidden viewBox="0 0 120 120" className="h-4 w-4 text-forest">
+                <Cactus />
+              </svg>
               The flagship guide · 2026–27 edition
             </p>
             <h1 id="flagship-title" className="t-display mt-6 text-balance">

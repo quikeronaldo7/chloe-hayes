@@ -10,7 +10,7 @@ import type Stripe from "stripe";
 import { bundles, collections, expandPurchase, getProduct, products } from "../src/catalogue";
 import { addToCart, reconcile, summarise } from "../src/catalogue/cart";
 import { delivery } from "../src/catalogue/delivery.server";
-import { approvedPriceBook, bundleOffers, testPriceBook, TEST_UNIT } from "../src/catalogue/pricing";
+import { approvedPriceBook, bundleOffers, testPriceBook } from "../src/catalogue/pricing";
 import { readiness } from "../src/catalogue/readiness";
 import { siteConfig } from "../src/lib/config";
 import { purchaseEmail, resendEmail } from "../src/lib/server/email";
@@ -33,6 +33,17 @@ function check(name: string, ok: unknown, detail = "") {
   }
 }
 const section = (s: string) => console.log(`\n— ${s}`);
+
+/** The owner's approved price list (18 Oct 2026), in cents. */
+const APPROVED_PRICES: Record<string, number> = {
+  "cia-new-to-austin": 3900,
+  "cia-dinner-spots": 1900,
+  "cia-being-single": 1900,
+  "cia-date-ideas": 1900,
+  "cia-natural-gems": 1900,
+  "cia-hill-country": 1500,
+  "cia-exclusive": 2400,
+};
 
 async function main() {
   // -------------------------------------------------------------------------
@@ -65,7 +76,7 @@ async function main() {
   for (const p of products) {
     check(`${p.id}: related ids valid and not self`, p.related.every((r) => getProduct(r.id) && r.id !== p.id && r.why.length > 20));
     check(`${p.id}: has FAQs, contents, caveats`, p.faqs.length >= 2 && p.contents.length >= 4 && p.caveats.length >= 1);
-    check(`${p.id}: price pending (none approved)`, p.price.status === "pending" && p.price.amount === null);
+    check(`${p.id}: approved price matches the owner's list`, p.price.status === "approved" && p.price.amount === APPROVED_PRICES[p.id], String(p.price.amount));
     for (const img of [p.cover.image, p.cover.photo, p.hero, ...(p.previews ?? []).map((x) => x.image)].filter(Boolean)) {
       check(`${p.id}: image exists ${img!.src}`, existsSync(path.join("public", img!.src)));
       check(`${p.id}: image has alt`, (img!.alt ?? "").length > 10);
@@ -78,7 +89,7 @@ async function main() {
   check("required recommendations: Gems → Hill Country", getProduct("cia-natural-gems")!.related[0].id === "cia-hill-country");
   check("required recommendations: Hill Country → Gems", getProduct("cia-hill-country")!.related[0].id === "cia-natural-gems");
   check("required recommendations: New to Austin → Being Single", getProduct("cia-new-to-austin")!.related[0].id === "cia-being-single");
-  check("four bundle proposals", bundles.length === 4 && bundles.every((b) => b.status === "proposal" && b.price.amount === null));
+  check("four bundles: Complete Collection approved at $99, the rest unpriced proposals", bundles.length === 4 && bundles.every((b) => (b.id === "cia-bundle-complete" ? b.status === "approved" && b.price.amount === 9900 : b.status === "proposal" && b.price.amount === null)));
   check("bundle contents valid", bundles.every((b) => b.includes.every((id) => getProduct(id))));
   check("Complete Austin Collection has all seven", bundles.find((b) => b.slug === "complete-austin-collection")!.includes.length === 7);
   check("no paid PDFs in /public", !hasPdf("public"));
@@ -106,10 +117,10 @@ async function main() {
   // -------------------------------------------------------------------------
   section("Price books (no invented prices)");
   const approved = approvedPriceBook();
-  check("approved book is empty today", Object.keys(approved.prices).length === 0);
+  check("approved book = the 7 approved guides + Complete Collection", Object.keys(approved.prices).length === 8 && Object.entries(APPROVED_PRICES).every(([id, n]) => approved.prices[id] === n) && approved.prices["cia-bundle-complete"] === 9900);
   const test = testPriceBook();
-  check("test book prices every guide at TEST_UNIT", products.every((p) => test.prices[p.id] === TEST_UNIT));
-  check("test bundles = exact sum (no invented discount)", bundles.every((b) => test.prices[b.id] === b.includes.length * TEST_UNIT));
+  check("test book carries approved guide prices (same figures as the shop)", products.every((p) => test.prices[p.id] === approved.prices[p.id]));
+  check("test book: approved bundle at its price, proposals = exact sum (no invented discount)", bundles.every((b) => test.prices[b.id] === (approved.prices[b.id] ?? b.includes.reduce((n, id) => n + test.prices[id], 0))));
   const env = (o: Record<string, string>) => o;
   check("test commerce needs all three conditions", testCommerceEnabled(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "preview" })));
   check("…not with a live key", !testCommerceEnabled(env({ STRIPE_SECRET_KEY: "sk_live_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "preview" })));
@@ -117,7 +128,11 @@ async function main() {
   check("…not without the flag", !testCommerceEnabled(env({ STRIPE_SECRET_KEY: "sk_test_x", VERCEL_ENV: "preview" })));
   check("Production always uses the approved book", activePriceBook(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "production" })).mode === "approved");
   check("Preview with flag uses the test book", activePriceBook(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "preview" })).mode === "test");
-  check("Save with Bundles shows no unapproved bundle (none approved today)", bundleOffers().length === 0 && bundles.every((b) => b.status !== "approved"));
+  {
+    const offers = bundleOffers();
+    check("Save with Bundles = Complete Collection only", offers.length === 1 && offers[0].bundle.id === "cia-bundle-complete");
+    check("Complete Collection: $99 vs $154 separately, saves $55", offers[0]?.price === 9900 && offers[0].separately === 15400 && offers[0].saving === 5500, JSON.stringify(offers[0] ?? null));
+  }
   {
     // Fixture book (QA only, never shown): checks the saving maths and that proposals stay hidden.
     const fx = { mode: "approved" as const, prices: { "cia-new-to-austin": 3900, "cia-being-single": 1900, "cia-bundle-first-month": 4900 } };
@@ -130,12 +145,13 @@ async function main() {
     check("saving = guides separately − bundle price", o?.separately === 5800 && o.price === 4900 && o.saving === 900, JSON.stringify(o ?? null));
     check("bundle with an unpriced guide is not offered", bundleOffers(["cia-bundle-date-night"], fx).length === 0);
   }
-  check("nothing is launch-ready (no approved prices)", ![...products, ...bundles].some(isLaunchReady));
+  check("nothing is launch-ready yet (copy review, imagery and delivery still open)", ![...products, ...bundles].some(isLaunchReady));
 
   // -------------------------------------------------------------------------
   section("Bag rules");
-  let r = addToCart([], "cia-dinner-spots", approved);
-  check("approved book: nothing can be added", r.note.kind === "unavailable" && r.ids.length === 0);
+  let r = addToCart([], "cia-bundle-date-night", approved);
+  check("approved book: an unapproved bundle can't be added", r.note.kind === "unavailable" && r.ids.length === 0);
+  check("approved book: an approved guide can be added", addToCart([], "cia-dinner-spots", approved).note.kind === "added");
   r = addToCart([], "cia-dinner-spots", test);
   check("add a guide", r.note.kind === "added" && r.ids.join() === "cia-dinner-spots");
   check("duplicate refused", addToCart(r.ids, "cia-dinner-spots", test).note.kind === "duplicate");
@@ -148,7 +164,7 @@ async function main() {
   check("bundle absorbs a guide it contains, keeps unrelated ones", addToCart(["cia-bundle-date-night", "cia-new-to-austin"], "cia-bundle-first-month", test).ids.join() === "cia-bundle-date-night,cia-bundle-first-month");
   const tampered = reconcile(["cia-dinner-spots", "cia-dinner-spots", "nope", 42, "cia-bundle-complete", "ka-london-guide"], test);
   check("reconcile: dupes, unknown, Kate ids and covered guides dropped", tampered.ids.join() === "cia-bundle-complete", tampered.ids.join());
-  check("summary uses book prices", summarise(["cia-new-to-austin", "cia-exclusive"], test).subtotal === 2 * TEST_UNIT);
+  check("summary uses book prices ($39 + $24)", summarise(["cia-new-to-austin", "cia-exclusive"], test).subtotal === 6300);
   check("expandPurchase: bundle → guides", expandPurchase(["cia-bundle-weekend-explorer"]).map((p) => p.id).join() === "cia-natural-gems,cia-hill-country");
 
   // -------------------------------------------------------------------------
@@ -246,7 +262,7 @@ async function main() {
     }
   };
   let res = await call({ items: ["cia-hill-country"] });
-  check("no approved price → 409, nothing sold", res.status === 409 && /can be bought yet|isn't available/.test(res.json.error ?? ""), `${res.status} ${res.json.error}`);
+  check("approved price but not launch-ready → 409, nothing sold", res.status === 409 && /can be bought yet|isn't available/.test(res.json.error ?? ""), `${res.status} ${res.json.error}`);
   res = await call("not json");
   check("malformed body → 400", res.status === 400);
   res = await call({ items: [] });

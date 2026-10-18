@@ -36,13 +36,17 @@ export interface Readiness {
 /**
  * The seven customer PDFs are FINAL per the 18 Oct 2026 master brief ("These
  * products already exist… use the actual final PDF files"). Website copy was
- * written on 18 Oct 2026 from those PDFs and needs owner review; no price is
- * approved; imagery has open rights questions (docs/IMAGERY.md).
+ * written on 18 Oct 2026 from those PDFs and needs owner review; prices were
+ * approved on 18 Oct 2026; imagery has open rights questions (docs/IMAGERY.md).
  */
+/** The owner's pricing approval in the 18 Oct 2026 corrections brief. */
+const PRICES_APPROVED: Approval = { by: "Owner", on: "2026-10-18", basis: "Storefront corrections brief: approved price list (guides + Complete Austin Collection)." };
+
 const finalPdf = (notes: string[] = []): Readiness => ({
   kind: "product",
   content: "final",
   design: "final",
+  priceApproval: PRICES_APPROVED,
   salesCopy: "needs-review",
   imagery: "pending",
   notes,
@@ -71,7 +75,7 @@ export const readiness: Record<string, Readiness> = {
   "cia-bundle-first-month": proposal(),
   "cia-bundle-date-night": proposal(),
   "cia-bundle-weekend-explorer": proposal(),
-  "cia-bundle-complete": proposal(),
+  "cia-bundle-complete": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "needs-review", imagery: "final", notes: [] },
 };
 
 export function getReadiness(id: string): Readiness | undefined {

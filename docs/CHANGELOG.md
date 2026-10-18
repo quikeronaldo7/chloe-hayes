@@ -1,5 +1,45 @@
 # Changelog
 
+## 18 Oct 2026 (later): Owner corrections (`preview` branch)
+
+**Covers**
+- **New to Austin:** back to the original cover layout (forest title block on top, Chloe photo below).
+  - The photo is now the Austin Motel scene with Chloe in the yellow dress (Drive `SOCO.png`). It's cropped to the cover's photo slot so the MOTEL sign, the "So close yet so far out" marquee, her face and the dress all show.
+  - The BBQ photo is no longer on any cover.
+- **Being Single:** the approved poolside skyline portrait, in the same layout, cropped to face and shoulders.
+
+**Logo**
+- Back to the simple cactus mark and "Chloe *in* Austin" wordmark in the header, footer and favicon.
+- The Western Badge files, the hat-and-cactus mark and the apple-touch icon are all removed.
+
+**Footer**
+- Instagram `@chloe.eats.atx` is linked under the tagline.
+- Facebook appears once `NEXT_PUBLIC_FACEBOOK_URL` is set. No URL exists in the project, guides or Drive, so none was invented.
+- The Legal column is gone. Terms, Refunds and Privacy are small links beside the copyright line.
+
+**Prices** (approved, recorded in `products.ts` and `readiness.ts`)
+
+| Item | Price |
+|---|---|
+| New to Austin | $39 |
+| 10 Most Exclusive Experiences | $24 |
+| Perfect Hill Country Escapes | $15 |
+| 10 Best Dinner Spots | $19 |
+| Guide to Being Single | $19 |
+| 12 Best Date Ideas | $19 |
+| 5 Natural Gems | $19 |
+| **Complete Austin Collection** (all 7) | **$99** ($154 separately, saves $55) |
+
+- These show on the homepage CTA, cards, product pages, Save with Bundles, bag and Stripe checkout.
+- Test mode now charges the same figures in Stripe test mode, and the "$1 test price" labels are gone.
+- First Month, Date Night and Weekend Explorer stay hidden: they have no approved price yet.
+
+**QA**
+- 185 tests pass, along with lint, typecheck and the production build.
+- axe: 0 violations on 15 pages × 2 widths. All links work.
+- A browser check confirmed every guide page shows its approved price.
+- Adding the Complete Collection to the bag replaces New to Austin, with a $99 subtotal.
+
 ## 18 Oct 2026: Storefront refinement (`preview` branch)
 
 **Images and crops**

@@ -14,7 +14,7 @@ Status as of **18 October 2026**. Five separate categories, never merged. "Built
 | Bundle system: "Save with Bundles" shows approved bundles only (price, combined price, saving); proposals stay hidden; bundles absorb guides they contain | Tested (bag rules, saving maths on a QA fixture, unapproved bundles never offered) |
 | Bag: add, remove, persist (localStorage, cross-tab), buy now, multi-item, empty state, mobile bottom sheet | Browser flow test |
 | Server-side pricing; browser prices ignored; Kate ids / unknown ids / tampered lists rejected | Checkout API tests |
-| Price books: no real price anywhere; test prices only with sk_test_ + not Production + flag | Tests |
+| Approved prices (18 Oct): 7 guides + Complete Austin Collection ($99, saves $55 on $154); same figures on every page, bag and checkout; test mode charges them in Stripe test only | Tests |
 | Stripe Checkout parameters (line items with Chloe's test Products, metadata, branding, promo codes, URLs) | Accepted by Stripe (two QA sessions created in **test mode**, unpaid, auto-expire in 24h) |
 | Chloe-branded hosted checkout on the shared account (`branding_settings`: "Chloe in Austin", terracotta/cream) | Confirmed in Stripe's response |
 | Webhook fulfilment logic: emails once (idempotency key), records it, retries on failure, ignores Kate's sessions, never emails refunded/unpaid | Tests with mocked Stripe/Resend |
@@ -39,11 +39,11 @@ Status as of **18 October 2026**. Five separate categories, never merged. "Built
 
 ## 3. Awaiting owner approval
 
-1. **Prices** for each of the 7 guides (then record the approval in `readiness.ts` and the amount in `products.ts`).
-2. **Bundles**: which of the 4 proposals, exact names, contents and prices (no discount is shown until approved).
+1. ~~Prices~~: approved 18 Oct 2026 and recorded (`products.ts`, `readiness.ts`).
+2. **Bundles**: Complete Austin Collection approved ($99). First Month, Date Night and Weekend Explorer remain hidden proposals until named and priced.
 3. **Website copy** for all pages (written from the PDFs on 18 Oct; marked *needs review*).
 4. **Image rights** (docs/IMAGERY.md): AI-generated brand imagery of Chloe in identifiable places (BBQ hall, South Congress/Austin Motel sign), the Greetings-from-Austin mural on the New to Austin cover, restaurant photos inside Dinner Spots, generated event scenes in Date Ideas.
-5. **Instagram handle `@chloe.eats.atx`**: printed in three guides, but the Brand Bible lists the live handle as unlocked and the Dinner Spots notes say "unresolved". Set `NEXT_PUBLIC_INSTAGRAM_CONFIRMED=true` once confirmed.
+5. **Socials**: the footer links Instagram `@chloe.eats.atx` (printed in three guides; the Brand Bible lists the live handle as unlocked, so confirm). **Facebook has no URL anywhere**: set `NEXT_PUBLIC_FACEBOOK_URL` to show it.
 6. **AI-persona disclosure**: whether/how the site discloses that Chloe and some imagery are AI-generated (the Dinner Spots PDF already notes "approved AI-assisted refinements").
 7. **Legal**: seller entity and address, refund policy, licence terms, update policy, privacy details, governing law, tax position (Stripe Tax?). Pages currently say "not published yet".
 8. **Support inbox**: a monitored address (set `NEXT_PUBLIC_SUPPORT_EMAIL`), or enable Resend receiving.

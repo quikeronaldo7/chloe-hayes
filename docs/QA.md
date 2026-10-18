@@ -15,7 +15,7 @@ Run in a cloud container against a local production build (`next build && next s
 
 ## Browser flow (Playwright, 390 px, `next dev`, demo checkout)
 
-1. Hill Country guide page shows "$1 · Test price" → **Add to bag** → bag count 1.
+1. (Pre-approval run, $1 test prices) Hill Country guide page shows "$1 · Test price" → **Add to bag** → bag count 1.
 2. Natural Gems page → **Add bundle (test)** "Weekend Explorer" → note: "Weekend Explorer replaces Chloe's Perfect Hill Country Escapes, which it already includes." Bag still 1 item, $2.
 3. **Checkout** → success page "You're all set." → bag emptied.
 4. Library lists both guides together: Hill Country with a **Download** button, Natural Gems with the honest "isn't ready yet" state (file pending).

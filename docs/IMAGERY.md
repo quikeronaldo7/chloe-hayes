@@ -9,23 +9,17 @@ Every image on the site, where it came from, and what still needs a decision. No
 | `previews/hill-country-p02/p03.jpg` | Pages 2–3 of the Hill Country PDF | Sample pages | 2 of 8 pages (not the whole product) |
 | `previews/new-to-austin-pages-*.jpg` | `page-overview.png` (New to Austin folder), cropped | Sample-page strips | Thumbnails too small to read; **page 1 (mural cover) excluded** |
 | `chloe/chloe-zilker-picnic.jpg` | `Zilker Picnic.png` (Date Ideas › 03 Selected Images; same photo as `img/picnic.jpg` and the approved Date Ideas cover) | Homepage flagship hero (owner-approved, 18 Oct 2026) | Approved by owner for the homepage. Brand Bible lists "Zilker Picnic" as a strongly consistent asset. Shows a wine glass at a public park, where alcohol needs a permit (as the Date Ideas guide notes) |
-| `chloe/chloe-bbq-table.jpg` | `Slide 1 - Chloe Hero FINAL.png` (Franklin carousel); pixel-identical to `APPROVED — Franklin Chloe Hero — Website Hero Reference.png` (Revision Round 2 › 03 — Hero References) | **New to Austin cover photo** (since 18 Oct refinement), Dinner Spots Open Graph | Marked APPROVED in Drive. AI-generated brand image in a barbecue hall. **Venue not named on the site** |
+| `chloe/chloe-bbq-table.jpg` | `Slide 1 - Chloe Hero FINAL.png` (Franklin carousel; same as `APPROVED — Franklin Chloe Hero`) | Dinner Spots Open Graph only (**not** on any cover, per owner) | AI-generated brand image in a barbecue hall. **Venue not named on the site** |
+| `chloe/chloe-austin-motel-yellow-dress.jpg` (+ `-cover.jpg` crop: sign, marquee, face, dress) | `SOCO.png` (My Drive; also `Sep 3 SOCO.jpg`) | **New to Austin cover photo** + Open Graph, inside the approved cover layout (title top, photo below) | Owner direction 18 Oct: Austin Motel scene, Chloe in the yellow dress. Shows the **Austin Motel sign** (Brand Bible: verified anchor; don't imply residence) |
+| `chloe/chloe-rooftop-portrait.jpg` | `Chloe Logo.jpg` / `REFERENCE — Previous Chloe Cactus Logo.jpg` | **Being Single cover photo** + Open Graph, cropped to face and shoulders | Owner-approved 18 Oct (poolside skyline portrait) |
 | `food/bbq-tray.jpg` | `Slide 4 - Full Tray FINAL.png` | (available, currently unused) | Same set |
-| `chloe/chloe-portrait-warm.jpg` | `10_ChloesPicks_WarmPortrait.png` (Being Single archive) | Meet Chloe, About, **Being Single cover photo** (owner's choice, 18 Oct) and hero | Brand portrait |
+| `chloe/chloe-portrait-warm.jpg` | `10_ChloesPicks_WarmPortrait.png` (Being Single archive) | Meet Chloe, About | Brand portrait |
 | `chloe/chloe-south-congress.jpg` | `01_Cover_SouthCongress_GoldenHour.png` (Being Single archive) | About page (no longer on any cover) | Brand image; shows the **Austin Motel sign** (Brand Bible: verified anchor, but don't imply residence) |
 | `chloe/chloe-private-doorway.jpg` | `COVER-H-Chloe-Nighttime-Private-Doorway-APPROVED.png` | Exclusive typeset cover, hero | Marked APPROVED in Drive. Generic doorway, no venue claimed |
 
-## Logo system (18 Oct 2026)
+## Logo
 
-Source: `Chloe in Austin — Western Badge Logo Concept v2.png` (Revision Round 2 › 01 — Brand Assets), named the approved logo direction in "Chloe Website — Revision Round 2 — Claude Prompt + Asset Map".
-
-| Use | File | What it is |
-|---|---|---|
-| Footer, large brand moments | `public/brand/chloe-in-austin-badge.png` | The approved badge, trimmed and resized to 800 px (transparent) |
-| Header | `public/brand/chloe-mark.svg` + live "Chloe *in* Austin" type (`Wordmark`) | Compact mark: the badge's cowboy hat on a saguaro, forest roundel, gold ring. Hand-drawn SVG simplification of the badge (the full badge is unreadable below ~80 px) |
-| Favicon / app icon | `src/app/icon.svg`, `src/app/apple-icon.png` | The compact mark alone |
-
-The compact mark is a simplification made here, not a separately supplied file: if a designer exports an official small mark, replace `chloe-mark.svg` and the icons.
+The site uses its simple cactus mark + "Chloe *in* Austin" wordmark (`src/components/wordmark.tsx`, favicon `src/app/icon.svg`). The ornate Western Badge concept was tried on 18 Oct and **not approved**; it is not used anywhere.
 
 ## Why some covers are typeset
 
@@ -39,7 +33,6 @@ So these use a **typeset cover** in the guides' own design system (Fraunces titl
 ## Not used, and why
 
 - Restaurant/venue photos from the Dinner Spots, Exclusive and Date Ideas folders: many are third-party (Instagram/Google Maps screenshots), `REVIEW-NOT-APPROVED`, `RIGHTS-PENDING` or `SELECTED-GENERATED` scenes of real events.
-- `Chloe Logo.jpg` / `REFERENCE — Previous Chloe Cactus Logo.jpg`: despite the names, a swimwear portrait, not a logo.
 - Face and turnaround sheets: identity references, not for publication.
 
 ## Decisions needed

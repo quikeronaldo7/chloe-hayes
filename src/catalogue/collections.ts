@@ -38,8 +38,9 @@ export const collections: Collection[] = [
 const PROPOSAL = { amount: null, status: "pending", source: "Bundle proposal from the 18 Oct 2026 brief. Contents, name and price need owner approval." } as const;
 
 /**
- * Bundle PROPOSALS (18 Oct 2026 brief). Not offers: shown only on preview
- * deployments, labelled as proposals, never discounted, never sold for real.
+ * Bundles. Only "approved" ones (with an approved price) appear to customers, in
+ * Save with Bundles. As of 18 Oct 2026 that is the Complete Austin Collection; the
+ * other three are still proposals: hidden, unpriced, never sold.
  */
 export const bundles: Bundle[] = [
   {
@@ -79,7 +80,8 @@ export const bundles: Bundle[] = [
     subtitle: "All seven guides",
     includes: ["cia-new-to-austin", "cia-dinner-spots", "cia-being-single", "cia-date-ideas", "cia-natural-gems", "cia-hill-country", "cia-exclusive"],
     why: "Everything Chloe has made so far, in one library.",
-    status: "proposal",
-    price: PROPOSAL,
+    // Owner-approved bundle and price (18 Oct 2026): $99 for all seven ($154 bought separately).
+    status: "approved",
+    price: { amount: 9900, status: "approved", source: "Owner-approved bundle price, 18 Oct 2026." },
   },
 ];

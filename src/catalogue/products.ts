@@ -16,7 +16,8 @@ import type { Product } from "./types";
  * here without a recorded owner approval in readiness.ts.
  */
 
-const PENDING = { amount: null, status: "pending", source: "Awaiting owner pricing approval (18 Oct 2026)." } as const;
+/** Owner-approved prices (18 Oct 2026 corrections brief), in cents. Recorded in readiness.ts too. */
+const approved = (amount: number) => ({ amount, status: "approved", source: "Owner-approved price, 18 Oct 2026." }) as const;
 
 const CHECK_LIVE =
   "Prices, hours, reservation rules and access change. Every listing links to the official source: confirm there before you plan around a detail.";
@@ -30,7 +31,7 @@ export const products: Product[] = [
     shortTitle: "New to Austin",
     subtitle: "The friend you call when you're choosing a neighborhood, planning week one, or looking for your people.",
     collection: "start-here",
-    price: PENDING,
+    price: approved(3900),
     stripe: { testProductId: "prod_VSjpsLrbCLnmCz" },
     cover: {
       kind: "typeset",
@@ -38,10 +39,12 @@ export const products: Product[] = [
       count: "12",
       countLabel: "chapters",
       lines: ["New to", "Austin"],
-      // "APPROVED — Franklin Chloe Hero" (Drive, Revision Round 2, 18 Oct 2026). Focus keeps her face in the upper third.
-      photo: { src: "/images/chloe/chloe-bbq-table.jpg", alt: "Chloe at a table loaded with barbecue, mid-bite", focus: "45% 17%" },
+      // Approved cover composition (title top, photo below) with the Austin Motel scene, Chloe in the
+      // yellow dress: Drive "SOCO.png" (owner direction, 18 Oct 2026).
+      // Cover crop of the same photo (sign, marquee, face and dress), sized to the cover's photo slot.
+      photo: { src: "/images/chloe/chloe-austin-motel-yellow-dress-cover.jpg", alt: "Chloe in a yellow sundress under the Austin Motel sign on South Congress", focus: "50% 50%" },
     },
-    hero: { src: "/images/chloe/chloe-bbq-table.jpg", alt: "Chloe at a table loaded with barbecue, mid-bite", focus: "45% 17%" },
+    hero: { src: "/images/chloe/chloe-austin-motel-yellow-dress.jpg", alt: "Chloe in a yellow sundress under the Austin Motel sign on South Congress", focus: "50% 40%" },
     lede: "Moving somewhere new gives you a lot to look forward to, and about a thousand questions. This is the guide for all of them: where to live, what it really costs, whether you need a car, and how to actually meet people once the boxes are unpacked.",
     summary:
       "Twelve chapters on living in Austin: neighborhoods and real costs, settling in, making friends, eating well and your first 90 days, with worksheets you can fill in on screen.",
@@ -133,7 +136,7 @@ export const products: Product[] = [
     shortTitle: "10 Best Dinner Spots",
     subtitle: "The ten dinners I'd plan a whole night around, and exactly how to get the table.",
     collection: "eat-and-drink",
-    price: PENDING,
+    price: approved(1900),
     stripe: { testProductId: "prod_VSjpiXtGJpFKPI" },
     cover: { kind: "typeset", tone: "terracotta", count: "10", countLabel: "dinners", lines: ["Chloe's 10 Best", "Dinner Spots", "in Austin"] },
     hero: { src: "/images/chloe/chloe-bbq-table.jpg", alt: "Chloe at a table loaded with barbecue, mid-bite", focus: "50% 40%" },
@@ -204,7 +207,7 @@ export const products: Product[] = [
     shortTitle: "Guide to Being Single",
     subtitle: "Where to actually meet people IRL, and whether you can walk in alone.",
     collection: "date-and-connect",
-    price: PENDING,
+    price: approved(1900),
     stripe: { testProductId: "prod_VSjp6hIedheOr8" },
     cover: {
       kind: "typeset",
@@ -212,10 +215,10 @@ export const products: Product[] = [
       count: "IRL",
       countLabel: "meet people",
       lines: ["Chloe's Guide to", "Being Single", "in Austin"],
-      // Owner's choice (18 Oct 2026): the warm portrait, distinct from New to Austin. Focus keeps her face clear of the fade.
-      photo: { src: "/images/chloe/chloe-portrait-warm.jpg", alt: "Chloe smiling on a patio in warm evening light", focus: "50% 14%" },
+      // Owner-approved (18 Oct 2026): poolside skyline portrait (Drive "Chloe Logo.jpg"), cropped to face and shoulders.
+      photo: { src: "/images/chloe/chloe-rooftop-portrait.jpg", alt: "Chloe smiling poolside with the Austin skyline behind her", focus: "50% 22%" },
     },
-    hero: { src: "/images/chloe/chloe-portrait-warm.jpg", alt: "Chloe smiling on a patio in warm evening light", focus: "50% 30%" },
+    hero: { src: "/images/chloe/chloe-rooftop-portrait.jpg", alt: "Chloe smiling poolside with the Austin skyline behind her", focus: "50% 30%" },
     lede: "This isn't a list of bars where singles supposedly hang out. It's the clubs, classes, nights and communities in Austin that are actually running, with what to expect, who each one suits and whether you can show up on your own.",
     summary:
       "Singles nights, run clubs, two-step, dinners with strangers and the communities worth joining, each with who it suits and whether you can go solo.",
@@ -278,7 +281,7 @@ export const products: Product[] = [
     shortTitle: "12 Best Date Ideas",
     subtitle: "Lake days, rooftops, games, galleries and brunch, each with a plan.",
     collection: "date-and-connect",
-    price: PENDING,
+    price: approved(1900),
     stripe: { testProductId: "prod_VSjqLgJ3VftHWg" },
     cover: { kind: "approved", image: { src: "/images/covers/12-best-date-ideas.jpg", alt: "Cover of Chloe's 12 Best Date Ideas in Austin: Chloe at a picnic on Zilker's lawn with the skyline behind" } },
     hero: { src: "/images/covers/12-best-date-ideas.jpg", alt: "Chloe at a picnic on Zilker's lawn with the Austin skyline behind", focus: "70% 45%" },
@@ -340,7 +343,7 @@ export const products: Product[] = [
     shortTitle: "5 Natural Gems",
     subtitle: "Swimming holes, waterfalls and Hill Country escapes worth the drive.",
     collection: "explore-and-escape",
-    price: PENDING,
+    price: approved(1900),
     stripe: { testProductId: "prod_VSjqC5iDU1X4ln" },
     cover: { kind: "typeset", tone: "sage", count: "5", countLabel: "gems", lines: ["Chloe's 5", "Natural Gems", "around Austin"] },
     lede: "One of the best things about Austin is how quickly you can trade the city for cypress trees, turquoise water and Hill Country views. This mini-guide rounds up five natural escapes that are genuinely worth the drive, and what to check before you leave.",
@@ -397,7 +400,7 @@ export const products: Product[] = [
     shortTitle: "Hill Country Escapes",
     subtitle: "Where to stay, sip, float, wander and eat, all within about an hour of the city.",
     collection: "explore-and-escape",
-    price: PENDING,
+    price: approved(1500),
     stripe: { testProductId: "prod_VSjnlLNyhC9zGx" },
     cover: {
       kind: "pdf",
@@ -468,7 +471,7 @@ export const products: Product[] = [
     shortTitle: "10 Most Exclusive Experiences",
     subtitle: "Private clubs, hidden doors and hard-to-get reservations, and how access actually works.",
     collection: "explore-and-escape",
-    price: PENDING,
+    price: approved(2400),
     stripe: { testProductId: "prod_VSjq33WGpB5oG1" },
     cover: {
       kind: "typeset",

@@ -281,7 +281,7 @@ function CartDrawer() {
 
         {test ? (
           <p className="border-b border-line bg-sun/25 px-6 py-2.5 text-[0.8rem] font-medium">
-            Test mode: $1 test prices, Stripe test cards only. Nothing here is a real price.
+            Test mode: Stripe test cards only, no real charges.
           </p>
         ) : null}
 

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { getSellable } from "@/catalogue";
-import { priceOf } from "@/catalogue/pricing";
+import { approvedPriceBook, priceOf } from "@/catalogue/pricing";
 import { useCart } from "@/components/cart";
 import { track } from "@/lib/analytics";
 import { formatMoney } from "@/lib/money";
@@ -16,7 +16,7 @@ export function PriceTag({ id, className = "" }: { id: string; className?: strin
   return (
     <span className={`inline-flex items-baseline gap-2 ${className}`}>
       <span className="font-serif text-2xl tabular-nums">{formatMoney(price)}</span>
-      {book.mode === "test" ? <span className="chip bg-sun/40 text-ink">Test price</span> : null}
+      {book.mode === "test" && priceOf(approvedPriceBook(), id) === null ? <span className="chip bg-sun/40 text-ink">Test price</span> : null}
     </span>
   );
 }
@@ -60,7 +60,7 @@ export function BuyBox({ id }: { id: string }) {
       <div className="card p-5">
         <p className="t-eyebrow text-terracotta">Coming soon</p>
         <p className="mt-2 font-serif text-xl leading-snug">This guide is finished. The shop isn&rsquo;t open quite yet.</p>
-        <p className="mt-2 t-small text-ink-soft">Prices are being finalized. Have a look around in the meantime: every guide, sample page and FAQ is here.</p>
+        <p className="mt-2 t-small text-ink-soft">The shop opens soon. Have a look around in the meantime: every guide, sample page and FAQ is here.</p>
         <Link href="/help" className="link-arrow mt-4 t-small">
           How buying will work <span aria-hidden>→</span>
         </Link>

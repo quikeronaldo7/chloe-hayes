@@ -1,26 +1,19 @@
 import Link from "next/link";
 import { collections } from "@/catalogue";
 import { instagramUrl, siteConfig } from "@/lib/config";
-import { Badge } from "./wordmark";
+import { Wordmark } from "./wordmark";
 
 export function SiteFooter() {
   return (
     <footer className="grain mt-auto bg-forest text-paper">
-      <div className="wrap grid gap-12 py-16 sm:grid-cols-2 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
+      <div className="wrap grid gap-12 py-16 sm:grid-cols-2 md:grid-cols-[1.6fr_1fr_1fr]">
         <div>
-          <Link href="/" className="inline-block rounded-full" aria-label="Chloe in Austin, home">
-            <Badge alt="" className="w-44 sm:w-52" />
-          </Link>
+          <Wordmark light size="lg" />
           <p className="mt-5 max-w-sm font-serif text-xl leading-snug text-paper/90" style={{ fontVariationSettings: '"SOFT" 100' }}>
             Good food. Great plans. <span className="italic text-sun">Your Austin, sorted.</span>
           </p>
-          {siteConfig.instagramConfirmed ? (
-            <a href={instagramUrl} target="_blank" rel="noopener" className="link-arrow mt-6 text-sun">
-              @{siteConfig.instagramHandle} on Instagram <span aria-hidden>↗</span>
-            </a>
-          ) : null}
+          <Socials />
         </div>
-
 
         <FooterCol title="The guides">
           <li><Link href="/shop" className="link-quiet">Shop all guides</Link></li>
@@ -38,16 +31,15 @@ export function SiteFooter() {
           <li><Link href="/help#how-it-works" className="link-quiet">How delivery works</Link></li>
           <li><Link href="/about" className="link-quiet">About Chloe</Link></li>
         </FooterCol>
-        <FooterCol title="Legal">
-          <li><Link href="/legal/terms" className="link-quiet">Terms of sale</Link></li>
-          <li><Link href="/legal/refunds" className="link-quiet">Refunds</Link></li>
-          <li><Link href="/legal/privacy" className="link-quiet">Privacy</Link></li>
-        </FooterCol>
       </div>
       <div className="border-t border-paper/15">
-        <div className="wrap flex flex-col gap-2 py-6 text-xs text-paper/65 sm:flex-row sm:justify-between">
-          <p>© {new Date().getFullYear()} Chloe Hayes · Chloe in Austin. All rights reserved.</p>
-          <p>Details in every guide are dated and linked to the official source.</p>
+        <div className="wrap flex flex-col gap-2 py-6 text-xs text-paper/65 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Chloe Hayes · Chloe in Austin · Details in every guide are dated and linked to the official source.</p>
+          <nav aria-label="Legal" className="-my-1 flex gap-4 [&>a]:py-1">
+            <Link href="/legal/terms" className="hover:text-paper">Terms</Link>
+            <Link href="/legal/refunds" className="hover:text-paper">Refunds</Link>
+            <Link href="/legal/privacy" className="hover:text-paper">Privacy</Link>
+          </nav>
         </div>
       </div>
     </footer>
@@ -60,5 +52,47 @@ function FooterCol({ title, children }: { title: string; children: React.ReactNo
       <p className="t-eyebrow text-sun">{title}</p>
       <ul className="mt-4 space-y-2.5 text-[0.95rem] text-paper/85">{children}</ul>
     </div>
+  );
+}
+
+/** Instagram and Facebook, each only when a real link exists (see siteConfig). */
+function Socials() {
+  const links = [
+    instagramUrl ? { href: instagramUrl, label: "Instagram", handle: `@${siteConfig.instagramHandle}`, icon: <InstagramIcon /> } : null,
+    siteConfig.facebookUrl ? { href: siteConfig.facebookUrl, label: "Facebook", handle: "Facebook", icon: <FacebookIcon /> } : null,
+  ].filter((l) => l !== null);
+  if (!links.length) return null;
+  return (
+    <ul className="mt-6 flex flex-wrap gap-3" aria-label="Chloe on social media">
+      {links.map((l) => (
+        <li key={l.label}>
+          <a href={l.href} target="_blank" rel="noopener" className="inline-flex items-center gap-2 rounded-full bg-paper/10 px-3.5 py-2 text-sm text-paper ring-1 ring-paper/20 transition-colors hover:bg-paper/20">
+            {l.icon}
+            <span>
+              <span className="sr-only">{l.label}: </span>
+              {l.handle}
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function InstagramIcon() {
+  return (
+    <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="1.8">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+    </svg>
+  );
+}
+
+function FacebookIcon() {
+  return (
+    <svg aria-hidden viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
+      <path d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8v3h2.6V21z" />
+    </svg>
   );
 }

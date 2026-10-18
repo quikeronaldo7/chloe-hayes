@@ -13,12 +13,14 @@ export const siteConfig = {
   currency: "usd",
   locale: "en-US",
   /**
-   * Instagram: @chloe.eats.atx is printed in three of the guides, but the Brand Bible lists
-   * Chloe's live handle as UNLOCKED and the Dinner Spots production notes say it is unresolved.
-   * Not linked until the owner confirms it (set NEXT_PUBLIC_INSTAGRAM_CONFIRMED=true).
+   * Socials, shown in the footer (owner request, 18 Oct 2026).
+   * Instagram: @chloe.eats.atx, the handle printed in the Date Ideas, Exclusive and New to
+   * Austin guides. Set NEXT_PUBLIC_INSTAGRAM_HANDLE to change it, or to "" to hide it.
+   * Facebook: no URL exists in the project, guides or Drive, so none is invented. It appears
+   * once NEXT_PUBLIC_FACEBOOK_URL is set.
    */
-  instagramHandle: "chloe.eats.atx",
-  instagramConfirmed: process.env.NEXT_PUBLIC_INSTAGRAM_CONFIRMED === "true",
+  instagramHandle: (process.env.NEXT_PUBLIC_INSTAGRAM_HANDLE ?? "chloe.eats.atx").trim().replace(/^@/, ""),
+  facebookUrl: process.env.NEXT_PUBLIC_FACEBOOK_URL?.trim() || null,
   /**
    * Customer support address. None is configured: chloeinaustin.com can send through
    * Resend but receiving is disabled, so no inbound mailbox is claimed anywhere.
@@ -31,7 +33,7 @@ export function absoluteUrl(path = "/") {
   return `${siteConfig.url}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-export const instagramUrl = `https://www.instagram.com/${siteConfig.instagramHandle}/`;
+export const instagramUrl = siteConfig.instagramHandle ? `https://www.instagram.com/${siteConfig.instagramHandle}/` : null;
 
 /** One phrase for "how to reach us", honest about what exists. */
 export function supportLine(): string {
