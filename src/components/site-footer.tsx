@@ -14,15 +14,15 @@ export function SiteFooter() {
           <p className="mt-5 max-w-sm font-serif text-xl leading-snug text-paper/90" style={{ fontVariationSettings: '"SOFT" 100' }}>
             Good food. Great plans. <span className="italic text-sun">Your Austin, sorted.</span>
           </p>
-          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-semibold text-sun">
+          <div className="mt-6 flex flex-wrap items-center gap-3 text-sun">
             {instagramUrl ? (
-              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" className="link-arrow">
-                Instagram <span aria-hidden>↗</span>
+              <a href={instagramUrl} target="_blank" rel="noopener noreferrer" aria-label="Chloe on Instagram" title="Instagram" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-paper/30 transition-colors hover:bg-paper/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper">
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.7" cy="6.4" r="1" fill="currentColor" stroke="none"/></svg>
               </a>
             ) : null}
             {siteConfig.facebookUrl ? (
-              <a href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer" className="link-arrow">
-                Facebook <span aria-hidden>↗</span>
+              <a href={siteConfig.facebookUrl} target="_blank" rel="noopener noreferrer" aria-label="Chloe on Facebook" title="Facebook" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-paper/30 transition-colors hover:bg-paper/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-paper">
+                <svg aria-hidden="true" viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor"><path d="M13.7 21v-8.2h2.8l.4-3.2h-3.2V7.5c0-.9.3-1.5 1.6-1.5H17V3.1c-.3 0-1.2-.1-2.4-.1-2.5 0-4.2 1.5-4.2 4.3v2.3H7.6v3.2h2.8V21h3.3Z"/></svg>
               </a>
             ) : null}
           </div>
