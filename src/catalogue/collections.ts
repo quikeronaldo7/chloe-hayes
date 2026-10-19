@@ -38,8 +38,8 @@ export const collections: Collection[] = [
 /**
  * Bundles, all four owner-approved on 18 Oct 2026. Only approved bundles with an
  * approved price appear to customers (Curated Guide Bundles). First Month, Date Night
- * and Weekend Explorer cost exactly their guides' total (convenience, no saving);
- * the Complete Austin Collection is $99 against $154 separately.
+ * and Weekend Explorer are discounted for owner review on the protected preview
+ * ($49 / $29 / $29 respectively); Complete Austin Collection stays $99 vs $154.
  */
 export const bundles: Bundle[] = [
   {
@@ -50,7 +50,7 @@ export const bundles: Bundle[] = [
     includes: ["cia-new-to-austin", "cia-being-single"],
     why: "Settle in, then get out there: the move, the neighborhoods and your first 90 days, plus where to meet people IRL.",
     status: "approved",
-    price: { amount: 5800, status: "approved", source: "Owner-approved bundle price, 18 Oct 2026 (equals the guides bought separately)." },
+    price: { amount: 4900, status: "approved", source: "Discounted bundle proposal for preview review, 18 Oct 2026: $49 vs $58 separately (save $9)." },
   },
   {
     id: "cia-bundle-date-night",
@@ -60,7 +60,7 @@ export const bundles: Bundle[] = [
     includes: ["cia-date-ideas", "cia-dinner-spots"],
     why: "Twelve dates with a plan, and ten dinners worth dressing up for.",
     status: "approved",
-    price: { amount: 3800, status: "approved", source: "Owner-approved bundle price, 18 Oct 2026 (equals the guides bought separately)." },
+    price: { amount: 2900, status: "approved", source: "Discounted bundle proposal for preview review, 18 Oct 2026: $29 vs $38 separately (save $9)." },
   },
   {
     id: "cia-bundle-weekend-explorer",
@@ -70,7 +70,7 @@ export const bundles: Bundle[] = [
     includes: ["cia-natural-gems", "cia-hill-country"],
     why: "Swimming holes and Hill Country days that share Wimberley and Dripping Springs.",
     status: "approved",
-    price: { amount: 3400, status: "approved", source: "Owner-approved bundle price, 18 Oct 2026 (equals the guides bought separately)." },
+    price: { amount: 2900, status: "approved", source: "Discounted bundle proposal for preview review, 18 Oct 2026: $29 vs $34 separately (save $5)." },
   },
   {
     id: "cia-bundle-complete",
