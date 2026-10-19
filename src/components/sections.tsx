@@ -40,7 +40,7 @@ export function HowItWorks({ dark = false }: { dark?: boolean }) {
 }
 
 /**
- * "Curated Guide Bundles": approved bundles only (see bundleOffers). Each card lists
+ * "Save with Bundles": approved bundles only (see bundleOffers). Each card lists
  * what's inside and the bundle price. A saving (with the guides' combined price) is shown
  * only when the bundle really costs less; otherwise it says it's the same price.
  * Callers render nothing when there are no offers.
@@ -98,14 +98,14 @@ export function BundleGrid({ offers }: { offers: BundleOffer[] }) {
   );
 }
 
-/** The "Curated Guide Bundles" section, or nothing when no bundle is approved. */
+/** The "Save with Bundles" section, or nothing when no bundle is approved. */
 export function SaveWithBundles({ ids, headingId = "bundles-title", className = "section-tight bg-paper-deep/60" }: { ids?: readonly string[]; headingId?: string; className?: string }) {
   const offers = bundleOffers(ids);
   if (!offers.length) return null;
   return (
     <section className={className} aria-labelledby={headingId}>
       <div className="wrap">
-        <SectionHead id={headingId} eyebrow="Bundles" title="Curated" accent="Guide Bundles" lede="Guides that work better together, in one bag and one download library." />
+        <SectionHead id={headingId} eyebrow="Bundles" title="Save with" accent="Bundles" lede="Two guides, a better price. Pick your perfect pair or get the complete Austin collection." />
         <div className="mt-10">
           <BundleGrid offers={offers} />
         </div>
