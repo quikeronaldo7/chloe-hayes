@@ -8,7 +8,7 @@ import { checkoutDecision } from "@/lib/server/launch";
 import { createDemoSessionId, productIdMetadata } from "@/lib/server/orders";
 import { siteOrigin } from "@/lib/server/origin";
 import { activePriceBook } from "@/lib/server/pricing";
-import { demoCheckoutEnabled, getStripe, liveKeyBlocked, stripeConfigured } from "@/lib/server/stripe";
+import { demoCheckoutEnabled, getStripe, isLiveStripeKey, liveKeyBlocked, stripeConfigured } from "@/lib/server/stripe";
 
 /**
  * POST /api/checkout  { items: string[] }   the bag, or Buy now with one id
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
     const authorized = requiredFlags.every((key) => process.env[key] === "true");
     const configured = requiredKeys.every((key) => Boolean(process.env[key])) &&
       process.env.STORAGE_DRIVER === "s3" &&
-      (process.env.STRIPE_SECRET_KEY ?? "").startsWith("sk_live_");
+      isLiveStripeKey(process.env.STRIPE_SECRET_KEY);
     if (!authorized || !configured) {
       console.error("[checkout] production checkout blocked: final owner launch approvals or live provider configuration incomplete");
       return Response.json({ error: "Checkout is not available yet. Please try again later." }, { status: 503 });
@@ -83,7 +83,7 @@ export async function POST(req: Request) {
     return Response.json({ error: "Checkout is temporarily unavailable. Please try again later." }, { status: 503 });
   }
 
-  const live = (process.env.STRIPE_SECRET_KEY ?? "").startsWith("sk_live_");
+  const live = isLiveStripeKey(process.env.STRIPE_SECRET_KEY);
   const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = ids.map((id) => {
     const s = getSellable(id)!;
     if (book.mode === "approved" && s.stripe?.priceId) return { price: s.stripe.priceId, quantity: 1 };
