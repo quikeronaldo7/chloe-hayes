@@ -72,74 +72,99 @@ const MASTER_BRIEF: FinalDelivery["approved"] = {
   instruction: "Master implementation prompt, 18 Oct 2026: the seven products already exist; use the actual final PDF files linked in Part 5.",
 };
 
-const TOO_LARGE = "Over the Drive connector's 10 MB transfer limit: bytes not yet retrieved and hashed (docs/DELIVERY.md).";
-
-const pending = (label: string, fileId: string, name: string, modifiedTime: string, bytes: number, blocker = TOO_LARGE): PendingDelivery => ({
-  status: "pending",
-  expected: [{ label, format: "PDF", approvedSource: { fileId, name, modifiedTime, bytes } }],
-  blocker,
-});
-
+/** Private R2 objects verified in Cloudflare on 19 Oct 2026; ZIP sources hashed locally. */
 export const delivery: Record<string, Delivery> = {
-  "cia-new-to-austin": pending(
-    "New to Austin: The Ultimate Guide (interactive PDF)",
-    "1ubUyPipbj7mEWqmDxNarJVaYAzMuB1l8",
-    "Chloe-New-to-Austin-Ultimate-Guide_FINAL.pdf",
-    "2026-10-18T05:56:04.263Z",
-    15058167,
-  ),
-  "cia-dinner-spots": pending(
-    "Chloe's 10 Best Dinner Spots in Austin (interactive PDF)",
-    "18zwRX8Ok1pqkQAUHv7j3wldF1JcxeQpq",
-    "Chloes_10_Best_Dinner_Spots_in_Austin_FINAL_INTERACTIVE.pdf",
-    "2026-10-15T03:38:22.093Z",
-    11441931,
-  ),
-  "cia-being-single": pending(
-    "Chloe's Guide to Being Single in Austin (PDF)",
-    "1_rLeVFi1Xpyb4nsOKGNuaHhf8QngaIx8",
-    "Chloes_Guide_to_Being_Single_in_Austin_FINAL_v3.pdf",
-    "2026-10-15T04:04:54.988Z",
-    9534247,
-    "9.5 MB: under the connector's stated limit, but the transfer failed twice (response too large). Retrieve directly (docs/DELIVERY.md).",
-  ),
-  "cia-date-ideas": pending(
-    "Chloe's 12 Best Date Ideas in Austin (PDF)",
-    "1LZeLIhChmKPSLiCLBLSWW57q9Qw43sLe",
-    "Chloe-12-Best-Date-Ideas-in-Austin_FINAL.pdf",
-    "2026-10-16T09:43:53.475Z",
-    12804695,
-  ),
-  "cia-natural-gems": pending(
-    "Chloe's 5 Natural Gems Around Austin (PDF)",
-    "1m3A-rpDnDaeyY6L51q_IqA_5QjoRm4k-",
-    "Chloes_5_Natural_Gems_Around_Austin_FINAL_LINKED.pdf",
-    "2026-10-15T03:34:20.656Z",
-    24337775,
-  ),
+  "cia-new-to-austin": {
+    status: "final",
+    approved: MASTER_BRIEF,
+    files: [{
+      label: "New to Austin: The Ultimate Guide (interactive PDF)",
+      format: "PDF",
+      key: "guides/new-to-austin.81de3a09c483.pdf",
+      filename: "New to Austin: The Ultimate Guide.pdf",
+      sha256: "81de3a09c483ce892ac322d5cd0f2c85cdcaedc2e7af2477ac3a1506e98dc33f",
+      bytes: 15058167,
+      source: { fileId: "1ubUyPipbj7mEWqmDxNarJVaYAzMuB1l8", modifiedTime: "2026-10-18T05:56:04.263Z", name: "Chloe-New-to-Austin-Ultimate-Guide_FINAL.pdf" },
+    }],
+  },
+  "cia-dinner-spots": {
+    status: "final",
+    approved: MASTER_BRIEF,
+    files: [{
+      label: "Chloe's 10 Best Dinner Spots in Austin (interactive PDF)",
+      format: "PDF",
+      key: "guides/dinner-spots.f963e62196a4.pdf",
+      filename: "Chloe's 10 Best Dinner Spots in Austin.pdf",
+      sha256: "f963e62196a4bd258d730274b89ac4d191c02a324a48677b01eafc2967772e01",
+      bytes: 11441931,
+      source: { fileId: "18zwRX8Ok1pqkQAUHv7j3wldF1JcxeQpq", modifiedTime: "2026-10-15T03:38:22.093Z", name: "Chloes_10_Best_Dinner_Spots_in_Austin_FINAL_INTERACTIVE.pdf" },
+    }],
+  },
+  "cia-being-single": {
+    status: "final",
+    approved: MASTER_BRIEF,
+    files: [{
+      label: "Chloe's Guide to Being Single in Austin (PDF)",
+      format: "PDF",
+      key: "guides/being-single.3db379c16098.pdf",
+      filename: "Chloe's Guide to Being Single in Austin.pdf",
+      sha256: "3db379c16098a33d424fbbb1fcd2ef709945d12b8401e319d19b3d899e72c253",
+      bytes: 9534247,
+      source: { fileId: "1_rLeVFi1Xpyb4nsOKGNuaHhf8QngaIx8", modifiedTime: "2026-10-15T04:04:54.988Z", name: "Chloes_Guide_to_Being_Single_in_Austin_FINAL_v3.pdf" },
+    }],
+  },
+  "cia-date-ideas": {
+    status: "final",
+    approved: MASTER_BRIEF,
+    files: [{
+      label: "Chloe's 12 Best Date Ideas in Austin (PDF)",
+      format: "PDF",
+      key: "guides/date-ideas.36134bfe2898.pdf",
+      filename: "Chloe's 12 Best Date Ideas in Austin.pdf",
+      sha256: "36134bfe2898a26ac40e1706eb10be9e555aea1b09d029c745162762c269e82a",
+      bytes: 12804695,
+      source: { fileId: "1LZeLIhChmKPSLiCLBLSWW57q9Qw43sLe", modifiedTime: "2026-10-16T09:43:53.475Z", name: "Chloe-12-Best-Date-Ideas-in-Austin_FINAL.pdf" },
+    }],
+  },
+  "cia-natural-gems": {
+    status: "final",
+    approved: MASTER_BRIEF,
+    files: [{
+      label: "Chloe's 5 Natural Gems Around Austin (PDF)",
+      format: "PDF",
+      key: "guides/natural-gems.0a15e03c1d55.pdf",
+      filename: "Chloe's 5 Natural Gems Around Austin.pdf",
+      sha256: "0a15e03c1d550e50b922aeb030a54255758dfce312f4fc0da0c6374a528979c3",
+      bytes: 24337775,
+      source: { fileId: "1m3A-rpDnDaeyY6L51q_IqA_5QjoRm4k-", modifiedTime: "2026-10-15T03:34:20.656Z", name: "Chloes_5_Natural_Gems_Around_Austin_FINAL_LINKED.pdf" },
+    }],
+  },
   "cia-hill-country": {
     status: "final",
     approved: MASTER_BRIEF,
-    files: [
-      {
-        label: "Chloe's Perfect Hill Country Escapes (PDF)",
-        format: "PDF",
-        key: "guides/hill-country-escapes.0ed03d3676bc.pdf",
-        filename: "Chloe's Perfect Hill Country Escapes.pdf",
-        sha256: "0ed03d3676bc1c920eeaa4bbd0c5a20983481063471759b980a3653ee6d92eb3",
-        bytes: 3178454,
-        source: { fileId: "1KSd7g3SeFlOM-tzMqbpo8svVNvV5lw0A", modifiedTime: "2026-10-15T03:32:43.930Z", name: "Chloes_Perfect_Hill_Country_Escapes_FINAL.pdf" },
-      },
-    ],
+    files: [{
+      label: "Chloe's Perfect Hill Country Escapes (PDF)",
+      format: "PDF",
+      key: "guides/hill-country-escapes.0ed03d3676bc.pdf",
+      filename: "Chloe's Perfect Hill Country Escapes.pdf",
+      sha256: "0ed03d3676bc1c920eeaa4bbd0c5a20983481063471759b980a3653ee6d92eb3",
+      bytes: 3178454,
+      source: { fileId: "1KSd7g3SeFlOM-tzMqbpo8svVNvV5lw0A", modifiedTime: "2026-10-15T03:32:43.930Z", name: "Chloes_Perfect_Hill_Country_Escapes_FINAL.pdf" },
+    }],
   },
-  "cia-exclusive": pending(
-    "Chloe's 10 Most Exclusive Experiences in Austin (interactive PDF)",
-    "1g5bPgQR1vlzzlWFwFK4zDuZ9mpLssJPq",
-    "Chloe-10-Most-Exclusive-Experiences-in-Austin_FINAL.pdf",
-    "2026-10-17T08:23:59.404Z",
-    10513766,
-    "Over the 10 MB transfer limit. Also: a second FINAL.pdf with a different size (10,361,297 bytes, id 1rUu3uX9W8KHYE-fUq3W6jBMnYzZqAFFZ) sits in '04 — Layout & Final PDF'. The brief links this one; confirm which is master.",
-  ),
+  "cia-exclusive": {
+    status: "final",
+    approved: MASTER_BRIEF,
+    files: [{
+      label: "Chloe's 10 Most Exclusive Experiences in Austin (interactive PDF)",
+      format: "PDF",
+      key: "guides/exclusive.6084d508280d.pdf",
+      filename: "Chloe's 10 Most Exclusive Experiences in Austin.pdf",
+      sha256: "6084d508280d7f34e76c67a3418ccc6a1f9ec2ac3ca0765e663a1a01b94a0953",
+      bytes: 10513766,
+      source: { fileId: "1g5bPgQR1vlzzlWFwFK4zDuZ9mpLssJPq", modifiedTime: "2026-10-17T08:23:59.404Z", name: "Chloe-10-Most-Exclusive-Experiences-in-Austin_FINAL.pdf" },
+    }],
+  }
 };
 
 export function deliveryFor(id: string): Delivery | undefined {
