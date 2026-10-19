@@ -44,6 +44,7 @@ export const collections: Collection[] = [
 export const bundles: Bundle[] = [
   {
     id: "cia-bundle-first-month",
+    stripe: { liveProductId: "prod_VT89adrp187Ko1", priceId: "price_1USBtOIhfSP7AoZwUePkyX4I" },
     slug: "first-month-in-austin",
     title: "First Month in Austin",
     subtitle: "New to Austin + Guide to Being Single",
@@ -54,6 +55,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: "cia-bundle-date-night",
+    stripe: { liveProductId: "prod_VT89n2RDaboJtr", priceId: "price_1USBtQIhfSP7AoZwUzWQLyew" },
     slug: "austin-date-night",
     title: "Austin Date Night",
     subtitle: "12 Best Date Ideas + 10 Best Dinner Spots",
@@ -64,6 +66,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: "cia-bundle-weekend-explorer",
+    stripe: { liveProductId: "prod_VT89QbV2aMfCYB", priceId: "price_1USBtSIhfSP7AoZwbnFWHMwq" },
     slug: "weekend-explorer",
     title: "Weekend Explorer",
     subtitle: "5 Natural Gems + Hill Country Escapes",
@@ -74,6 +77,7 @@ export const bundles: Bundle[] = [
   },
   {
     id: "cia-bundle-complete",
+    stripe: { liveProductId: "prod_VT892waMC87jj6", priceId: "price_1USBtUIhfSP7AoZwTduqcMt1" },
     slug: "complete-austin-collection",
     title: "Complete Austin Collection",
     subtitle: "All seven guides",
