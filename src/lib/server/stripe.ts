@@ -11,8 +11,13 @@ export function stripeConfigured(): boolean {
  * Live payments stay off until explicitly enabled. A live secret key on its own
  * is not enough: LIVE_PAYMENTS_ENABLED=true must also be set, deliberately, at launch.
  */
+/** Stripe accepts both full-access (sk_live_) and restricted (rk_live_) live API keys. */
+export function isLiveStripeKey(key: string | undefined): boolean {
+  return Boolean(key?.startsWith("sk_live_") || key?.startsWith("rk_live_"));
+}
+
 export function liveKeyBlocked(env: Record<string, string | undefined> = process.env): boolean {
-  return (env.STRIPE_SECRET_KEY ?? "").startsWith("sk_live_") && env.LIVE_PAYMENTS_ENABLED !== "true";
+  return isLiveStripeKey(env.STRIPE_SECRET_KEY) && env.LIVE_PAYMENTS_ENABLED !== "true";
 }
 
 export function getStripe(): Stripe {
