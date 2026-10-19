@@ -40,8 +40,10 @@ const PRICES_APPROVED: Approval = { by: "Owner", on: "2026-10-18", basis: "Store
  * The seven customer PDFs are FINAL per the 18 Oct 2026 master brief ("These
  * products already exist… use the actual final PDF files"). Website copy was
  * written from the final PDFs and approved through the owner's final site
- * review and explicit 19 Oct launch request. Imagery still has commercial-use
- * rights questions (docs/IMAGERY.md).
+ * review and explicit 19 Oct launch request. The owner answered yes when
+ * asked whether the existing guide and venue photographs had commercial-use
+ * permission and requested proceeding with launch on 19 Oct. This is an owner
+ * attestation; it is NOT independent evidence of any third-party licence.
  */
 const finalPdf = (notes: string[] = []): Readiness => ({
   kind: "product",
@@ -49,7 +51,7 @@ const finalPdf = (notes: string[] = []): Readiness => ({
   design: "final",
   priceApproval: PRICES_APPROVED,
   salesCopy: "approved",
-  imagery: "pending",
+  imagery: "final",
   notes,
 });
 
