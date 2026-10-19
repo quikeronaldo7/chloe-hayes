@@ -19,6 +19,7 @@ import { isLaunchReady } from "../src/lib/server/launch";
 import { buildLibrary, deliverablesFor } from "../src/lib/server/library";
 import { orderFromSession, productIdMetadata, productIdsFromSession, type Order } from "../src/lib/server/orders";
 import { activePriceBook, testCommerceEnabled } from "../src/lib/server/pricing";
+import { isLiveStripeKey, liveKeyBlocked } from "../src/lib/server/stripe";
 import { fetchPrivateFile } from "../src/lib/server/storage";
 import { placeholdersAllowedFor } from "../src/lib/server/test-fulfilment";
 import { createDownloadToken, createLibraryToken, readDownloadToken, readLibraryToken } from "../src/lib/server/tokens";
@@ -131,6 +132,11 @@ async function main() {
   const env = (o: Record<string, string>) => o;
   check("test commerce needs all three conditions", testCommerceEnabled(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "preview" })));
   check("…not with a live key", !testCommerceEnabled(env({ STRIPE_SECRET_KEY: "sk_live_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "preview" })));
+  check("restricted live key is recognized", isLiveStripeKey("rk_live_x") && isLiveStripeKey("sk_live_x"));
+  check("restricted key never unlocks Preview test commerce", !testCommerceEnabled(env({ STRIPE_SECRET_KEY: "rk_live_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "preview" })));
+  check("restricted live key blocked until explicitly enabled", liveKeyBlocked(env({ STRIPE_SECRET_KEY: "rk_live_x", LIVE_PAYMENTS_ENABLED: "false" })));
+  check("restricted live key still requires explicit live enable", !liveKeyBlocked(env({ STRIPE_SECRET_KEY: "rk_live_x", LIVE_PAYMENTS_ENABLED: "true" })));
+
   check("…not in Production", !testCommerceEnabled(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "production" })));
   check("…not without the flag", !testCommerceEnabled(env({ STRIPE_SECRET_KEY: "sk_test_x", VERCEL_ENV: "preview" })));
   check("Production always uses the approved book", activePriceBook(env({ STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "production" })).mode === "approved");
@@ -288,6 +294,10 @@ async function main() {
   check("Production never sells at test prices (browsing-only too)", res.status === 403 || res.status === 409, String(res.status));
   res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "sk_live_x", CHLOE_TEST_COMMERCE: "true" });
   check("live key never unlocks test prices", res.status === 409, String(res.status));
+  res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "rk_live_x", CHLOE_TEST_COMMERCE: "true" });
+  check("restricted live key never unlocks test prices", res.status === 409, String(res.status));
+  res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "rk_live_x", STOREFRONT_MODE: "open", VERCEL_ENV: "production", LIVE_PAYMENTS_ENABLED: "false" });
+  check("restricted key cannot enable production checkout alone", res.status === 503, String(res.status));
   res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", NEXT_PUBLIC_SITE_URL: "" , VERCEL_ENV: "preview", VERCEL_URL: "" });
   check("test mode without a safe HTTPS origin → refused before Stripe", res.status === 503, String(res.status));
 
