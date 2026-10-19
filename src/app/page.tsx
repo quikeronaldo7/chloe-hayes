@@ -222,15 +222,16 @@ export default function Home() {
             </h2>
             <div className="mt-5 max-w-xl space-y-4 text-[1.06rem] text-ink-soft">
               <p>
-                I&rsquo;m 27, Canadian, and new to Austin. I love discovering a city through its people, neighborhoods, food, and all the little experiences that make it feel like home.
+                I came to Austin for a fresh adventure and fell for the fun of exploring it. A new restaurant, a dreamy sunset spot, a little weekend
+                escape&mdash;I&rsquo;m always looking for the next place worth getting excited about.
               </p>
               <p>
-                These guides are what happens when that curiosity gets organized: dinners worth planning a night around, dates that beat dinner-and-a-movie,
-                the clubs and classes that are actually running, swimming holes worth the drive, Hill Country weekends and the rooms that are hard to get
-                into. Researched, checked, dated and linked to the official source, so your plans hold up.
+                That curiosity turned into Chloe in Austin, where I share favorite finds and thoughtfully researched plans: dinner spots,
+                creative dates, hidden gems, Hill Country adventures, and those special places worth planning ahead for. I check the details
+                and link the official sources so you can spend less time searching and more time making memories.
               </p>
               <p className="font-serif text-xl italic text-forest" style={{ fontVariationSettings: '"SOFT" 100, "WONK" 1' }}>
-                Tell me what I&rsquo;m missing in Austin.
+                Got a favorite Austin spot? I&rsquo;m always up for a new adventure.
               </p>
             </div>
             <Link href="/about" className="link-arrow mt-7">
