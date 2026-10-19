@@ -35,9 +35,9 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Chloe in Austin",
     locale: "en_US",
-    images: [{ url: "/images/chloe/chloe-bbq-table.jpg", width: 1100, height: 1375, alt: "Chloe at a table loaded with barbecue" }],
+    images: [{ url: "/images/chloe/chloe-golden-hour-austin-motel.jpg", width: 1448, height: 1086, type: "image/jpeg", alt: "Chloe in a yellow sundress beside the Austin Motel sign at golden hour" }],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: { card: "summary_large_image", images: ["/images/chloe/chloe-golden-hour-austin-motel.jpg"] },
   alternates: { canonical: "/" },
   // Previews are private; only Production may ever be indexed (and only once launched).
   robots: process.env.VERCEL_ENV === "production" ? undefined : { index: false, follow: false },
