@@ -1,79 +1,45 @@
-# Chloe in Austin: launch checklist
+# Chloe in Austin — launch readiness
 
-Status as of **18 October 2026**. Five separate categories, never merged. "Built and tested" means it was run and passed here (see [QA.md](QA.md)), not just configured.
+**Updated 19 October 2026.** Deployment and payment states must be kept separate: a Vercel production build can be READY while public access and paid checkout remain intentionally closed. Kate's website, webhook, and product records are not part of this launch.
 
-## 1. Fully built and tested
+## Completed and independently verified
 
-| Item | Evidence |
-|---|---|
-| Independent Next.js project (own history, own package name, no Kate copy or assets) | `grep -ri kate src` returns nothing customer-facing; separate git repo |
-| Homepage (all 11 sections), Shop All, 4 collections, 7 guide pages, About, Help, legal placeholders, 404/error | Production build: 30 routes. Screenshots at 1440 / 768 / 375 in `docs/screenshots/` |
-| Catalogue of all 7 guides with facts from the FINAL PDFs | `npm run test:chloe` checks titles and page counts against the PDFs |
-| Collections + "Find your Austin" (≤ 3 clicks to any guide) | Every door links straight to a guide or collection |
-| Recommendations (Dinner ↔ Dates, Gems ↔ Hill Country, New to Austin → Being Single, …) with reasons | Tested |
-| Bundles: all four approved and shown as "Curated Guide Bundles" (First Month $58, Date Night $38, Weekend Explorer $34: same as separately, no saving claimed; Complete Collection $99, saves $55); bundles absorb guides they contain | Tested (prices, saving maths, bag subtotals, unapproved bundles never offered) |
-| Bag: add, remove, persist (localStorage, cross-tab), buy now, multi-item, empty state, mobile bottom sheet | Browser flow test |
-| Server-side pricing; browser prices ignored; Kate ids / unknown ids / tampered lists rejected | Checkout API tests |
-| Approved prices (18 Oct): 7 guides + Complete Austin Collection ($99, saves $55 on $154); same figures on every page, bag and checkout; test mode charges them in Stripe test only | Tests |
-| Stripe Checkout parameters (line items with Chloe's test Products, metadata, branding, promo codes, URLs) | Accepted by Stripe (two QA sessions created in **test mode**, unpaid, auto-expire in 24h) |
-| Chloe-branded hosted checkout on the shared account (`branding_settings`: "Chloe in Austin", terracotta/cream) | Confirmed in Stripe's response |
-| Webhook fulfilment logic: emails once (idempotency key), records it, retries on failure, ignores Kate's sessions, never emails refunded/unpaid | Tests with mocked Stripe/Resend |
-| Purchase email template, Chloe-branded, test-order label, no claimed support inbox | **Sent for real** through Resend from `hello@chloeinaustin.com` to Resend's test sink: status *delivered* |
-| Private library: all purchased guides together, fresh signed links, refund → access revoked | Demo-flow test; refund path tested in unit tests |
-| Secure download of a locked file (size + SHA-256 verified) | Demo flow downloaded Hill Country; hash = lock `0ed03d36…` |
-| Expired / forged tokens, foreign-site tokens | Tests + browser |
-| Resend-my-downloads endpoint (privacy-neutral answer) | Built; unit-level checks |
-| SEO: metadata, canonicals, sitemap, robots, JSON-LD (no fake offers) | Build output; previews are noindex |
-| Accessibility | axe-core WCAG 2 A/AA + best practice: 0 violations on 9 pages × 2 widths |
-| Lint, TypeScript, production build | All pass |
+- All seven approved PDFs retrieved from master Drive links and SHA-256 locked in `src/catalogue/delivery.server.ts`.
+- All seven uploaded to the **private** Cloudflare R2 bucket `chloe-hayes-products` under `guides/<slug>.<sha-prefix>.pdf`. Cloudflare object names and sizes agree with the approved bundle. R2 public managed domain is disabled, and there are no custom public R2 domains.
+- R2 **Object Read only** credentials installed in Vercel Preview **and Production**. PDF download verifies remote object size and SHA-256 before returning a five-minute presigned URL.
+- All seven product guide prices and four discounted bundle prices recorded from owner approval (18 October): First Month $49; Date Night $29; Weekend Explorer $29; Complete Collection $99. Individual guide prices remain unchanged.
+- Eleven **live** Stripe Products with fixed default USD Prices created in QR DIGITAL (19 October) with `storefront=chloe-in-austin` and `product_id` metadata. The code references their exact live Product and Price IDs. This does **not** activate live payments.
+- Dedicated **live** Stripe webhook at `https://chloeinaustin.com/api/webhooks/stripe`, events `checkout.session.completed` and `checkout.session.async_payment_succeeded`, with signing secret installed in Vercel **Production**. Kate's live webhook untouched.
+- Dedicated **test** Stripe webhook on the protected Preview alias, with Vercel automation bypass, and test secret installed in **Preview**.
+- The deployed **Preview** successfully processed a Stripe test-card purchase. Its private library showed a real locked PDF (no placeholder) and returned a presigned Cloudflare R2 URL for the correct object.
+- Resend verified `chloeinaustin.com` for **outbound** email. Domain-restricted sending-only key installed in Vercel; confirmed a Chloe test purchase email was **delivered** to the test buyer on 19 October.
+- Updated code deployed to both Vercel Preview and Production. Production domain `chloeinaustin.com` and www are assigned and verified.
+- See `docs/DELIVERY.md` for locked R2 object paths and credentials.
 
-## 2. Configured but awaiting verification
+## Not yet live — intentional safeguards
 
-| Item | What's left |
-|---|---|
-| **Resend domain `chloeinaustin.com`** | Verified, sending enabled (checked 18 Oct). Needs a **sending API key** in Vercel (`RESEND_API_KEY`) + `EMAIL_FROM`. Receiving is disabled: replies to hello@ go nowhere today |
-| **Stripe test Products** (7, metadata `storefront=chloe-in-austin`) | Created in test mode; ids in `products.ts`. A real end-to-end Stripe test payment needs the deployed preview (webhook URL) |
-| **R2 bucket `chloe-hayes-products`** (private, APAC) | Exists. Needs a read-only API token scoped to it, then upload of the locked files (`npm run storage:plan`) and `npm run verify:storage` |
-| **Cloudflare DNS + Vercel domain** | Per the brief, A/CNAME records and the Vercel domain exist. Not re-verified here: `api.vercel.com` is blocked from this session |
-| **Delivery files** | Hill Country locked by SHA-256. The other six are identified (Drive id, size, date) but over the Drive connector's 10 MB limit, so not yet hashed/uploaded (docs/DELIVERY.md) |
+- Vercel **Production**: `STOREFRONT_MODE=browse`; `LIVE_PAYMENTS_ENABLED=false`; no live `STRIPE_SECRET_KEY` installed yet. Site currently shows a **Coming Soon** purchase state. **Do not set `STOREFRONT_MODE=open` before the remaining approvals and checks pass**.
+- Vercel Authentication still protects all deployments: `ssoProtection.deploymentType=all`. Public visitors do not yet have unrestricted access.
+- Preview uses its separate `sk_test_` Stripe key and `CHLOE_TEST_COMMERCE=true`; never put this test key in Production.
+- `SELLER_VERIFIED=false`, `CHLOE_EMAIL_VERIFIED=false`, and `CHLOE_LIVE_ACTIVATION_APPROVED=false`: intentionally not marked true without real owner approvals.
 
-## 3. Awaiting owner approval
+## Manual account tasks before opening public sales
 
-1. ~~Prices~~: approved 18 Oct 2026 and recorded (`products.ts`, `readiness.ts`).
-2. ~~Bundles~~: all four approved 18 Oct 2026 and recorded.
-3. **Website copy** for all pages (written from the PDFs on 18 Oct; marked *needs review*).
-4. **Image rights** (docs/IMAGERY.md): AI-generated brand imagery of Chloe in identifiable places (BBQ hall, South Congress/Austin Motel sign), the Greetings-from-Austin mural on the New to Austin cover, restaurant photos inside Dinner Spots, generated event scenes in Date Ideas.
-5. **Socials**: the footer icons link Facebook (owner-verified page) and Instagram `https://www.instagram.com/chloe.eats.atx/` (printed in three guides; the Brand Bible lists the live handle as unlocked, so confirm the account). Footer keeps small Terms / Refunds / Privacy links to `/legal/*`.
-6. **AI-persona disclosure**: whether/how the site discloses that Chloe and some imagery are AI-generated (the Dinner Spots PDF already notes "approved AI-assisted refinements").
-7. **Legal**: seller entity and address, refund terms, licence wording, update policy, data retention, governing law, tax position (Stripe Tax?). The Help page (Terms of Sale, Privacy, Refund & Digital Product Policy; `src/lib/policies.ts`) states what already applies and says the full policy isn't published yet. `/legal/terms|refunds|privacy` stay live for payment providers.
-8. **Support inbox**: a monitored address (set `NEXT_PUBLIC_SUPPORT_EMAIL`), or enable Resend receiving.
-9. **Which Exclusive Experiences PDF is master**: two FINAL files with different sizes exist (10,513,766 vs 10,361,297 bytes).
-10. **New to Austin open items** from its production summary (Zilker rent figure, mural cover, image provenance) and the in-PDF recommendation links (storefront URLs can now be supplied: `/guides/<slug>`).
-11. **Live payments** (`LIVE_PAYMENTS_ENABLED=true` + live key + live webhook) and **public launch** (`STOREFRONT_MODE=open`, remove Vercel protection).
+1. **Live Stripe secret**: owner must copy `sk_live_…` from QR DIGITAL's live Stripe API-key dashboard directly into Vercel Environment Variables as **Sensitive**, key `STRIPE_SECRET_KEY`, **Production only**. Never paste it into chat or GitHub. The live webhook signing secret is already in Vercel.
+2. **Legal seller and policies**: owner confirms legal seller (QR DIGITAL LLC or alternative), official address/jurisdiction, tax handling, digital guide personal-use licence, privacy/contact details and actual digital-product refund rules. `src/lib/policies.ts` is *not* an approved final legal agreement; do not present placeholders as finalized terms.
+3. **Support receiving**: choose a monitored customer-service email destination and enable forwarding/receiving of `hello@chloeinaustin.com`, or provide a separate working support inbox. Current Resend verification is *outgoing only*. Confirm support receipt and reply.
+4. **Rights and truthful identity**: owner must approve commercial rights for all website and in-PDF restaurant/venue/Google Maps/mural photos, plus AI-generated Chloe depiction in named settings, and decide the transparent AI-persona disclosure. See `docs/IMAGERY.md` and the seven PDF masters.
+5. **Editorial/merchant approvals**: website sales copy still marked `needs-review`; imagery `pending` in `src/catalogue/readiness.ts`. Resolve the New-to-Austin image/rent provenance checks and confirm whether the chosen Exclusive Experiences master (10,513,766 bytes) is the intended one. Do not change readiness flags by guessing.
 
-## 4. Blocked by unavailable resources (this session)
+## Final end-to-end QA
 
-| Blocker | Exact error | Workaround / next step |
-|---|---|---|
-| ~~GitHub repo~~ | Resolved 18 Oct: owner created `quikeronaldo7/chloe-hayes`; code pushed to `main` (+ `preview`) | – |
-| Vercel (inspect project, set env vars, deploy preview) | `api.vercel.com` → proxy `403 CONNECT tunnel failed`; no Vercel tool | Owner connects the repo in the Vercel dashboard: exact steps in [DEPLOY.md](DEPLOY.md) |
-| Six PDFs > 10 MB | Drive connector: "File too large for download, over limit of 10 MB" (Being Single at 9.5 MB crashed the connector) | Download from Drive manually or via rclone, then follow docs/DELIVERY.md |
-| Stripe webhook endpoint for Chloe | Needs the deployed preview URL; the signing secret must go into Vercel | Create in **test mode**: `https://<preview>/api/webhooks/stripe`, events `checkout.session.completed`, `checkout.session.async_payment_succeeded` |
+- Repeat a test purchase for **one discounted bundle**, verify the emailed library contains the exact guides and both real PDFs download.
+- In Stripe test mode, refund a test transaction and verify the previously valid library/download links refuse refunded access.
+- With production payment credentials and the complete approved policies/rights/operational checks, deploy with `LIVE_PAYMENTS_ENABLED=true` and `STOREFRONT_MODE=open`. Perform **one controlled real-money purchase** and receipt/email/download test, then optionally refund it.
+- Remove Vercel Authentication from the **Production** custom domain (keep Preview protected), only after the owner's final public-launch authorization and successful live-payment QA.
 
-## 5. Not implemented (deliberately)
+**Never make all deployments public just to unblock the Stripe test webhook.** Its protected Preview bypass is already configured.
 
-- **Newsletter/signup**: no list or privacy policy exists yet (brief: only once real).
-- **Journal articles**: the content model and `/journal` shell exist (noindex, not in nav); no fabricated articles.
-- **Reviews, ratings, sales counters, bestseller labels**: none, by rule.
-- **Ads/affiliate links**: not implemented; the Journal model has a `disclosure` field for later.
-- **Live-mode Stripe Products/Prices**: created at launch once prices are approved.
-- **Statement descriptor suffix** (e.g. "CHLOE AUSTIN" on card statements): optional, untested; can be added with `payment_intent_data.statement_descriptor_suffix` after a live test.
+## Future refreshes
 
-## Launch sequence (once approvals arrive)
-
-1. Repo + Vercel connected; preview env: `STRIPE_SECRET_KEY=sk_test_…`, `CHLOE_TEST_COMMERCE=true`, `DOWNLOAD_TOKEN_SECRET`, R2 read-only token, `RESEND_API_KEY`, `EMAIL_FROM`, `NEXT_PUBLIC_SITE_URL=<preview alias>`.
-2. Create the test webhook → `STRIPE_WEBHOOK_SECRET`. Buy with card 4242… on the preview: success page, email, library, download, then refund in Stripe and confirm the library closes.
-3. Lock and upload the six remaining PDFs (docs/DELIVERY.md); `npm run verify:storage`.
-4. Record approved prices/copy/imagery in `products.ts` + `readiness.ts`; create live Products/Prices; live webhook.
-5. Production env: live key, `LIVE_PAYMENTS_ENABLED=true`, `STOREFRONT_MODE=open`, `NEXT_PUBLIC_SITE_URL=https://chloeinaustin.com`. One controlled real purchase, then refund.
-6. Remove deployment protection only on the owner's go.
+Guides contain date-sensitive venue information (one-off October 2026 events, prices, reservations, swim access). Establish a content review cadence and upload revised PDFs under new hash-qualified object keys, without overwriting earlier customer files.

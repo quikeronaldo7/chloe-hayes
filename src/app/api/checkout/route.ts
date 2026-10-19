@@ -20,6 +20,23 @@ import { demoCheckoutEnabled, getStripe, liveKeyBlocked, stripeConfigured } from
 export async function POST(req: Request) {
   if (!storefrontOpen()) return Response.json({ error: SHOP_CLOSED.api, closed: true }, { status: 403 });
 
+  // Live checkout is fail-closed even if the browse-only UI is accidentally opened.
+  // The account owner must approve the legal seller, receiving support inbox and
+  // public launch explicitly; required provider integrations must actually be set.
+  // These guards never run on Preview, which uses isolated Stripe TEST checkout.
+  if (process.env.VERCEL_ENV === "production") {
+    const requiredFlags = ["SELLER_VERIFIED", "CHLOE_EMAIL_VERIFIED", "CHLOE_LIVE_ACTIVATION_APPROVED", "LIVE_PAYMENTS_ENABLED"];
+    const requiredKeys = ["STRIPE_WEBHOOK_SECRET", "RESEND_API_KEY", "EMAIL_FROM", "S3_ENDPOINT", "S3_BUCKET", "S3_ACCESS_KEY_ID", "S3_SECRET_ACCESS_KEY"];
+    const authorized = requiredFlags.every((key) => process.env[key] === "true");
+    const configured = requiredKeys.every((key) => Boolean(process.env[key])) &&
+      process.env.STORAGE_DRIVER === "s3" &&
+      (process.env.STRIPE_SECRET_KEY ?? "").startsWith("sk_live_");
+    if (!authorized || !configured) {
+      console.error("[checkout] production checkout blocked: final owner launch approvals or live provider configuration incomplete");
+      return Response.json({ error: "Checkout is not available yet. Please try again later." }, { status: 503 });
+    }
+  }
+
   let body: { items?: unknown };
   try {
     body = await req.json();
