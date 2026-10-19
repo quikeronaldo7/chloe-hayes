@@ -111,6 +111,7 @@ async function main() {
     } else check(`${id}: pending entry names its FINAL Drive file + size`, d.expected.every((e) => e.approvedSource.fileId && e.approvedSource.bytes > 0) && d.blocker.length > 10);
   }
   const hill = delivery["cia-hill-country"];
+  check("All seven customer PDFs locked FINAL", Object.values(delivery).length === 7 && Object.values(delivery).every((d) => d.status === "final"));
   check("Hill Country locked FINAL", hill.status === "final");
   if (hill.status === "final" && existsSync("private-files")) {
     const r = await fetchPrivateFile(hill.files[0], { STORAGE_DRIVER: "local", PRIVATE_FILES_DIR: "private-files" });
@@ -211,8 +212,8 @@ async function main() {
   check("test order may receive placeholders", placeholdersAllowedFor(testOrder));
   check("live order never receives placeholders", !placeholdersAllowedFor(liveOrder));
   check("Hill Country delivers the locked file", deliverablesFor("cia-hill-country", liveOrder)[0].kind === "file");
-  check("pending guide → placeholder on a test order", deliverablesFor("cia-natural-gems", testOrder)[0].kind === "placeholder");
-  check("pending guide → unavailable on a live order (never a substitute)", deliverablesFor("cia-natural-gems", liveOrder)[0].kind === "unavailable");
+  check("Natural Gems delivers its real locked PDF on test orders", deliverablesFor("cia-natural-gems", testOrder)[0].kind === "file");
+  check("Natural Gems delivers its real locked PDF on live orders", deliverablesFor("cia-natural-gems", liveOrder)[0].kind === "file");
   const items = buildLibrary(testOrder);
   check("bundle library shows both guides together", items.map((i) => i.product.id).join() === "cia-natural-gems,cia-hill-country");
   check("library download links are signed tokens", items.every((i) => i.files.every((f) => !f.href || f.href.startsWith("/api/download/"))));
