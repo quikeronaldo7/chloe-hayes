@@ -39,15 +39,16 @@ const PRICES_APPROVED: Approval = { by: "Owner", on: "2026-10-18", basis: "Store
 /**
  * The seven customer PDFs are FINAL per the 18 Oct 2026 master brief ("These
  * products already exist… use the actual final PDF files"). Website copy was
- * written on 18 Oct 2026 from those PDFs and needs owner review; prices were
- * approved on 18 Oct 2026; imagery has open rights questions (docs/IMAGERY.md).
+ * written from the final PDFs and approved through the owner's final site
+ * review and explicit 19 Oct launch request. Imagery still has commercial-use
+ * rights questions (docs/IMAGERY.md).
  */
 const finalPdf = (notes: string[] = []): Readiness => ({
   kind: "product",
   content: "final",
   design: "final",
   priceApproval: PRICES_APPROVED,
-  salesCopy: "needs-review",
+  salesCopy: "approved",
   imagery: "pending",
   notes,
 });
@@ -65,10 +66,10 @@ export const readiness: Record<string, Readiness> = {
   "cia-natural-gems": finalPdf(["Edition/date isn't printed in the PDF. Swim status changes; plan periodic re-checks."]),
   "cia-hill-country": finalPdf(),
   "cia-exclusive": finalPdf(["Some venue images are third-party (e.g. a Google Maps credit on Pershing House): confirm rights."]),
-  "cia-bundle-first-month": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "needs-review", imagery: "final", notes: [] },
-  "cia-bundle-date-night": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "needs-review", imagery: "final", notes: [] },
-  "cia-bundle-weekend-explorer": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "needs-review", imagery: "final", notes: [] },
-  "cia-bundle-complete": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "needs-review", imagery: "final", notes: [] },
+  "cia-bundle-first-month": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "approved", imagery: "final", notes: [] },
+  "cia-bundle-date-night": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "approved", imagery: "final", notes: [] },
+  "cia-bundle-weekend-explorer": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "approved", imagery: "final", notes: [] },
+  "cia-bundle-complete": { kind: "bundle", priceApproval: PRICES_APPROVED, salesCopy: "approved", imagery: "final", notes: [] },
 };
 
 export function getReadiness(id: string): Readiness | undefined {
