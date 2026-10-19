@@ -135,6 +135,12 @@ export default function AboutPage() {
         </div>
       </section>
 
+      <div className="wrap py-7">
+        <p className="max-w-3xl text-sm text-ink-soft">
+          <strong>A little transparency:</strong> Chloe is a virtual creator and guide persona. Some imagery is AI-generated; these guides are curated from research and credited sources rather than claiming personal visits to every featured place.
+        </p>
+      </div>
+
       <section className="section-tight pb-24" aria-labelledby="ask-title">
         <div className="wrap">
           <p className="t-eyebrow text-terracotta">Ask Chloe</p>
@@ -175,7 +181,7 @@ export default function AboutPage() {
           "@context": "https://schema.org",
           "@type": "ProfilePage",
           url: absoluteUrl("/about"),
-          mainEntity: { "@type": "Person", name: "Chloe Hayes", jobTitle: "Culinary storyteller", homeLocation: { "@type": "Place", name: "Austin, Texas" }, image: absoluteUrl(ABOUT_PHOTO.src) },
+          mainEntity: { "@type": "Brand", name: "Chloe in Austin", description: "Curated Austin guides featuring Chloe Hayes, a virtual creator persona", image: absoluteUrl(ABOUT_PHOTO.src) },
         }}
       />
     </>
