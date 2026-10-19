@@ -105,7 +105,7 @@ export function SaveWithBundles({ ids, headingId = "bundles-title", className = 
   return (
     <section className={className} aria-labelledby={headingId}>
       <div className="wrap">
-        <SectionHead id={headingId} eyebrow="Bundles" title="Save with" accent="Bundles" lede="Two guides, a better price. Pick your perfect pair or get the complete Austin collection." />
+        <SectionHead id={headingId} eyebrow="Bundle & save" title="Save with" accent="Bundles!" lede="Two guides, one better deal. Pick your perfect pair or grab all seven and save $55." />
         <div className="mt-10">
           <BundleGrid offers={offers} />
         </div>
