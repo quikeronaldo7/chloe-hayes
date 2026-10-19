@@ -45,9 +45,9 @@ const APPROVED_PRICES: Record<string, number> = {
   "cia-exclusive": 2400,
 };
 const APPROVED_BUNDLES: Record<string, number> = {
-  "cia-bundle-first-month": 5800,
-  "cia-bundle-date-night": 3800,
-  "cia-bundle-weekend-explorer": 3400,
+  "cia-bundle-first-month": 4900,
+  "cia-bundle-date-night": 2900,
+  "cia-bundle-weekend-explorer": 2900,
   "cia-bundle-complete": 9900,
 };
 
@@ -137,14 +137,14 @@ async function main() {
   {
     const offers = Object.fromEntries(bundleOffers().map((o) => [o.bundle.id, o]));
     check("Curated Guide Bundles shows all four", Object.keys(offers).length === 4);
-    const same = (id: string, cents: number) => offers[id]?.price === cents && offers[id].separately === cents && offers[id].saving === 0;
-    check("First Month $58 = $39 + $19, no saving claimed", same("cia-bundle-first-month", 5800), JSON.stringify(offers["cia-bundle-first-month"] ?? null));
-    check("Date Night $38 = $19 + $19, no saving claimed", same("cia-bundle-date-night", 3800));
-    check("Weekend Explorer $34 = $19 + $15, no saving claimed", same("cia-bundle-weekend-explorer", 3400));
+    const discounted = (id: string, price: number, separately: number, saving: number) => offers[id]?.price === price && offers[id].separately === separately && offers[id].saving === saving;
+    check("First Month: $49 vs $58 separately, saves $9", discounted("cia-bundle-first-month", 4900, 5800, 900), JSON.stringify(offers["cia-bundle-first-month"] ?? null));
+    check("Date Night: $29 vs $38 separately, saves $9", discounted("cia-bundle-date-night", 2900, 3800, 900));
+    check("Weekend Explorer: $29 vs $34 separately, saves $5", discounted("cia-bundle-weekend-explorer", 2900, 3400, 500));
     const c = offers["cia-bundle-complete"];
     check("Complete Collection: $99 vs $154 separately, saves $55", c?.price === 9900 && c.separately === 15400 && c.saving === 5500, JSON.stringify(c ?? null));
-    check("bag: First Month bundle subtotal $58", summarise(["cia-bundle-first-month"], approved).subtotal === 5800);
-    check("bag: three convenience bundles together $130", summarise(["cia-bundle-first-month", "cia-bundle-date-night", "cia-bundle-weekend-explorer"], approved).subtotal === 13000);
+    check("bag: First Month bundle subtotal $49", summarise(["cia-bundle-first-month"], approved).subtotal === 4900);
+    check("bag: three discounted bundles together $107", summarise(["cia-bundle-first-month", "cia-bundle-date-night", "cia-bundle-weekend-explorer"], approved).subtotal === 10700);
   }
   {
     // Fixture book (QA only, never shown): checks the saving maths and that proposals stay hidden.
