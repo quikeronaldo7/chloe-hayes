@@ -1,6 +1,6 @@
 import type { Policy } from "@/lib/policies";
 
-/** One store policy: what already applies, then what the full text will add. */
+/** One published store policy, with no placeholder notices. */
 export function PolicyBody({ policy }: { policy: Policy }) {
   return (
     <div className="prose-chloe">
@@ -9,9 +9,7 @@ export function PolicyBody({ policy }: { policy: Policy }) {
           <li key={f}>{f}</li>
         ))}
       </ul>
-      <p className="mt-5 rounded-xl border border-dashed border-line-strong bg-card px-4 py-3 t-small text-ink-soft">
-        The full policy will be published here before the shop opens. It will also cover: {policy.covers.join("; ").toLowerCase()}.
-      </p>
+
     </div>
   );
 }
