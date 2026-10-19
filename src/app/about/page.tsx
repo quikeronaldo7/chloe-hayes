@@ -37,10 +37,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * About copy: the owner-approved text (18 Oct 2026) is used verbatim in the opening section.
- * The sections after it describe what the guides deliver, with no biography. Anything beyond it
- * (hometown, previous city, education, jobs, relationship status) stays UNLOCKED per
- * the Brand Bible v1.1 and must not be added here.
+ * About copy: updated at the owner's request for an Austin-explorer voice. Keep
+ * biography light, local discovery central, and make no unverifiable credentials,
+ * memberships or specific first-hand visit claims.
  */
 export default function AboutPage() {
   return (
@@ -52,29 +51,33 @@ export default function AboutPage() {
             Your Austin insider, <span className="accent-italic">with excellent taste.</span>
           </h1>
           <p className="t-lede mt-6 font-serif text-ink">
-            Hi, I&rsquo;m Chloe! <span role="img" aria-label="Canadian flag">🇨🇦</span>
+            Hi, I&rsquo;m Chloe!
           </p>
           <div className="mt-4 max-w-xl space-y-4 text-[1.08rem] text-ink-soft text-pretty">
-            <p>I came to Austin for a new adventure, and somewhere along the way, finding the city&rsquo;s best spots became my favorite obsession.</p>
             <p>
-              I&rsquo;m the friend who knows where to make dinner reservations, which new places are worth the hype, where to go on a first date, and
-              which little hidden gems deserve a spot on your weekend calendar.
+              I came to Austin looking for a new adventure, and somewhere along the way, I completely fell for the city. The food, the energy,
+              the little discoveries around every corner&mdash;there&rsquo;s always somewhere new to explore, and I love that.
             </p>
             <p>
-              I&rsquo;m equally happy at a neighborhood taco joint or a beautiful tasting menu. Give me good food, great company, and a place with a
-              little personality, and I&rsquo;m in.
+              Before long, exploring turned into my favorite obsession, and sharing the good finds felt just as fun. So I started Chloe in Austin:
+              my little corner of the internet for the places, plans, and adventures that make this city so special.
             </p>
             <p>
-              I&rsquo;ve made it my mission to discover the Austin experiences actually worth your time. The romantic spots, the fun nights out, the
-              secret corners, the beautiful escapes, and those special places you&rsquo;ll want to tell your friends about.
+              I&rsquo;m your girl for the dinner reservation worth making, the first-date spot that isn&rsquo;t awkward, the hidden gem your friends
+              haven&rsquo;t heard of yet, or the spontaneous weekend escape that somehow becomes your favorite memory.
             </p>
             <p>
-              And because a great recommendation is only useful when you can actually experience it, my guides go beyond pretty pictures. I bring you
-              the details: what to order, what to book, when to go, and how to make the most of it.
+              And my taste? A little bit of everything. I&rsquo;ll happily dress up for a beautiful tasting menu, then get equally excited about a
+              neighborhood taco spot, a sunny patio, or a swimming hole on a hot Texas afternoon. Good food, great people, and a little adventure?
+              Always yes.
+            </p>
+            <p>
+              I also believe the best plans are the ones you can actually pull off. My guides go beyond the pretty pictures with thoughtful
+              recommendations, booking details, what to order, when to go, and links to check before heading out.
             </p>
             <p className="text-ink">
-              <strong className="font-semibold">Consider me your Austin girl with the inside scoop.</strong> You bring the company. I&rsquo;ll bring the
-              plans. <span role="img" aria-label="cowboy hat face">🤠</span>
+              <strong className="font-semibold">Think of me as your Austin friend with the inside scoop.</strong> You bring the company.
+              I&rsquo;ll bring the plans&mdash;and probably a few ideas for our next adventure. <span role="img" aria-label="cowboy hat face">🤠</span>
             </p>
           </div>
           <p className="mt-6 max-w-xl font-serif text-xl italic text-forest" style={{ fontVariationSettings: '"SOFT" 100, "WONK" 1' }}>
