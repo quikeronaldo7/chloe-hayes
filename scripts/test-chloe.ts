@@ -164,7 +164,7 @@ async function main() {
     check("saving = guides separately − bundle price", o?.separately === 5800 && o.price === 4900 && o.saving === 900, JSON.stringify(o ?? null));
     check("bundle with an unpriced guide is not offered", bundleOffers(["cia-bundle-date-night"], fx).length === 0);
   }
-  check("nothing is launch-ready yet (copy review, imagery and delivery still open)", ![...products, ...bundles].some(isLaunchReady));
+  check("all eleven approved products and bundles are launch-ready", [...products, ...bundles].every(isLaunchReady));
 
   // -------------------------------------------------------------------------
   section("Bag rules");
@@ -281,7 +281,7 @@ async function main() {
     }
   };
   let res = await call({ items: ["cia-hill-country"] });
-  check("approved price but not launch-ready → 409, nothing sold", res.status === 409 && /can be bought yet|isn't available/.test(res.json.error ?? ""), `${res.status} ${res.json.error}`);
+  check("no provider configured → fail closed before checkout", res.status === 503, `${res.status} ${res.json.error}`);
   res = await call("not json");
   check("malformed body → 400", res.status === 400);
   res = await call({ items: [] });
@@ -289,13 +289,13 @@ async function main() {
   res = await call({ items: ["ka-london-guide"] });
   check("Kate's product id → 404", res.status === 404);
   res = await call({ items: ["cia-hill-country"], prices: { "cia-hill-country": 1 } });
-  check("browser-sent prices ignored (still refused)", res.status === 409);
+  check("browser-sent prices ignored (checkout not configured)", res.status === 503);
   res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", VERCEL_ENV: "production" });
   check("Production never sells at test prices (browsing-only too)", res.status === 403 || res.status === 409, String(res.status));
   res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "sk_live_x", CHLOE_TEST_COMMERCE: "true" });
-  check("live key never unlocks test prices", res.status === 409, String(res.status));
+  check("live key cannot unlock checkout without live enable", res.status === 503, String(res.status));
   res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "rk_live_x", CHLOE_TEST_COMMERCE: "true" });
-  check("restricted live key never unlocks test prices", res.status === 409, String(res.status));
+  check("restricted live key cannot unlock checkout without live enable", res.status === 503, String(res.status));
   res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "rk_live_x", STOREFRONT_MODE: "open", VERCEL_ENV: "production", LIVE_PAYMENTS_ENABLED: "false" });
   check("restricted key cannot enable production checkout alone", res.status === 503, String(res.status));
   res = await call({ items: ["cia-hill-country"] }, { STRIPE_SECRET_KEY: "sk_test_x", CHLOE_TEST_COMMERCE: "true", NEXT_PUBLIC_SITE_URL: "" , VERCEL_ENV: "preview", VERCEL_URL: "" });
