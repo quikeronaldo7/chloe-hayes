@@ -23,7 +23,7 @@ export const storeFaqs: Faq[] = [
   },
   {
     q: "Will I get updated editions?",
-    a: "Our policy on future editions hasn't been published yet. It will be on the site before the shop opens.",
+    a: "Your purchase includes the edition described on its product page. Updated editions, if released, are separate unless we explicitly offer an update. Your downloaded files remain yours for personal use.",
   },
   {
     q: "I lost my email. How do I get my guides back?",
@@ -31,7 +31,7 @@ export const storeFaqs: Faq[] = [
   },
   {
     q: "Can I get a refund?",
-    a: "Refunded orders lose access to their library and downloads. The full Refund & Digital Product Policy will be published before the shop opens, in the policies section of the Help page.",
+    a: "Yes. Request a refund within 14 days by emailing chloehayes.eats@gmail.com with the email used at checkout. We review accidental or duplicate purchases, unresolved file problems and other requests in good faith. Applicable statutory rights always apply. Refunded purchases lose access to new library downloads.",
   },
   {
     q: "Does buying a guide get me reservations or access anywhere?",
