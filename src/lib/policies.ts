@@ -2,8 +2,9 @@
  * Store policies, shown as sections of the Help page (/help#terms-of-sale, #privacy,
  * #refunds) and at the original /legal/* URLs, which stay live for payment providers.
  *
- * Nothing here is a finished legal policy: the seller entity, licence wording, refund
- * terms, retention periods and governing law need owner approval
+ * These are not final legal policies: the owner has confirmed QR DIGITAL LLC
+ * as the seller, but its address, licence, refunds, retention and governing law
+ * still require owner/legal approval
  * (docs/LAUNCH-CHECKLIST.md). Each policy states only what the store already does,
  * says plainly that the full text isn't published, and lists what it will cover.
  */
@@ -25,6 +26,7 @@ export const policies: Policy[] = [
     legalSlug: "terms",
     title: "Terms of Sale",
     facts: [
+      "QR DIGITAL LLC is the legal seller of Chloe in Austin's digital guides.",
       "You're buying a digital PDF guide for your own personal use. Nothing physical is shipped.",
       "Your private library opens straight after payment, and the link is emailed to you.",
       "Prices are in US dollars and confirmed at checkout. Promo codes, when offered, are entered at checkout.",
@@ -32,7 +34,7 @@ export const policies: Policy[] = [
       "Venue details, prices and access rules change. Every guide is dated and links to official sources so you can confirm before you go.",
       "A guide is research and planning help. It doesn't include reservations, memberships or guaranteed access anywhere.",
     ],
-    covers: ["Who is selling (the legal seller and contact details)", "The exact personal-use licence wording", "Taxes", "Governing law"],
+    covers: ["The legal seller's business address and contact details", "The exact personal-use licence wording", "Taxes", "Governing law"],
   },
   {
     anchor: "privacy",
