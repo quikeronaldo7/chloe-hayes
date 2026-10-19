@@ -41,3 +41,9 @@ So these use a **typeset cover** in the guides' own design system (Fraunces titl
 1. Commercial use of AI-generated Chloe imagery in identifiable settings (BBQ hall, South Congress).
 2. Whether and how to disclose AI-generated persona/imagery on the site.
 3. Real covers for the five typeset guides (and whether the mural cover is acceptable for New to Austin).
+
+## Owner commercial-use attestation — 19 October 2026
+
+The owner was specifically asked whether there is commercial-use permission for the restaurant and venue imagery within all seven customer PDFs, or whether uncertain photographs should be replaced. The owner responded affirmatively and instructed proceeding with launch. On that stated basis, the storefront readiness flag for imagery was marked **final** on 19 October 2026. This is an **owner attestation**, not an independently verified licence, clearance or assignment from third-party photographers, venues, mural artists or platforms.
+
+Historical notes above remain important: several source assets were marked `RIGHTS-PENDING`, `REVIEW-NOT-APPROVED`, or credited to third-party platforms during guide production. The site does not imply that attribution alone proves commercial permission. For future revisions, maintain rights evidence and replace or remove any image if this attestation is incorrect for that asset. Public website covers already exclude the two explicitly contentious imagery choices (mural cover and Hestia photography).
