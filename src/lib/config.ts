@@ -22,9 +22,9 @@ export const siteConfig = {
   instagramHandle: (process.env.NEXT_PUBLIC_INSTAGRAM_HANDLE ?? "chloe.eats.atx").trim().replace(/^@/, ""),
   facebookUrl: (process.env.NEXT_PUBLIC_FACEBOOK_URL ?? "https://www.facebook.com/profile.php?id=61593967931557").trim() || null,
   /**
-   * Customer support address. None is configured: chloeinaustin.com can send through
-   * Resend but receiving is disabled, so no inbound mailbox is claimed anywhere.
-   * Set NEXT_PUBLIC_SUPPORT_EMAIL once a real, monitored inbox exists.
+   * Customer support address is configured per deployment. Cloudflare Email Routing
+   * forwards hello@chloeinaustin.com to the account owner's verified Gmail inbox.
+   * Unlike Resend outbound sending, this routes actual inbound customer messages.
    */
   supportEmail: process.env.NEXT_PUBLIC_SUPPORT_EMAIL?.trim() || null,
 };
