@@ -1,0 +1,707 @@
+{
+  "id": "2",
+  "slug": "three-perfect-days-in-london-on-a-budget",
+  "title": "Three perfect days in London on a budget",
+  "excerpt": "A practical, tested plan with timings, costs and the mistakes to avoid on your first visit.",
+  "path": "/journal/three-perfect-days-in-london-on-a-budget",
+  "url": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget",
+  "heroImage": {
+    "url": "https://studio.example.com/api/media/file/kate-hero.png",
+    "alt": "Photo for kate-hero",
+    "width": 1300,
+    "height": 700,
+    "sizes": {
+      "card": {
+        "url": "https://studio.example.com/api/media/file/kate-hero-800x431.png",
+        "width": 800,
+        "height": 431
+      },
+      "og": {
+        "url": "https://studio.example.com/api/media/file/kate-hero-1200x630.png",
+        "width": 1200,
+        "height": 630
+      },
+      "wide": {
+        "url": "https://studio.example.com/api/media/file/kate-hero-1300x700.png",
+        "width": 1300,
+        "height": 700
+      }
+    }
+  },
+  "category": {
+    "name": "City guides",
+    "slug": "city-guides"
+  },
+  "author": {
+    "name": "Kate Anderson",
+    "slug": "kate-anderson",
+    "avatar": null,
+    "disclosure": "Kate is a virtual travel creator.",
+    "sameAs": []
+  },
+  "tags": [
+    {
+      "name": "Budget travel",
+      "slug": "budget-travel"
+    }
+  ],
+  "primaryTopic": "london on a budget",
+  "publishedAt": "2026-11-05T17:15:19.000Z",
+  "modifiedAt": "2026-11-05T17:15:19.000Z",
+  "readingMinutes": 1,
+  "content": {
+    "root": {
+      "type": "root",
+      "version": 1,
+      "children": [
+        {
+          "type": "paragraph",
+          "version": 1,
+          "children": [
+            {
+              "type": "text",
+              "text": "London does not have to be expensive. ",
+              "version": 1,
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": ""
+            },
+            {
+              "type": "link",
+              "version": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Here is where to eat for under £10",
+                  "version": 1,
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "fields": {
+                "linkType": "internal",
+                "newTab": false,
+                "url": "/journal/where-to-eat-in-london-for-under-10",
+                "doc": {
+                  "relationTo": "articles",
+                  "value": {
+                    "slug": "where-to-eat-in-london-for-under-10",
+                    "title": "Where to eat in London for under £10"
+                  }
+                }
+              }
+            },
+            {
+              "type": "text",
+              "text": ".",
+              "version": 1,
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "textFormat": 0,
+          "textStyle": ""
+        },
+        {
+          "type": "heading",
+          "tag": "h2",
+          "version": 1,
+          "children": [
+            {
+              "type": "text",
+              "text": "Day one: the South Bank",
+              "version": 1,
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0
+        },
+        {
+          "type": "paragraph",
+          "version": 1,
+          "children": [
+            {
+              "type": "text",
+              "text": "london early pack light walk often eat well book ahead stay curious london early pack light walk often eat well book ahead stay curious london early pack light walk often eat well book ahead stay curious london early pack light walk often eat well book ahead stay curious london early pack light walk often eat well book ahead stay curious london early pack light walk often eat well book ahead stay curious london early pack light walk often eat well",
+              "version": 1,
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "textFormat": 0,
+          "textStyle": ""
+        },
+        {
+          "type": "list",
+          "listType": "bullet",
+          "tag": "ul",
+          "start": 1,
+          "version": 1,
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "children": [
+            {
+              "type": "listitem",
+              "value": 1,
+              "version": 1,
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Tate Modern (free)",
+                  "version": 1,
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            },
+            {
+              "type": "listitem",
+              "value": 2,
+              "version": 1,
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "children": [
+                {
+                  "type": "text",
+                  "text": "Borough Market",
+                  "version": 1,
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "upload",
+          "version": 3,
+          "format": "",
+          "relationTo": "media",
+          "value": {
+            "url": "https://studio.example.com/api/media/file/kate-hero.png",
+            "alt": "Photo for kate-hero",
+            "width": 1300,
+            "height": 700,
+            "caption": "The South Bank at dusk",
+            "sizes": {
+              "card": {
+                "url": "https://studio.example.com/api/media/file/kate-hero-800x431.png",
+                "width": 800,
+                "height": 431
+              },
+              "og": {
+                "url": "https://studio.example.com/api/media/file/kate-hero-1200x630.png",
+                "width": 1200,
+                "height": 630
+              },
+              "wide": {
+                "url": "https://studio.example.com/api/media/file/kate-hero-1300x700.png",
+                "width": 1300,
+                "height": 700
+              }
+            }
+          }
+        },
+        {
+          "type": "heading",
+          "tag": "h3",
+          "version": 1,
+          "children": [
+            {
+              "type": "text",
+              "text": "Costs at a glance",
+              "version": 1,
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0
+        },
+        {
+          "type": "table",
+          "version": 1,
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "children": [
+            {
+              "type": "tablerow",
+              "version": 1,
+              "children": [
+                {
+                  "type": "tablecell",
+                  "version": 1,
+                  "headerState": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "version": 1,
+                      "children": [
+                        {
+                          "type": "text",
+                          "text": "Item",
+                          "version": 1,
+                          "detail": 0,
+                          "format": 0,
+                          "mode": "normal",
+                          "style": ""
+                        }
+                      ],
+                      "direction": "ltr",
+                      "format": "",
+                      "indent": 0,
+                      "textFormat": 0,
+                      "textStyle": ""
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0
+                },
+                {
+                  "type": "tablecell",
+                  "version": 1,
+                  "headerState": 1,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "version": 1,
+                      "children": [
+                        {
+                          "type": "text",
+                          "text": "Price",
+                          "version": 1,
+                          "detail": 0,
+                          "format": 0,
+                          "mode": "normal",
+                          "style": ""
+                        }
+                      ],
+                      "direction": "ltr",
+                      "format": "",
+                      "indent": 0,
+                      "textFormat": 0,
+                      "textStyle": ""
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0
+            },
+            {
+              "type": "tablerow",
+              "version": 1,
+              "children": [
+                {
+                  "type": "tablecell",
+                  "version": 1,
+                  "headerState": 0,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "version": 1,
+                      "children": [
+                        {
+                          "type": "text",
+                          "text": "Oyster daily cap",
+                          "version": 1,
+                          "detail": 0,
+                          "format": 0,
+                          "mode": "normal",
+                          "style": ""
+                        }
+                      ],
+                      "direction": "ltr",
+                      "format": "",
+                      "indent": 0,
+                      "textFormat": 0,
+                      "textStyle": ""
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0
+                },
+                {
+                  "type": "tablecell",
+                  "version": 1,
+                  "headerState": 0,
+                  "children": [
+                    {
+                      "type": "paragraph",
+                      "version": 1,
+                      "children": [
+                        {
+                          "type": "text",
+                          "text": "£8.90",
+                          "version": 1,
+                          "detail": 0,
+                          "format": 0,
+                          "mode": "normal",
+                          "style": ""
+                        }
+                      ],
+                      "direction": "ltr",
+                      "format": "",
+                      "indent": 0,
+                      "textFormat": 0,
+                      "textStyle": ""
+                    }
+                  ],
+                  "direction": "ltr",
+                  "format": "",
+                  "indent": 0
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0
+            }
+          ]
+        },
+        {
+          "type": "block",
+          "version": 2,
+          "format": "",
+          "fields": {
+            "blockType": "videoEmbed",
+            "provider": "youtube",
+            "videoId": "dQw4w9WgXcQ",
+            "embedUrl": "https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ",
+            "title": "Walking the South Bank",
+            "caption": "A 3-minute walk-through"
+          }
+        },
+        {
+          "type": "quote",
+          "version": 1,
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "children": [
+            {
+              "type": "text",
+              "text": "Walk more, ride less.",
+              "version": 1,
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": ""
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "version": 1,
+          "children": [
+            {
+              "type": "text",
+              "text": "Check ",
+              "version": 1,
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": ""
+            },
+            {
+              "type": "link",
+              "version": 3,
+              "children": [
+                {
+                  "type": "text",
+                  "text": "TfL fares",
+                  "version": 1,
+                  "detail": 0,
+                  "format": 0,
+                  "mode": "normal",
+                  "style": ""
+                }
+              ],
+              "direction": "ltr",
+              "format": "",
+              "indent": 0,
+              "fields": {
+                "linkType": "custom",
+                "url": "https://tfl.gov.uk",
+                "newTab": false
+              }
+            },
+            {
+              "type": "text",
+              "text": " before you go. ",
+              "version": 1,
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": ""
+            },
+            {
+              "type": "text",
+              "text": "travel early pack light walk often eat well book ahead stay curious travel early pack light walk often eat well book ahead stay curious travel early pack light walk often eat well book ahead stay curious travel early pack light walk often eat well book ahead stay curious travel early pack light walk often eat well book ahead stay curious",
+              "version": 1,
+              "detail": 0,
+              "format": 0,
+              "mode": "normal",
+              "style": ""
+            }
+          ],
+          "direction": "ltr",
+          "format": "",
+          "indent": 0,
+          "textFormat": 0,
+          "textStyle": ""
+        },
+        {
+          "type": "block",
+          "version": 2,
+          "format": "",
+          "fields": {
+            "blockType": "callToAction",
+            "heading": "Want the full plan?",
+            "text": "Maps, timings and bookings in one guide.",
+            "buttonLabel": "Get the London Guide",
+            "href": "/products/london-guide",
+            "style": "primary"
+          }
+        },
+        {
+          "type": "block",
+          "version": 2,
+          "format": "",
+          "fields": {
+            "blockType": "productRecommendation",
+            "note": "Planning a trip? This helps.",
+            "products": [
+              {
+                "productId": "ka-london-guide",
+                "title": "The London Guide",
+                "path": "/products/london-guide",
+                "url": "https://thetravellingkate.com/products/london-guide",
+                "summary": "Plan London properly."
+              }
+            ]
+          }
+        }
+      ],
+      "direction": "ltr",
+      "format": "",
+      "indent": 0
+    }
+  },
+  "keyTakeaways": [
+    "Use contactless; fares cap daily."
+  ],
+  "faqs": [
+    {
+      "question": "Is London expensive?",
+      "answer": "It can be, but free museums and daily fare caps help a lot."
+    }
+  ],
+  "sources": [
+    {
+      "title": "TfL fares",
+      "url": "https://tfl.gov.uk/fares",
+      "publisher": "Transport for London",
+      "accessedAt": "2026-11-01T00:00:00.000Z"
+    }
+  ],
+  "factCheckedAt": "2026-11-01T00:00:00.000Z",
+  "relatedProducts": [
+    {
+      "productId": "ka-london-guide",
+      "title": "The London Guide",
+      "path": "/products/london-guide",
+      "url": "https://thetravellingkate.com/products/london-guide",
+      "summary": "Plan London properly."
+    }
+  ],
+  "relatedArticles": [
+    {
+      "slug": "where-to-eat-in-london-for-under-10",
+      "title": "Where to eat in London for under £10",
+      "path": "/journal/where-to-eat-in-london-for-under-10",
+      "excerpt": "A practical, tested plan with timings, costs and the mistakes to avoid on your first visit."
+    }
+  ],
+  "searchIntent": "informational",
+  "relatedTopics": [
+    "cheap eats london"
+  ],
+  "seo": {
+    "title": "Three days in London on a budget: a tested plan",
+    "description": "Plan three days in London on a budget with tested timings, real costs and the mistakes first-time visitors make.",
+    "canonical": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget",
+    "robots": {
+      "index": true,
+      "follow": true
+    },
+    "image": {
+      "url": "https://studio.example.com/api/media/file/kate-hero.png",
+      "alt": "Photo for kate-hero",
+      "width": 1300,
+      "height": 700,
+      "sizes": {
+        "card": {
+          "url": "https://studio.example.com/api/media/file/kate-hero-800x431.png",
+          "width": 800,
+          "height": 431
+        },
+        "og": {
+          "url": "https://studio.example.com/api/media/file/kate-hero-1200x630.png",
+          "width": 1200,
+          "height": 630
+        },
+        "wide": {
+          "url": "https://studio.example.com/api/media/file/kate-hero-1300x700.png",
+          "width": 1300,
+          "height": 700
+        }
+      }
+    },
+    "focusKeyword": "london"
+  },
+  "preview": false,
+  "jsonLd": {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://thetravellingkate.com/#organization",
+        "name": "Kate Anderson",
+        "url": "https://thetravellingkate.com"
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://thetravellingkate.com/#website",
+        "name": "Kate Anderson",
+        "url": "https://thetravellingkate.com",
+        "publisher": {
+          "@id": "https://thetravellingkate.com/#organization"
+        }
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget",
+        "url": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget",
+        "name": "Three days in London on a budget: a tested plan",
+        "description": "Plan three days in London on a budget with tested timings, real costs and the mistakes first-time visitors make.",
+        "isPartOf": {
+          "@id": "https://thetravellingkate.com/#website"
+        },
+        "datePublished": "2026-11-05T17:15:19.000Z",
+        "dateModified": "2026-11-05T17:15:19.000Z",
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://studio.example.com/api/media/file/kate-hero.png"
+        }
+      },
+      {
+        "@type": "BlogPosting",
+        "@id": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget#article",
+        "headline": "Three perfect days in London on a budget",
+        "description": "Plan three days in London on a budget with tested timings, real costs and the mistakes first-time visitors make.",
+        "url": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget",
+        "mainEntityOfPage": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget",
+        "datePublished": "2026-11-05T17:15:19.000Z",
+        "dateModified": "2026-11-05T17:15:19.000Z",
+        "image": [
+          "https://studio.example.com/api/media/file/kate-hero.png"
+        ],
+        "isPartOf": {
+          "@id": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Kate Anderson"
+        },
+        "publisher": {
+          "@id": "https://thetravellingkate.com/#organization"
+        },
+        "articleSection": "City guides",
+        "keywords": "Budget travel",
+        "about": {
+          "@type": "Thing",
+          "name": "london on a budget"
+        },
+        "citation": [
+          "https://tfl.gov.uk/fares"
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Kate Anderson",
+            "item": "https://thetravellingkate.com"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Journal",
+            "item": "https://thetravellingkate.com/journal"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Three perfect days in London on a budget",
+            "item": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget"
+          }
+        ]
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is London expensive?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "It can be, but free museums and daily fare caps help a lot."
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

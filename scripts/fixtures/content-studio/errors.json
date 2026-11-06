@@ -1,0 +1,20 @@
+{
+  "missingToken": {
+    "status": 401,
+    "body": {
+      "error": "Invalid or missing delivery token."
+    }
+  },
+  "notFound": {
+    "status": 404,
+    "body": {
+      "error": "Not found."
+    }
+  },
+  "badPreviewToken": {
+    "status": 403,
+    "body": {
+      "error": "Preview link is invalid or has expired."
+    }
+  }
+}

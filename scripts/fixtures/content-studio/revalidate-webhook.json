@@ -1,0 +1,14 @@
+{
+  "headers": {
+    "Content-Type": "application/json",
+    "X-QRV-Signature": "t=1793869200,v1=b737ff7a3d3d5477d1571680d7c2ff26445f94edff175a7f87eb59fccfa9d087"
+  },
+  "body": {
+    "event": "published",
+    "brand": "kate-anderson",
+    "slug": "three-perfect-days-in-london-on-a-budget",
+    "path": "/journal/three-perfect-days-in-london-on-a-budget",
+    "at": "2026-11-05T09:00:00.000Z"
+  },
+  "note": "Signed with the example secret \"example-secret-do-not-use-0000000000000\" at t=1793869200."
+}

@@ -1,0 +1,78 @@
+{
+  "brand": {
+    "name": "Kate Anderson",
+    "slug": "kate-anderson"
+  },
+  "docs": [
+    {
+      "id": "2",
+      "slug": "three-perfect-days-in-london-on-a-budget",
+      "title": "Three perfect days in London on a budget",
+      "excerpt": "A practical, tested plan with timings, costs and the mistakes to avoid on your first visit.",
+      "path": "/journal/three-perfect-days-in-london-on-a-budget",
+      "url": "https://thetravellingkate.com/journal/three-perfect-days-in-london-on-a-budget",
+      "heroImage": {
+        "url": "https://studio.example.com/api/media/file/kate-hero.png",
+        "alt": "Photo for kate-hero",
+        "width": 1300,
+        "height": 700,
+        "sizes": {
+          "card": {
+            "url": "https://studio.example.com/api/media/file/kate-hero-800x431.png",
+            "width": 800,
+            "height": 431
+          },
+          "og": {
+            "url": "https://studio.example.com/api/media/file/kate-hero-1200x630.png",
+            "width": 1200,
+            "height": 630
+          },
+          "wide": {
+            "url": "https://studio.example.com/api/media/file/kate-hero-1300x700.png",
+            "width": 1300,
+            "height": 700
+          }
+        }
+      },
+      "category": {
+        "name": "City guides",
+        "slug": "city-guides"
+      },
+      "author": {
+        "name": "Kate Anderson",
+        "slug": "kate-anderson"
+      },
+      "tags": [
+        {
+          "name": "Budget travel",
+          "slug": "budget-travel"
+        }
+      ],
+      "primaryTopic": "london on a budget",
+      "publishedAt": "2026-11-05T17:15:19.000Z",
+      "modifiedAt": "2026-11-05T17:15:19.000Z",
+      "readingMinutes": 1
+    },
+    {
+      "id": "1",
+      "slug": "where-to-eat-in-london-for-under-10",
+      "title": "Where to eat in London for under £10",
+      "excerpt": "A practical, tested plan with timings, costs and the mistakes to avoid on your first visit.",
+      "path": "/journal/where-to-eat-in-london-for-under-10",
+      "url": "https://thetravellingkate.com/journal/where-to-eat-in-london-for-under-10",
+      "heroImage": null,
+      "category": null,
+      "author": {
+        "name": "Kate Anderson",
+        "slug": "kate-anderson"
+      },
+      "tags": [],
+      "publishedAt": "2026-11-05T17:15:18.909Z",
+      "modifiedAt": "2026-11-05T17:15:18.909Z",
+      "readingMinutes": 1
+    }
+  ],
+  "page": 1,
+  "totalPages": 1,
+  "totalDocs": 2
+}
