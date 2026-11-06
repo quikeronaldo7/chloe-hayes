@@ -64,7 +64,9 @@ export const articleTag = (slug: string) => `journal:${slug}`;
 const config = () => {
   const url = process.env.CONTENT_STUDIO_URL?.trim().replace(/\/$/, "");
   const token = process.env.CONTENT_STUDIO_DELIVERY_TOKEN?.trim();
-  return url && token && token.length >= 32 ? { url, token } : null;
+  // Optional: the Studio's Vercel Deployment Protection bypass secret ("Protection Bypass for Automation").
+  const bypass = process.env.CONTENT_STUDIO_PROTECTION_BYPASS?.trim();
+  return url && token && token.length >= 32 ? { url, token, bypass } : null;
 };
 
 export const studioEnabled = () => config() !== null;
@@ -74,7 +76,7 @@ async function studioFetch<T>(path: string, init: { tags?: string[]; preview?: b
   if (!c) return { ok: false, status: 503, unavailable: true };
   try {
     const res = await fetch(`${c.url}/api/delivery/v1${path}`, {
-      headers: { Authorization: `Bearer ${c.token}`, Accept: "application/json" },
+      headers: { Authorization: `Bearer ${c.token}`, Accept: "application/json", ...(c.bypass ? { "x-vercel-protection-bypass": c.bypass } : {}) },
       signal: AbortSignal.timeout(TIMEOUT_MS),
       ...(init.preview ? { cache: "no-store" as const } : { next: { revalidate: 300, tags: [JOURNAL_TAG, ...(init.tags ?? [])] } }),
     });
