@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { DM_Sans, Fraunces } from "next/font/google";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next";
 import { CartProvider } from "@/components/cart";
 import { JsonLd } from "@/components/json-ld";
 import { RevealObserver } from "@/components/reveal-observer";
@@ -39,6 +40,8 @@ export const metadata: Metadata = {
   },
   twitter: { card: "summary_large_image", images: ["/images/chloe/chloe-golden-hour-austin-motel.jpg"] },
   alternates: { canonical: "/" },
+  // Google Search Console HTML-tag verification for the production property.
+  verification: { google: "pPCL0fmcuzw_cwm53jBi4IgxXMtk89C8teomUCPotOs" },
   // Previews are private; only Production may ever be indexed (and only once launched).
   robots: process.env.VERCEL_ENV === "production" ? undefined : { index: false, follow: false },
 };
@@ -98,6 +101,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </Script>
           </>
         ) : null}
+        <Analytics />
       </body>
     </html>
   );
